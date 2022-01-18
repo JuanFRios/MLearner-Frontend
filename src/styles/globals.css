@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.login-background {
+    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1642543240/background-login_uowr9p.svg);
+    background-size: contain contain;
+}
