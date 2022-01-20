@@ -2,7 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-.login-background {
-    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1642543240/background-login_uowr9p.svg);
-    background-size: contain contain;
+.bg {
+    @apply h-full w-full bg-cover;
+    display: block;
+    margin: 0 auto;
+    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1642563749/unsplash_ieic5Tq8YMk_wrji6a.png);
+    clip-path: polygon(60% 0, 100% 0%, 100% 100%, 60% 100%, 44% 54%);
+}
+
+.btn {
+    @apply font-bold py-2 px-4 rounded-xl;
+  }
+  .btn-blue {
+    @apply bg-light_blue_2 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-light_blue_1;
 }
