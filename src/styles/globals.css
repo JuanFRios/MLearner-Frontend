@@ -6,8 +6,18 @@
     @apply h-full w-full bg-cover;
     display: block;
     margin: 0 auto;
-    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1642563749/unsplash_ieic5Tq8YMk_wrji6a.png);
-    clip-path: polygon(60% 0, 100% 0%, 100% 100%, 60% 100%, 44% 54%);
+    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643157247/bgcode_oa0tnu.png);
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+.transparent {
+  background: rgba(0,0,0,0.5);
+}
+
+.svg {
+  visibility: hidden; position: absolute;
 }
 
 .btn {
