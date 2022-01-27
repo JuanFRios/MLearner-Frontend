@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
+import useFormData from 'hooks/useFormData';
+import axios from 'axios';
 // import backgroundLogin from 'assets/background-login.svg';
 
 const Login = () => {
+  const { form, formData, updateFormData } = useFormData();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
+    const options = {
+      method: 'POST',
+      url: 'https://restserver-pi.herokuapp.com/api/auth',
+      header: { 'Content-Type': 'application/json' },
+      data: formData,
+    };
+    const respuestaAxios = await axios.request(options);
+    // eslint-disable-next-line no-console
+    console.log(respuestaAxios);
   }
 
   return (
@@ -19,8 +31,10 @@ const Login = () => {
             Inicio de sesión
           </h1>
           <form
+            ref={form}
+            onChange={updateFormData}
             className='w-full h-full flex flex-col justify-around items-center'
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
           >
             <Input
               name='usuario'
