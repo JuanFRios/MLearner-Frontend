@@ -2,26 +2,16 @@ import React from 'react';
 import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
-import axios from 'axios';
-// import backgroundLogin from 'assets/background-login.svg';
-const baseUrl = process.env.REACT_APP_API_URL;
+import { useDispatch } from 'react-redux';
+import { login } from 'actions/auth';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { form, formData, updateFormData } = useFormData();
 
   async function onSubmit(event) {
-    // eslint-disable-next-line no-console
-    console.log(`${baseUrl}/`);
     event.preventDefault();
-    const options = {
-      method: 'POST',
-      url: 'https://restserver-pi.herokuapp.com/api/auth',
-      header: { 'Content-Type': 'application/json' },
-      data: formData,
-    };
-    const respuestaAxios = await axios.request(options);
-    // eslint-disable-next-line no-console
-    console.log(respuestaAxios);
+    dispatch(login(formData));
   }
 
   return (
