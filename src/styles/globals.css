@@ -6,9 +6,9 @@
     @apply h-full w-full bg-cover;
     display: block;
     margin: 0 auto;
-    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643157247/bgcode_oa0tnu.png);
+    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643326469/bgcode_nlgyyl.png);
     background-size: cover;
-    background-position: left;
+    background-position: right;
     background-repeat: no-repeat;
 }
 
@@ -29,3 +29,4 @@
   .btn-blue:hover {
     @apply bg-light_blue_1;
 }
+

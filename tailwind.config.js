@@ -9,7 +9,7 @@ module.exports = {
         light_blue_2: '#0095F6',
       },
       spacing: {
-        128: '32rem',
+        128: '35rem',
       },
     },
   },
