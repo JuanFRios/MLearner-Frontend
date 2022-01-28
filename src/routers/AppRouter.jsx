@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from 'pages/Login';
 import PublicLayout from 'layouts/PublicLayout';
 import Footer from 'components/Footer';
+import Dashboard from 'pages/Dashboard';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -11,9 +12,9 @@ export const AppRouter = () => (
       <Route path='/' element={<PublicLayout />}>
         <Route path='/' element={<Login />} />
       </Route>
-      <Route path='/Home' element={<Footer />} />
+      <Route path='/Home' element={<Dashboard />} />
       <Route path='/Statics' element={<Footer />} />
-      <Route path='/Leccion' element={<Footer />} />
+      <Route path='/Leccion' element={<Dashboard />} />
     </Routes>
   </BrowserRouter>
 );
