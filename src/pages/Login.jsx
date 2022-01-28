@@ -3,7 +3,7 @@ import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
 import { useDispatch } from 'react-redux';
-import { login } from 'actions/auth';
+import { startLoginEmailPassword } from 'actions/auth';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Login = () => {
 
   async function onSubmit(event) {
     event.preventDefault();
-    dispatch(login(formData));
+    dispatch(startLoginEmailPassword(formData));
   }
 
   return (
