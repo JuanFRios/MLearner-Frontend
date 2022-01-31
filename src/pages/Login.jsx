@@ -1,35 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
-import axios from 'axios';
-// import backgroundLogin from 'assets/background-login.svg';
+import { useDispatch } from 'react-redux';
+import { startLoginEmailPassword } from 'actions/auth';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { form, formData, updateFormData } = useFormData();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   async function onSubmit(event) {
     event.preventDefault();
-    const options = {
-      method: 'POST',
-      url: 'https://restserver-pi.herokuapp.com/api/auth',
-      header: { 'Content-Type': 'application/json' },
-      data: formData,
-    };
-    const respuestaAxios = await axios.request(options);
-    // eslint-disable-next-line no-console
-    console.log(respuestaAxios);
+    dispatch(startLoginEmailPassword(formData));
   }
 
   return (
     <div className='bg'>
       <div className='h-full flex flex-col justify-end'>
-        <div className='w-128 h-96 flex flex-col justify-around items-center absolute bottom-1/4 right-20 bg-gradient-to-r from-gray-100 rounded-xl'>
-          <h1 className='text-6xl w-full text-center pt-8 pb-12 leading-none font-bold'>
-            Inicio de sesión
-          </h1>
+        <div className='w-128 h-96 flex flex-col justify-around items-center absolute bottom-1/4 right-5 bg-gradient-to-r from-gray-100 rounded-xl'>
+          <img
+            className='pt-4'
+            src='https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/c_crop,g_south,h_170,y_49/v1643328200/MLearner_1_jex1ky.png'
+            alt=''
+          />
           <form
             ref={form}
             onChange={updateFormData}
@@ -40,15 +33,11 @@ const Login = () => {
               name='usuario'
               type='text'
               placeholder='Escribe tu usuario institucional'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               name='contraseña'
               type='password'
               placeholder='Escribe tu contraseña'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
             />
             <button type='submit' className='btn btn-blue w-2/4 pt-8'>
               Ingresar
