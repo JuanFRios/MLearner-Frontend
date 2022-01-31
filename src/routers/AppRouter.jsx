@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from 'pages/Login';
 import PublicLayout from 'layouts/PublicLayout';
+import PrivateLayout from 'layouts/PrivateLayout';
 import Footer from 'components/Footer';
 import { useDispatch } from 'react-redux';
 import { renewToken } from 'actions/auth';
@@ -24,9 +25,11 @@ export const AppRouter = () => {
         <Route path='/' element={<PublicLayout />}>
           <Route path='' element={<Login />} />
         </Route>
-        <Route path='/Home' element={<Dashboard />} />
-        <Route path='/Statics' element={<Footer />} />
-        <Route path='/Leccion' element={<Dashboard />} />
+        <Route path='/course' element={<PrivateLayout />}>
+          <Route path='/home' element={<Dashboard />} />
+          <Route path='/statics' element={<Footer />} />
+          <Route path='/lesson' element={<Dashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
