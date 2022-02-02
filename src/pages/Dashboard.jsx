@@ -1,12 +1,6 @@
-import Header from 'components/Header';
-import Sidebar from 'components/Sidebar';
+import InformationProgress from 'components/InformationProgress';
 import React from 'react';
 
-const Dashboard = () => (
-  <>
-    <Sidebar />
-    <Header />
-  </>
-);
+const Dashboard = () => <InformationProgress />;
 
 export default Dashboard;

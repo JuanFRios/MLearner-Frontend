@@ -25,7 +25,7 @@ export const AppRouter = () => {
         <Route path='/' element={<PublicLayout />}>
           <Route path='' element={<Login />} />
         </Route>
-        <Route path='/course' element={<PrivateLayout />}>
+        <Route path='/' element={<PrivateLayout />}>
           <Route path='/home' element={<Dashboard />} />
           <Route path='/statics' element={<Footer />} />
           <Route path='/lesson' element={<Dashboard />} />
