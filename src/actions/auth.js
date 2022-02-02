@@ -9,12 +9,13 @@ export const startLoginEmailPassword = (formData) => async (dispatch) => {
     const respuestaAxios = await mlearnerApi.post('/auth', formData);
     if (respuestaAxios.data.token) {
       localStorage.setItem('token', respuestaAxios.data.token);
-      dispatch(renewToken());
+      return await dispatch(renewToken());
     }
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);
   }
+  return false;
 };
 
 export const renewToken = () => async (dispatch) => {

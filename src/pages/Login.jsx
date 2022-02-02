@@ -3,15 +3,21 @@ import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { startLoginEmailPassword } from 'actions/auth';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { form, formData, updateFormData } = useFormData();
 
   async function onSubmit(event) {
     event.preventDefault();
-    dispatch(startLoginEmailPassword(formData));
+    const auth = await dispatch(startLoginEmailPassword(formData));
+    if (auth) {
+      console.log('home');
+      navigate('/home');
+    }
   }
 
   return (
