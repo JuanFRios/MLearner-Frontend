@@ -1,9 +1,10 @@
+import { ContinueLesson } from 'components/ContinueLesson';
 import InformationProgress from 'components/InformationProgress';
 import React from 'react';
 
 const Dashboard = () => (
-  <div className='ml-64 pl-32 pt-5'>
-    <div className='flex float-right mr-6'>
+  <div className='flex flex-col ml-64 pl-28 pr-4 pt-5'>
+    <div className='flex justify-end mr-6'>
       <InformationProgress
         className='basis-1/4'
         icono='grommet-icons:diamond'
@@ -25,6 +26,12 @@ const Dashboard = () => (
         titulo='Progreso'
         informacion='10%'
       />
+    </div>
+    <div>
+      <p className='text-2xl font-bold'>Hola Felipe!, sigue aprendiendo</p>
+    </div>
+    <div>
+      <ContinueLesson />
     </div>
   </div>
 );

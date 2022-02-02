@@ -62,3 +62,14 @@
   box-sizing: border-box;
   border-radius: 100px;
 }
+
+.continue{
+  @apply h-64 py-1;
+  box-sizing: border-box;
+  width: 800px;
+  border-radius: 60px;
+  background-image: url(https://i.ibb.co/Jc14DmW/Continue-Mod.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
