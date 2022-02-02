@@ -1,17 +1,14 @@
 import React from 'react';
 
-const InformationProgress = () => (
-  <div className='ml-64 pl-32 pt-12 w-2/12 flex'>
-    <div className='info flex items-center text-2xl font-bold p-3'>
-      <div className='flex p-1'>
-        <span
-          className='iconify text-6xl text-sky-400'
-          data-icon='grommet-icons:diamond'
-        />
+const InformationProgress = ({ icono, color, titulo, informacion }) => (
+  <div className='px-2'>
+    <div className='info flex items-center text-xl font-bold p-1'>
+      <div className='p-1'>
+        <span className={`iconify ${color} text-5xl`} data-icon={icono} />
       </div>
-      <div className='flex flex-col items-center px-2'>
-        <p className='m-1'>Puntaje</p>
-        <p>10/20</p>
+      <div className='flex flex-col items-center pr-2'>
+        <p className='m-1'>{titulo}</p>
+        <p>{informacion}</p>
       </div>
     </div>
   </div>
