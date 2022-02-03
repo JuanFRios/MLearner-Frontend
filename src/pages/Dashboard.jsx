@@ -1,3 +1,4 @@
+import { Content } from 'components/Content';
 import { ContinueLesson } from 'components/ContinueLesson';
 import InformationProgress from 'components/InformationProgress';
 import React from 'react';
@@ -30,8 +31,12 @@ const Dashboard = () => (
     <div>
       <p className='text-2xl font-bold'>Hola Felipe!, sigue aprendiendo</p>
     </div>
-    <div>
-      <ContinueLesson />
+    <ContinueLesson
+      leccion='Lección: Procesamiento con pandas'
+      modulo='Modulo: Ingeniería de características'
+    />
+    <div className='my-16'>
+      <Content />
     </div>
   </div>
 );
