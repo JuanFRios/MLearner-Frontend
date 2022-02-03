@@ -79,8 +79,11 @@
 }
 
 .green {
-  font-size: 30px;
   color: green;
+}
+
+.lesson-status-icon {
+  font-size: 30px;
 }
 
 .moduleLg{

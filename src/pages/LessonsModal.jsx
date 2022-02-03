@@ -28,16 +28,11 @@ export default function LessonsModal() {
           </span>
         </ModalHeader>
         <ModalBody>
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
-          <ItemLesson />
+          <ItemLesson type='LECTURA' status='VISTA' />
+          <ItemLesson type='CODIGO' status='VISTA' />
+          <ItemLesson type='CODIGO' status='EN_CURSO' />
+          <ItemLesson type='QUIZ' status='BLOQUEADA' />
+          <ItemLesson type='LECTURA' status='BLOQUEADA' />
         </ModalBody>
         <ModalFooter>
           <Button
