@@ -15,7 +15,6 @@ const Login = () => {
     event.preventDefault();
     const auth = await dispatch(startLoginEmailPassword(formData));
     if (auth) {
-      console.log('home');
       navigate('/home');
     }
   }
@@ -45,7 +44,7 @@ const Login = () => {
               type='password'
               placeholder='Escribe tu contraseña'
             />
-            <button type='submit' className='btn btn-blue w-2/4 pt-8'>
+            <button type='submit' className='btn btn-blue w-2/4 '>
               Ingresar
             </button>
           </form>

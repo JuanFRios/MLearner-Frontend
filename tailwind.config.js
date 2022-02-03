@@ -10,6 +10,7 @@ module.exports = {
       },
       spacing: {
         128: '35rem',
+        140: '45rem',
       },
     },
   },

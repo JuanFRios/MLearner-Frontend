@@ -73,3 +73,12 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.big-icon {
+  font-size: 40px;
+}
+
+.green {
+  font-size: 30px;
+  color: green;
+}
