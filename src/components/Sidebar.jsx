@@ -4,10 +4,10 @@
 import React from 'react';
 
 const Sidebar = () => (
-        <div className="flex flex-nowrap">
+        <div className="flex flex-nowrap ">
             {/* Sidebar starts */}
             {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
-            <div className="backgroudSB w-80 absolute h-full flex flex-col items-center content-center  z-20 ">
+            <div className="backgroudSB w-80 fixed h-full flex flex-col items-center content-center left-0 top-0 z-20 ">
                 <div className="px-8 py-12">
                     <div className="flex flex-col items-center">
                         <div className='circle'>F</div>
