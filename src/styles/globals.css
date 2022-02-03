@@ -74,17 +74,23 @@
     background-repeat: no-repeat;
 }
 
+.containerContent{
+  width: 100%;
+  align-items: center;
+  @apply px-24
+}
+
 .moduleLg{
   @apply h-48;
   box-sizing: border-box;
-  width: 800px;
+  width: 100%;
   border-radius: 16px;
 }
 
 .moduleSm{
   @apply h-48;
   box-sizing: border-box;
-  width: 380px;
+  width: 100%;
   border-radius: 16px;
   background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
   background-position: center;
