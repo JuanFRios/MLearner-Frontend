@@ -3,47 +3,43 @@ import ModalHeader from '@material-tailwind/react/ModalHeader';
 import ModalBody from '@material-tailwind/react/ModalBody';
 import ModalFooter from '@material-tailwind/react/ModalFooter';
 import Button from '@material-tailwind/react/Button';
-import { useState } from 'react';
+// import LoadingLessons from 'components/loading/LoadingLessons';
 import ItemLesson from 'components/dashboard/ItemLesson';
+import { useDispatch, useSelector } from 'react-redux';
+import LoadingLessons from 'components/loading/LoadingLessons';
+import { removeActiveLessons } from 'actions/lessons';
 
-export default function LessonsModal() {
-  const [showModal, setShowModal] = useState(false);
+export const LessonsModal = ({ module, showModal, setShowModal }) => {
+  const { activeLessons } = useSelector((state) => state.lessons);
+  const dispatch = useDispatch();
+  function onClick() {
+    setShowModal(false);
+    dispatch(removeActiveLessons());
+  }
+  const listItems = activeLessons
+    ? activeLessons.map((lesson) => (
+        <ItemLesson
+          key={lesson.idLeccion}
+          type={lesson.tipo}
+          status={lesson.estado}
+          title={lesson.tituloLeccion}
+        />
+      ))
+    : null;
 
   return (
-    <>
-      <Button
-        color='lightBlue'
-        type='button'
-        onClick={() => setShowModal(true)}
-        ripple='light'
-        className='ml-96'
-      >
-        Open small Modal
-      </Button>
-
-      <Modal size='lg' active={showModal} toggler={() => setShowModal(false)}>
-        <ModalHeader toggler={() => setShowModal(false)}>
-          <span className='text-3xl'>
-            Módulo: Ingeniería de características
-          </span>
-        </ModalHeader>
-        <ModalBody>
-          <ItemLesson type='LECTURA' status='VISTA' />
-          <ItemLesson type='CODIGO' status='VISTA' />
-          <ItemLesson type='CODIGO' status='EN_CURSO' />
-          <ItemLesson type='QUIZ' status='BLOQUEADA' />
-          <ItemLesson type='LECTURA' status='BLOQUEADA' />
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            color='blueGray'
-            onClick={() => setShowModal(false)}
-            ripple='light'
-          >
-            Salir
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </>
+    <Modal size='lg' active={showModal} toggler={() => onClick()}>
+      <ModalHeader toggler={() => onClick()}>
+        <span className='text-3xl'>Módulo: {module}</span>
+      </ModalHeader>
+      <ModalBody>
+        {activeLessons ? <ul>{listItems}</ul> : <LoadingLessons />}
+      </ModalBody>
+      <ModalFooter>
+        <Button color='blueGray' onClick={() => onClick()} ripple='light'>
+          Salir
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
-}
+};

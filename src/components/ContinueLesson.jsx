@@ -14,7 +14,7 @@ export const ContinueLesson = ({ modulo, leccion }) => (
       <div className='ml-52 pl-40 mt-48'>
         <button
           type='submit'
-          className='flex bg-gray-100 text-2xl font-bold px-4 rounded-3xl items-center p-1 '
+          className='flex bg-gray-100 text-2xl font-bold px-4 rounded-3xl items-center p-1 mr-6'
         >
           <span className='iconify' data-icon='fluent:play-12-filled' />
           Continuar

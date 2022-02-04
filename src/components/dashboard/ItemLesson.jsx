@@ -1,7 +1,7 @@
 import React from 'react';
 import { LessonType, LessonStatus } from 'constants/Lesson';
 
-const ItemLesson = ({ type, status }) => {
+const ItemLesson = ({ type, status, title }) => {
   let iconType;
   let iconStatus;
   let lessonStatusClass = 'iconify lesson-status-icon';
@@ -41,9 +41,7 @@ const ItemLesson = ({ type, status }) => {
       <div className='flex justify-between w-140 py-2 items-center'>
         <div className='flex items-center'>
           <span className='iconify big-icon' data-icon={iconType} />
-          <p className='text-2xl pl-3'>
-            ¿Que es ingeniería de características?
-          </p>
+          <p className='text-2xl px-3'>{title}</p>
         </div>
         <span className={lessonStatusClass} data-icon={iconStatus} />
       </div>
