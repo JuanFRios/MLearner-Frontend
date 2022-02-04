@@ -37,7 +37,7 @@ export const Content = ({
     aux = (
       <div>
         <div
-          className='flex flex-col items-center my-2 text-white'
+          className='flex flex-col items-center my-2 text-white w-full'
           onClick={() => {
             onClick();
           }}
@@ -65,9 +65,9 @@ export const Content = ({
     );
   } else {
     aux = (
-      <div>
+      <div className='w-96'>
         <div
-          className='flex flex-col my-8 text-white'
+          className='flex flex-col my-8 text-white w-full'
           onClick={() => {
             onClick();
           }}

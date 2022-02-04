@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PrivateLayout = () => (
-  <div className='flex justify-center w-screen'>
+  <div className='flex justify-center w-full'>
     <div className='max-w-190 h-screen'>
       <Sidebar />
       <Header />

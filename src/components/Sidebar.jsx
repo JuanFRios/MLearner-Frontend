@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   function onSubmit(event) {
     event.preventDefault();
     localStorage.removeItem('token');
@@ -17,9 +19,9 @@ const Sidebar = () => {
       <div className='backgroudSB w-80 fixed h-full flex flex-col items-center content-center  z-20 '>
         <div className='px-8 py-12'>
           <div className='flex flex-col items-center'>
-            <div className='circle'>F</div>
-            <p className='text-gray-200 py-3 text-3xl font-bold'>
-              Felipe Morales
+            <div className='circle'>J</div>
+            <p className='text-gray-200 py-3 text-2xl font-bold text-center'>
+              {user.nombreCompleto}
             </p>
           </div>
           <ul className='mt-12 '>
