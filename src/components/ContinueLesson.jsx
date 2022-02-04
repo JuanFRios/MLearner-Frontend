@@ -7,7 +7,7 @@ export const ContinueLesson = ({ modulo, leccion }) => (
         <div className='w-48'>
           <p className='text-3xl font-bold'>{modulo}</p>
         </div>
-        <div className='w-48 mt-2'>
+        <div className='w-fit mt-2'>
           <p className='text-lg font-medium'>{leccion}</p>
         </div>
       </div>
