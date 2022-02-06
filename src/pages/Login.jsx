@@ -3,15 +3,20 @@ import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { startLoginEmailPassword } from 'actions/auth';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { form, formData, updateFormData } = useFormData();
 
   async function onSubmit(event) {
     event.preventDefault();
-    dispatch(startLoginEmailPassword(formData));
+    const auth = await dispatch(startLoginEmailPassword(formData));
+    if (auth) {
+      navigate('/home');
+    }
   }
 
   return (
@@ -39,7 +44,7 @@ const Login = () => {
               type='password'
               placeholder='Escribe tu contraseña'
             />
-            <button type='submit' className='btn btn-blue w-2/4 pt-8'>
+            <button type='submit' className='btn btn-blue w-2/4 '>
               Ingresar
             </button>
           </form>

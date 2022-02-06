@@ -8,6 +8,7 @@ import Footer from 'components/Footer';
 import { useDispatch } from 'react-redux';
 import { renewToken } from 'actions/auth';
 import Dashboard from 'pages/Dashboard';
+import LoadingHome from 'components/loading/LoadingHome';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export const AppRouter = () => {
         <Route path='/' element={<PublicLayout />}>
           <Route path='' element={<Login />} />
         </Route>
-        <Route path='/course' element={<PrivateLayout />}>
+        <Route path='/' element={<PrivateLayout />}>
           <Route path='/home' element={<Dashboard />} />
           <Route path='/statics' element={<Footer />} />
           <Route path='/lesson' element={<Dashboard />} />

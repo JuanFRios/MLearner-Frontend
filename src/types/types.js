@@ -7,4 +7,7 @@ export const types = {
 
   uiStartLoading: '[UI] Start loading',
   uiFinishLoading: '[UI] Finish loading',
+
+  setActiveLessons: '[Lesson] Set active lessons',
+  removeActiveLessons: '[Lesson] Remove active lessons',
 };
