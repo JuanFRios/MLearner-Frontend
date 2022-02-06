@@ -21,7 +21,7 @@ const Sidebar = () => {
           <div className='flex flex-col items-center'>
             <div className='circle'>J</div>
             <p className='text-gray-200 py-3 text-2xl font-bold text-center'>
-              {user.nombreCompleto}
+              {user ? user.nombreCompleto : ''}
             </p>
           </div>
           <ul className='mt-12 '>

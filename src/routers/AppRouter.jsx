@@ -8,6 +8,7 @@ import Footer from 'components/Footer';
 import { useDispatch } from 'react-redux';
 import { renewToken } from 'actions/auth';
 import Dashboard from 'pages/Dashboard';
+import LoadingHome from 'components/loading/LoadingHome';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();

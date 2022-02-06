@@ -15,26 +15,27 @@ const Dashboard = () => {
             icono='grommet-icons:diamond'
             color='text-sky-400'
             titulo='Puntaje'
-            informacion={user.puntajeGlobal}
+            informacion={user ? user.puntajeGlobal : ''}
           />
           <InformationProgress
             className='basis-1/4'
             icono='ic:sharp-local-fire-department'
             color='text-orange-600'
             titulo='Racha'
-            informacion={user.rachaDias}
+            informacion={user ? user.rachaDias : ''}
           />
           <InformationProgress
             className='basis-1/4'
             icono='mdi:progress-clock'
             color='text-green-600'
             titulo='Progreso'
-            informacion={`${user.porcentajeProgreso}%`}
+            informacion={user ? `${user.porcentajeProgreso}%` : ''}
           />
         </div>
         <div>
           <p className='text-2xl font-bold'>
-            Hola {user.nombreCompleto.split(' ')[0]}!, sigue aprendiendo
+            Hola {user ? user.nombreCompleto.split(' ')[0] : ''}!, sigue
+            aprendiendo
           </p>
         </div>
         <ContinueLesson
@@ -48,6 +49,7 @@ const Dashboard = () => {
       <div className='items-center px-24 w-160 flex flex-wrap justify-between my-4'>
         <Content
           nombre='Introducción a Python'
+          idModule='61db50d98e5e161c6ca65604'
           puntajeObtenido='32'
           puntajetotal='32'
           tamaño='moduleLg'
@@ -55,6 +57,7 @@ const Dashboard = () => {
         />
         <Content
           nombre='Ingeniería de Características'
+          idModule='61db51468e5e161c6ca65605'
           puntajeObtenido='0'
           puntajetotal='32'
           tamaño='moduleSm'
@@ -62,6 +65,7 @@ const Dashboard = () => {
         />
         <Content
           nombre='Reducción de dimensionalidad'
+          idModule='61db519e8e5e161c6ca65606'
           puntajeObtenido='0'
           puntajetotal='32'
           tamaño='moduleSm'
@@ -69,6 +73,7 @@ const Dashboard = () => {
         />
         <Content
           nombre='Clustering'
+          idModule='61db51c78e5e161c6ca65607'
           puntajeObtenido='0'
           puntajetotal='32'
           tamaño='moduleLg'

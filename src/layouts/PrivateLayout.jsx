@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const PrivateLayout = () => (
   <div className='flex justify-center w-full'>
-    <div className='max-w-190 h-screen'>
+    <div className='min-w-190 h-screen'>
       <Sidebar />
       <Header />
       <Outlet />

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 
 export const Content = ({
   nombre,
+  idModule,
   puntajeObtenido,
   puntajetotal,
   tamaño,
@@ -22,7 +23,7 @@ export const Content = ({
   function onClick() {
     setShowModal(true);
     dispatch(getContentModule());
-    dispatch(getLessonsByModule('61db50d98e5e161c6ca65604'));
+    dispatch(getLessonsByModule(idModule));
   }
 
   if (activo === 'False') {
