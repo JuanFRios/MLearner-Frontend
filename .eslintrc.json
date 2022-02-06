@@ -27,6 +27,7 @@
     "no-use-before-define": "off",
     "import/no-unresolved": "off",
     "camelcase": "off",
+    "no-param-reassign": "off",
     "no-underscore-dangle": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
