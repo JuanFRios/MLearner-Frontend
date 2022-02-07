@@ -33,7 +33,9 @@ export const LessonsModal = ({ module, showModal, setShowModal }) => {
         <span className='text-3xl'>Módulo: {module}</span>
       </ModalHeader>
       <ModalBody>
-        {activeLessons ? <ul>{listItems}</ul> : <LoadingLessons />}
+        <div className='max-h-96 overflow-y-auto'>
+          {activeLessons ? <ul>{listItems}</ul> : <LoadingLessons />}
+        </div>
       </ModalBody>
       <ModalFooter>
         <Button color='blueGray' onClick={() => onClick()} ripple='light'>
