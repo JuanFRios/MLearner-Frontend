@@ -26,7 +26,7 @@ export const Content = ({
     dispatch(getLessonsByModule(idModule));
   }
 
-  if (activo === 'False') {
+  if (activo === false) {
     icono = 'bx:bxs-lock';
     color = 'locked';
   } else {
