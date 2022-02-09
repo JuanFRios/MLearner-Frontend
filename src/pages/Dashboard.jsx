@@ -16,6 +16,7 @@ const Dashboard = () => {
 
   useEffect(async () => {
     modules = await dispatch(getContentModule());
+    console.log(modules);
     setModulesItems(
       modules.data.contenidoCurso.map((module) => (
         <Content
@@ -25,13 +26,13 @@ const Dashboard = () => {
           puntajeObtenido={module.puntajeAcumulado}
           puntajetotal={module.modulo.puntajeMaximo}
           tamaño={
+            // 'moduleSm'
             tamañitorandom[Math.floor(Math.random() * tamañitorandom.length)]
           }
-          activo={module.estado === 'EN_CURSO'}
+          activo={module.estado}
         />
       ))
     );
-    console.log(modulesItems);
   }, []);
 
   return (
