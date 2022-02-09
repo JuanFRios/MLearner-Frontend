@@ -23,6 +23,7 @@ export const LessonsModal = ({ module, showModal, setShowModal }) => {
           type={lesson.tipo}
           status={lesson.estado}
           title={lesson.tituloLeccion}
+          idLesson={lesson.idLeccion}
         />
       ))
     : null;

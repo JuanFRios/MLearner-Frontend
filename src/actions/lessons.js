@@ -21,6 +21,22 @@ export const getLessonsByModule = (idModule) => async (dispatch) => {
   }
 };
 
+export const getLessonContent = (idLesson) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const respuestaAxios = await mlearnerApi.get(
+      `/lecciones/${idLesson}/contenido`
+    );
+    dispatch(finishLoading);
+    console.log(respuestaAxios);
+    return respuestaAxios;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+    return null;
+  }
+};
+
 export const setActiveLessons = (lessons) => ({
   type: types.setActiveLessons,
   payload: lessons,
