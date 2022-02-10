@@ -39,13 +39,16 @@
 	align-items: center;
 	text-align: center;
   font-size: 7rem;
-  color: #fff;
   text-align: center;
   background: #FBB631;
 }
 
 .backgroudSB{
   background: linear-gradient(180deg, #03314B 0%, #05192D 100%);
+}
+
+.selected {
+  background: #2CE080;
 }
 
 .shadowH{
