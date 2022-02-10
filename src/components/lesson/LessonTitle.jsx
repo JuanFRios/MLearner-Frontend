@@ -20,7 +20,7 @@ export const LessonTitle = ({ type, title }) => {
   return (
     <div className='flex justify-center w-full py-2 items-center'>
       <div className='flex items-center'>
-        <span className='iconify big-icon' data-icon={iconType} />
+        <span className='iconify text-5xl' data-icon={iconType} />
         <p className='text-3xl font-bold px-3'>{title}</p>
       </div>
     </div>

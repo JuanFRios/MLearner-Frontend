@@ -7,6 +7,7 @@ module.exports = {
         dark_blue_2: '#03314B',
         light_blue_1: '#007ED2',
         light_blue_2: '#0095F6',
+        light_green_2: '#2CE080',
       },
       spacing: {
         128: '35rem',

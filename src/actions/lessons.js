@@ -29,7 +29,7 @@ export const getLessonContent = (idLesson) => async (dispatch) => {
     );
     dispatch(finishLoading);
     console.log(respuestaAxios);
-    return respuestaAxios;
+    return respuestaAxios.data;
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);
