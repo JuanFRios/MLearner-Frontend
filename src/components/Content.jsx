@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-lone-blocks */
 import { getLessonsByModule } from 'actions/lessons';
@@ -5,6 +6,7 @@ import { getContentModule } from 'actions/modules';
 import { LessonsModal } from 'pages/LessonsModal';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { ModulesStatus } from 'constants/Modules';
 
 export const Content = ({
   nombre,
@@ -18,7 +20,9 @@ export const Content = ({
   const [showModal, setShowModal] = useState(false);
   let icono;
   let color;
-  let aux;
+  let anchoModulo;
+  let medidatexto;
+  let medidaIcono;
 
   function onClick() {
     setShowModal(true);
@@ -26,76 +30,70 @@ export const Content = ({
     dispatch(getLessonsByModule(idModule));
   }
 
-  if (activo === 'False') {
-    icono = 'bx:bxs-lock';
-    color = 'locked';
-  } else {
-    icono = 'iconoir:gym';
-    color = 'enable';
-  }
+  console.log(activo);
 
   if (tamaño === 'moduleLg') {
-    aux = (
-      <div>
-        <div
-          className='flex flex-col items-center my-2 text-white w-full'
-          onClick={() => {
-            onClick();
-          }}
-          role='button'
-          tabIndex='0'
-        >
-          <div className={`${tamaño} ${color} flex m-2 p-4`}>
-            <div className='flex flex-col self-baseline'>
-              <p className='text-3xl font-bold'>{`${puntajeObtenido}/${puntajetotal}`}</p>
-              <div className='mt-20 w-64'>
-                <p className='text-2xl font-bold'>{nombre}</p>
-              </div>
-            </div>
-            <div className='flex justify-items-end ml-72 pl-72 items-end'>
-              <span className='iconify text-5xl' data-icon={icono} />
-            </div>
-          </div>
-        </div>
-        <LessonsModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          module={nombre}
-        />
-      </div>
-    );
+    anchoModulo = '';
+    medidatexto = 'w-128 mt-16';
+    medidaIcono = 'pl-64';
   } else {
-    aux = (
-      <div className='w-96'>
-        <div
-          className='flex flex-col my-8 text-white w-full'
-          onClick={() => {
-            onClick();
-          }}
-          role='button'
-          tabIndex='0'
-        >
-          <div className={`${tamaño} ${color} flex p-4`}>
-            <div className='flex flex-col self-baseline'>
-              <p className='text-3xl font-bold'>{`${puntajeObtenido}/${puntajetotal}`}</p>
-              <div className='mt-12 flex'>
-                <p className='w-40 text-2xl font-bold justify-items-center'>
-                  {nombre}
-                </p>
-                <div className='items-center ml-28 pt-4'>
-                  <span className='iconify text-5xl' data-icon={icono} />
-                </div>
-              </div>
+    anchoModulo = 'w-96';
+    medidatexto = 'w-64 mt-12';
+    medidaIcono = 'pl-12';
+  }
+
+  switch (activo) {
+    case ModulesStatus.passed:
+      icono = 'iconoir:gym';
+      color = 'good';
+      break;
+    case ModulesStatus.fail:
+      icono = 'bx:bxs-lock';
+      color = 'bad';
+      break;
+    case ModulesStatus.inProgress:
+      icono = 'fluent:play-12-filled';
+      color = 'enable';
+      break;
+    case ModulesStatus.blocked:
+      icono = 'bx:bxs-lock';
+      color = 'locked';
+      break;
+    default:
+      icono = '';
+      color = '';
+      break;
+  }
+
+  return (
+    <div className={anchoModulo}>
+      <div
+        className='flex flex-col items-center my-2 text-white w-full'
+        onClick={() => {
+          onClick();
+        }}
+        role='button'
+        tabIndex='0'
+      >
+        <div className={`${tamaño} ${color} flex m-2 py-4`}>
+          <div className='flex flex-col'>
+            <div className='flex'>
+              <p className='puntaje text-3xl font-bold px-8 pt-2'>{`${puntajeObtenido}/${puntajetotal}`}</p>
+            </div>
+            <div className={`${medidatexto} flex`}>
+              <p className='text-2xl font-bold px-8 py-2'>{nombre}</p>
             </div>
           </div>
+          <div className={`${medidaIcono} flex items-end py-2`}>
+            <span className='iconify text-5xl' data-icon={icono} />
+          </div>
         </div>
-        <LessonsModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          module={nombre}
-        />
       </div>
-    );
-  }
-  return <div>{aux}</div>;
+      <LessonsModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        module={nombre}
+      />
+    </div>
+  );
 };

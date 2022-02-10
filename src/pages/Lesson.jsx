@@ -3,11 +3,12 @@ import ItemContent from 'components/lesson/ItemContent';
 import LessonContent from 'components/lesson/LessonContent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Lesson = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [lesson, setLesson] = useState(null);
 
   useEffect(async () => {
@@ -15,13 +16,22 @@ const Lesson = () => {
     setLesson(lessonResponse);
   }, []);
 
+  function onClick(event) {
+    event.preventDefault();
+    navigate('/home');
+  }
+
   return (
     <div className='flex flex-col w-190 px-20'>
       <div className='flex items-center my-10'>
-        <span className='iconify big-icon' data-icon='ep:close-bold' />
-        <p className='text-3xl font-bold ml-9'>
-          Módulo: ingeniería de características
-        </p>
+        <button type='button' onClick={onClick}>
+          <span className='iconify big-icon' data-icon='ep:close-bold' />
+        </button>
+        {lesson && (
+          <p className='text-3xl font-bold ml-9'>
+            Modulo: {lesson.leccion.modulo.nombre}
+          </p>
+        )}
       </div>
       <div className='container border-2 p-6'>
         {lesson && <LessonContent lesson={lesson.leccion} />}

@@ -39,13 +39,16 @@
 	align-items: center;
 	text-align: center;
   font-size: 7rem;
-  color: #fff;
   text-align: center;
   background: #FBB631;
 }
 
 .backgroudSB{
   background: linear-gradient(180deg, #03314B 0%, #05192D 100%);
+}
+
+.selected {
+  background: #2CE080;
 }
 
 .shadowH{
@@ -95,7 +98,7 @@
 .moduleLg{
   @apply h-48;
   box-sizing: border-box;
-  width: 100%;
+  width: 56rem;
   border-radius: 16px;
 }
 
@@ -104,21 +107,34 @@
   box-sizing: border-box;
   width: 100%;
   border-radius: 16px;
-  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
 }
 
 .enable{
+  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
+  background-position: center;
+  object-fit: cover;
+}
+.enable p
+{
+  background:#03314B;
+  left:0px;
+}
+.enable .puntaje{
+  background: linear-gradient(90deg, #03314B 0%, rgba(3, 49, 75, 0.82) 57.12%, rgba(3, 49, 75, 0.69) 79.15%, rgba(5, 25, 45, 0.31) 104.09%);
+}
+
+.good{
   background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
   background-position: center;
   object-fit: cover;
+  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
 }
 
 .bad{
   background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
   background-position: center;
   object-fit: cover;
+  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
 }
 
 .locked{
@@ -127,7 +143,6 @@
   background-position: center;
   object-fit: cover;
 }
-
 
 input[type="radio"] + label:hover,
 input[type="radio"] + label:hover label{
@@ -141,4 +156,8 @@ box-shadow: 0px 0px 0px 2px white inset;
 
 input[type="radio"]:checked + label{
  color: #3490DC;
+}
+.locked .iconify {
+  @apply
+  text-white
 }
