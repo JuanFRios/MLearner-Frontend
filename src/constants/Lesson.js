@@ -9,3 +9,12 @@ export const LessonStatus = {
   inProgress: 'EN_CURSO',
   blocked: 'BLOQUEADA',
 };
+
+export const LessonContent = {
+  image: 'IMAGEN',
+  text: 'TEXTO',
+  title: 'TITULO',
+  subtitle: 'SUBTITULO',
+  list: 'LISTA',
+  code: 'CODIGO',
+};

@@ -30,8 +30,6 @@ export const Content = ({
     dispatch(getLessonsByModule(idModule));
   }
 
-  console.log(activo);
-
   if (tamaño === 'moduleLg') {
     anchoModulo = '';
     medidatexto = 'w-128 mt-16';
