@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = 'https://restserver-pi.herokuapp.com/api';
 
 const mlearnerApi = axios.create({ baseURL });
 

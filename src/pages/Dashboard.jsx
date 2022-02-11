@@ -1,11 +1,39 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import { Content } from 'components/Content';
 import { ContinueLesson } from 'components/ContinueLesson';
 import InformationProgress from 'components/InformationProgress';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContentModule } from 'actions/modules';
+import React, { useEffect, useState } from 'react';
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  let modules = null;
+  const [modulesItems, setModulesItems] = useState([]);
+  const tamañitorandom = ['moduleLg', 'moduleSm'];
+
+  useEffect(async () => {
+    modules = await dispatch(getContentModule());
+    setModulesItems(
+      modules.data.contenidoCurso.map((module) => (
+        <Content
+          key={module.modulo._id}
+          nombre={module.modulo.nombre}
+          idModule={module.modulo._id}
+          puntajeObtenido={module.puntajeAcumulado}
+          puntajetotal={module.modulo.puntajeMaximo}
+          tamaño={
+            // 'moduleSm'
+            tamañitorandom[0]
+          }
+          activo={module.estado}
+        />
+      ))
+    );
+  }, []);
+
   return (
     <div className='ml-64 pl-28 pr-4 pt-5'>
       <div className='flex flex-col'>
@@ -47,38 +75,7 @@ const Dashboard = () => {
         <p>Contenido del curso</p>
       </div>
       <div className='items-center px-24 w-160 flex flex-wrap justify-between my-4'>
-        <Content
-          nombre='Introducción a Python'
-          idModule='61db50d98e5e161c6ca65604'
-          puntajeObtenido='32'
-          puntajetotal='32'
-          tamaño='moduleLg'
-          activo='True'
-        />
-        <Content
-          nombre='Ingeniería de Características'
-          idModule='61db51468e5e161c6ca65605'
-          puntajeObtenido='0'
-          puntajetotal='32'
-          tamaño='moduleSm'
-          activo='False'
-        />
-        <Content
-          nombre='Reducción de dimensionalidad'
-          idModule='61db519e8e5e161c6ca65606'
-          puntajeObtenido='0'
-          puntajetotal='32'
-          tamaño='moduleSm'
-          activo='False'
-        />
-        <Content
-          nombre='Clustering'
-          idModule='61db51c78e5e161c6ca65607'
-          puntajeObtenido='0'
-          puntajetotal='32'
-          tamaño='moduleLg'
-          activo='False'
-        />
+        {modulesItems}
       </div>
     </div>
   );
