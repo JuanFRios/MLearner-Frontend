@@ -20,7 +20,6 @@ const Sidebar = () => {
     selectedE =
       'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
     // eslint-disable-next-line no-console
-    console.log('Entro');
   } else {
     selectedE = 'border-green-500 text-green-500';
     selectedH =

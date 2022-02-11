@@ -4,6 +4,7 @@ import QuizLesson from 'components/lesson/QuizLesson';
 import Live from 'components/lesson/Live';
 import { LessonType } from 'constants/Lesson';
 import ReadingCodeLesson from 'components/lesson/ReadingCodeLesson';
+import Compiler from 'components/lesson/Compiler';
 
 const LessonContent = ({ lesson }) => {
   console.log(lesson);
@@ -19,6 +20,11 @@ const LessonContent = ({ lesson }) => {
       )}
       {lesson.tipo === LessonType.reading && (
         <ReadingCodeLesson content={lesson.contenido} />
+      )}
+      {lesson.tipo === LessonType.code && (
+        <div>
+          <Compiler />
+        </div>
       )}
       <div className='flex'>{livesItems}</div>
     </div>

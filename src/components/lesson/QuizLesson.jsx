@@ -3,8 +3,6 @@ import React from 'react';
 
 const QuizLesson = ({ question }) => {
   const { form, formData, updateFormData } = useFormData();
-  console.log(formData);
-  console.log(question);
 
   async function onSubmit(event) {
     event.preventDefault();

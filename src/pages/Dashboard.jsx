@@ -16,7 +16,6 @@ const Dashboard = () => {
 
   useEffect(async () => {
     modules = await dispatch(getContentModule());
-    console.log(modules);
     setModulesItems(
       modules.data.contenidoCurso.map((module) => (
         <Content

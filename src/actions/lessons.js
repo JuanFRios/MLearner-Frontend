@@ -28,7 +28,6 @@ export const getLessonContent = (idLesson) => async (dispatch) => {
       `/lecciones/${idLesson}/contenido`
     );
     dispatch(finishLoading);
-    console.log(respuestaAxios);
     return respuestaAxios.data;
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
