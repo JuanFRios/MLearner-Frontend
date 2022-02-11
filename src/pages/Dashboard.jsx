@@ -27,7 +27,7 @@ const Dashboard = () => {
           puntajetotal={module.modulo.puntajeMaximo}
           tamaño={
             // 'moduleSm'
-            tamañitorandom[Math.floor(Math.random() * tamañitorandom.length)]
+            tamañitorandom[0]
           }
           activo={module.estado}
         />
