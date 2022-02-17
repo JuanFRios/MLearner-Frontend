@@ -1,7 +1,7 @@
 import React from 'react';
 import Compiler from 'components/lesson/Compiler';
 
-const ItemContent = ({ type, value }) => {
+const ItemContent = ({ type, value, valueCode }) => {
   let item;
   switch (type) {
     case 'TEXTO':
@@ -45,7 +45,7 @@ const ItemContent = ({ type, value }) => {
     default:
       item = (
         <div className='pt-8'>
-          <Compiler />
+          <Compiler sampleCodev={valueCode} />
         </div>
       );
   }
