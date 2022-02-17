@@ -59,14 +59,10 @@ const Dashboard = () => {
         </div>
         <div>
           <p className='text-2xl font-bold'>
-            Hola {user ? user.nombreCompleto.split(' ')[0] : ''}!, sigue
-            aprendiendo
+            Hola {user?.nombreCompleto.split(' ')[0]}!, sigue aprendiendo
           </p>
         </div>
-        <ContinueLesson
-          leccion='Lección: Procesamiento con pandas'
-          modulo='Modulo: Ingeniería de características'
-        />
+        {user && <ContinueLesson idLesson={user?.leccionActual} />}
       </div>
       <div className='my-6 pt-3 text-2xl font-bold'>
         <p>Contenido del curso</p>

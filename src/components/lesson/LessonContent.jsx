@@ -7,7 +7,6 @@ import ReadingCodeLesson from 'components/lesson/ReadingCodeLesson';
 import Compiler from 'components/lesson/Compiler';
 
 const LessonContent = ({ lesson }) => {
-  console.log(lesson);
   const livesItems = [];
   for (let i = 0; i < lesson.vidasTotales; i += 1) {
     livesItems.push(<Live key={i} />);

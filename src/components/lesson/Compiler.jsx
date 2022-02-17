@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react';
 
 const Compiler = () => {
-    console.log('Entra al codigo');
     const sampleCode = `# Create a variable a, equal to 5
 
 # Print out a`;

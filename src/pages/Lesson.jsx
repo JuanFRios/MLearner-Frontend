@@ -23,7 +23,6 @@ const Lesson = () => {
   function onClick(event) {
     event.preventDefault();
     dispatch(resetLessonStatus());
-    console.log(selectedOption);
     navigate('/home');
   }
 

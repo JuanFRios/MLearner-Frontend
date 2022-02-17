@@ -31,11 +31,11 @@ export const Content = ({
   }
 
   if (tamaño === 'moduleLg') {
-    anchoModulo = '';
+    anchoModulo = 'w-full';
     medidatexto = 'w-128 mt-16';
     medidaIcono = 'pl-64';
   } else {
-    anchoModulo = 'w-96';
+    anchoModulo = 'w-96 m-4';
     medidatexto = 'w-64 mt-12';
     medidaIcono = 'pl-12';
   }
@@ -73,7 +73,7 @@ export const Content = ({
         role='button'
         tabIndex='0'
       >
-        <div className={`${tamaño} ${color} flex m-2 py-4`}>
+        <div className={`${tamaño} ${color} flex py-4`}>
           <div className='flex flex-col'>
             <div className='flex'>
               <p className='puntaje text-3xl font-bold px-8 pt-2'>{`${puntajeObtenido}/${puntajetotal}`}</p>
