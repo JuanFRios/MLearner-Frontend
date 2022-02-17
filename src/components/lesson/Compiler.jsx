@@ -30,7 +30,7 @@ const Compiler = () => {
             Use the assignment operator (<code>=</code>) to create the variable <code>a</code>.
         </div>
         
-      </div>
+    </div>
 )}
 
 export default Compiler

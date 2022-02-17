@@ -12,7 +12,6 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   let modules = null;
   const [modulesItems, setModulesItems] = useState([]);
-  const tamañitorandom = ['moduleLg', 'moduleSm'];
 
   useEffect(async () => {
     modules = await dispatch(getContentModule());
@@ -24,10 +23,8 @@ const Dashboard = () => {
           idModule={module.modulo._id}
           puntajeObtenido={module.puntajeAcumulado}
           puntajetotal={module.modulo.puntajeMaximo}
-          tamaño={
-            // 'moduleSm'
-            tamañitorandom[0]
-          }
+          tamaño={module.modulo.tamañoVisualizacion}
+          imagen={module.modulo.urlImagen}
           activo={module.estado}
         />
       ))

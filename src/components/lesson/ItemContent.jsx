@@ -1,4 +1,5 @@
 import React from 'react';
+import Compiler from 'components/lesson/Compiler';
 
 const ItemContent = ({ type, value }) => {
   let item;
@@ -42,7 +43,11 @@ const ItemContent = ({ type, value }) => {
       );
       break;
     default:
-      item = <p>Contenido tipo {type} no soportado aún</p>;
+      item = (
+        <div className='pt-8'>
+          <Compiler />
+        </div>
+      );
   }
   return <div>{item}</div>;
 };

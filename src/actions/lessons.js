@@ -28,6 +28,7 @@ export const getLessonContent = (idLesson) => async (dispatch) => {
       `/lecciones/${idLesson}/contenido`
     );
     dispatch(finishLoading);
+    dispatch(setActiveLesson(respuestaAxios.data));
     return respuestaAxios.data;
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
@@ -41,6 +42,24 @@ export const setActiveLessons = (lessons) => ({
   payload: lessons,
 });
 
+export const setActiveLesson = (lesson) => ({
+  type: types.setActiveLesson,
+  payload: lesson,
+});
+
 export const removeActiveLessons = () => ({
   type: types.removeActiveLessons,
+});
+
+export const removeActiveLesson = () => ({
+  type: types.removeActiveLesson,
+});
+
+export const changeSelectedOption = (option) => ({
+  type: types.setSelectedOption,
+  payload: option,
+});
+
+export const resetLessonStatus = () => ({
+  type: types.resetLessonStatus,
 });

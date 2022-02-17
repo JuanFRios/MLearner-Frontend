@@ -22,7 +22,7 @@ const LessonContent = ({ lesson }) => {
         <ReadingCodeLesson content={lesson.contenido} />
       )}
       {lesson.tipo === LessonType.code && (
-        <div>
+        <div className='pt-8'>
           <Compiler />
         </div>
       )}
