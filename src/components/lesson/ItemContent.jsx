@@ -1,6 +1,7 @@
 import React from 'react';
+import Compiler from 'components/lesson/Compiler';
 
-const ItemContent = ({ type, value }) => {
+const ItemContent = ({ type, value, valueCode }) => {
   let item;
   switch (type) {
     case 'TEXTO':
@@ -42,9 +43,13 @@ const ItemContent = ({ type, value }) => {
       );
       break;
     default:
-      item = <p>Contenido tipo {type} no soportado aún</p>;
+      item = (
+        <div className='pt-8 pl-1'>
+          <Compiler sampleCodev={valueCode} />
+        </div>
+      );
   }
-  return <div>{item}</div>;
+  return <div className='pr-3'>{item}</div>;
 };
 
 export default ItemContent;

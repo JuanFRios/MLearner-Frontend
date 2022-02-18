@@ -10,4 +10,12 @@ export const types = {
 
   setActiveLessons: '[Lesson] Set active lessons',
   removeActiveLessons: '[Lesson] Remove active lessons',
+
+  setActiveLesson: '[Lesson] Set active lesson',
+  removeActiveLesson: '[Lesson] Remove active lesson',
+
+  setSelectedOption: '[Lesson] Set Selected option',
+  removeSelectedOption: '[Lesson] Remove Selected option',
+
+  resetLessonStatus: '[Lesson] Reset Lesson Status',
 };

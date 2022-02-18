@@ -19,7 +19,6 @@ const Sidebar = () => {
     selectedH = 'border-green-500 text-green-500';
     selectedE =
       'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
-    // eslint-disable-next-line no-console
   } else {
     selectedE = 'border-green-500 text-green-500';
     selectedH =
@@ -33,8 +32,8 @@ const Sidebar = () => {
       <div className='backgroudSB w-80 fixed h-full flex flex-col items-center content-center  z-20 '>
         <div className='px-8 py-12'>
           <div className='flex flex-col items-center'>
-            <div className='circle'>
-              <img src={user ? user.urlImagen : ''} alt='' />
+            <div className='circle text-white'>
+              J{/* <img src={user ? user.urlImagen : ''} alt='' /> */}
             </div>
             <p className='text-gray-200 py-3 text-2xl font-bold text-center'>
               {user ? user.nombreCompleto : ''}

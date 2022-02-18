@@ -29,6 +29,7 @@ export const AppRouter = () => {
           <Route path='' element={<Login />} />
         </Route>
         <Route path='/' element={<PrivateLayout />}>
+          <Route path='/home2' element={<LoadingHome />} />
           <Route path='/home' element={<Dashboard />} />
           <Route path='/statics' element={<Footer />} />
         </Route>
