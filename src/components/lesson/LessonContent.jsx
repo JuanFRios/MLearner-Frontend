@@ -7,13 +7,12 @@ import ReadingCodeLesson from 'components/lesson/ReadingCodeLesson';
 import Compiler from 'components/lesson/Compiler';
 
 const LessonContent = ({ lesson }) => {
-  console.log(lesson);
   const livesItems = [];
   for (let i = 0; i < lesson.vidasTotales; i += 1) {
     livesItems.push(<Live key={i} />);
   }
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col max-h-128 overflow-y-auto'>
       <LessonTitle type={lesson.tipo} title={lesson.titulo} />
       {lesson.tipo === LessonType.quiz && (
         <QuizLesson question={lesson.pregunta} />
@@ -22,7 +21,7 @@ const LessonContent = ({ lesson }) => {
         <ReadingCodeLesson content={lesson.contenido} />
       )}
       {lesson.tipo === LessonType.code && (
-        <div>
+        <div className='pt-8'>
           <Compiler />
         </div>
       )}

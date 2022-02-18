@@ -2,19 +2,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
 
-const Compiler = () => {
-    console.log('Entra al codigo');
-    const sampleCode = `# Create a variable a, equal to 5
-
-# Print out a`;
-    const solution = `          # Create a variable a, equal to 5
-    a =  5
-
-    # Print out a
-    print(a)`;
+const Compiler = ( {sampleCodev} ) => {
     const sct = `          test_object("a")
     test_function("print")
-    success_msg("Great job!")`
+    success_msg("Genial!")`
     useEffect(() => {
         window.initAddedDCLightExercises()
     }, [])    
@@ -23,14 +14,14 @@ const Compiler = () => {
         <code data-type="pre-exercise-code">
           # no pec
         </code>
-        <code data-type="sample-code">{sampleCode}</code>
-        <code data-type="solution">{solution}</code>
+        <code data-type="sample-code">{sampleCodev}</code>
+        {/* <code data-type="solution">{sampleCodev}</code> */}
         <code data-type="sct">{sct}</code>
         <div  data-type="hint" >
             Use the assignment operator (<code>=</code>) to create the variable <code>a</code>.
         </div>
         
-      </div>
+    </div>
 )}
 
 export default Compiler

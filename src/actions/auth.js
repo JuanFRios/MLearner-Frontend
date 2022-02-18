@@ -13,7 +13,7 @@ export const startLoginEmailPassword = (formData) => async (dispatch) => {
     }
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
-    dispatch(finishLoading);
+    dispatch(finishLoading());
   }
   return false;
 };

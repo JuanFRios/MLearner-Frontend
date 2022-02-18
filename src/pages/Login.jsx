@@ -44,7 +44,10 @@ const Login = () => {
               type='password'
               placeholder='Escribe tu contraseña'
             />
-            <button type='submit' className='btn btn-blue w-2/4 '>
+            <button
+              type='submit'
+              className='btn btn-blue w-2/4 focus:outline-none focus:ring focus:border-blue-500'
+            >
               Ingresar
             </button>
           </form>
