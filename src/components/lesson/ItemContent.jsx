@@ -44,12 +44,12 @@ const ItemContent = ({ type, value, valueCode }) => {
       break;
     default:
       item = (
-        <div className='pt-8'>
+        <div className='pt-8 pl-1'>
           <Compiler sampleCodev={valueCode} />
         </div>
       );
   }
-  return <div>{item}</div>;
+  return <div className='pr-3'>{item}</div>;
 };
 
 export default ItemContent;

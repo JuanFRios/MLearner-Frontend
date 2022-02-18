@@ -94,7 +94,11 @@ export const Content = ({
             </div>
           </div>
           <div className={`${medidaIcono} flex items-end py-2`}>
-            <button type='button' onClick={evento}>
+            <button
+              type='button'
+              onClick={evento}
+              className='focus:outline-none hover:scale-110'
+            >
               <span className='iconify text-5xl' data-icon={icono} />
             </button>
           </div>

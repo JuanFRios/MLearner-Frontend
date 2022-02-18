@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { changeSelectedOption } from 'actions/lessons';
 import useFormData from 'hooks/useFormData';
 import React, { useEffect } from 'react';

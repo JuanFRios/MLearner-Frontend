@@ -12,7 +12,7 @@ const LessonContent = ({ lesson }) => {
     livesItems.push(<Live key={i} />);
   }
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col max-h-128 overflow-y-auto'>
       <LessonTitle type={lesson.tipo} title={lesson.titulo} />
       {lesson.tipo === LessonType.quiz && (
         <QuizLesson question={lesson.pregunta} />

@@ -35,7 +35,7 @@ export const ContinueLesson = ({ idLesson }) => {
           <button
             type='button'
             onClick={onContinue}
-            className='flex bg-gray-100 text-2xl font-bold px-4 rounded-3xl items-center p-1 mr-6'
+            className='flex bg-gray-100 text-2xl font-bold px-4 rounded-3xl items-center p-1 mr-6 focus:outline-none hover:scale-105'
           >
             <span className='iconify' data-icon='fluent:play-12-filled' />
             Continuar
