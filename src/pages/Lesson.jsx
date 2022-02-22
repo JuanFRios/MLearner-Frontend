@@ -1,4 +1,5 @@
-import { getLessonContent } from 'actions/lessons';
+/* eslint-disable no-console */
+import { getLessonContent, validateQuizLesson } from 'actions/lessons';
 import LessonContent from 'components/lesson/LessonContent';
 import { ConfirmDialog } from 'components/utils/ConfirmDialog';
 import ProgressBar from 'components/lesson/ProgressBar';
@@ -39,6 +40,18 @@ const Lesson = () => {
     window.location.reload(true);
   }
 
+  async function onValidate(event) {
+    event.preventDefault();
+    await dispatch(
+      validateQuizLesson(activeLesson.leccion.lid, {
+        idOpcionSeleccionada: selectedOption,
+      })
+    );
+    const lessonResponse = await dispatch(getLessonContent(id));
+    setLesson(lessonResponse);
+    console.log({ idOpcionSeleccionada: selectedOption });
+  }
+
   return (
     <>
       {!ready && <LoadingLesson />}
@@ -61,9 +74,20 @@ const Lesson = () => {
               </p>
             )}
           </div>
-          {lesson && <ProgressBar seenLessons={3} totalLessons={32} />}
+          {lesson && (
+            <ProgressBar
+              seenLessons={lesson.leccion.modulo.numeroLeccionesVistas}
+              totalLessons={lesson.leccion.modulo.numeroLecciones}
+              puntaje={lesson.leccion.puntajeObtenido}
+            />
+          )}
           <div className='w-full max-h-screen border-2 py-6 pl-6 '>
-            {lesson && <LessonContent lesson={lesson.leccion} />}
+            {lesson && (
+              <LessonContent
+                lesson={lesson.leccion}
+                lostLives={activeLesson.vidasPerdidas}
+              />
+            )}
           </div>
           <div className='flex justify-end my-4'>
             {activeLesson &&
@@ -84,7 +108,7 @@ const Lesson = () => {
                   disabled={!selectedOption}
                   type='button'
                   className='btn bg-green-500 text-white shadow-lg disabled:bg-gray-300 disabled:text-gray-600 hover:scale-110 focus:outline-none'
-                  onClick={onContinue}
+                  onClick={onValidate}
                 >
                   Validar
                 </button>

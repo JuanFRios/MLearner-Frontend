@@ -6,10 +6,13 @@ import { LessonType } from 'constants/Lesson';
 import ReadingCodeLesson from 'components/lesson/ReadingCodeLesson';
 import Compiler from 'components/lesson/Compiler';
 
-const LessonContent = ({ lesson }) => {
+const LessonContent = ({ lesson, lostLives }) => {
   const livesItems = [];
-  for (let i = 0; i < lesson.vidasTotales; i += 1) {
+  for (let i = 0; i < lesson.vidasTotales - lostLives; i += 1) {
     livesItems.push(<Live key={i} />);
+  }
+  for (let i = 0; i < lostLives; i += 1) {
+    livesItems.push(<Live key={`${i}L`} type='LOST' />);
   }
   return (
     <div className='flex flex-col max-h-128 overflow-y-auto'>
