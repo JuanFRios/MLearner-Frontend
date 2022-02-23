@@ -52,6 +52,20 @@ export const validateQuizLesson =
     }
   };
 
+export const validateCodeLesson = (idLesson) => async (dispatch) => {
+  try {
+    const respuestaAxios = await mlearnerApi.post(
+      `/lecciones/${idLesson}/codigo/validacion`,
+      { esCorrecta: true }
+    );
+    return respuestaAxios.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+    return null;
+  }
+};
+
 export const setActiveLessons = (lessons) => ({
   type: types.setActiveLessons,
   payload: lessons,

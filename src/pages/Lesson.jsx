@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
-import { getLessonContent, validateQuizLesson } from 'actions/lessons';
+import {
+  getLessonContent,
+  validateQuizLesson,
+  validateCodeLesson,
+} from 'actions/lessons';
 import LessonContent from 'components/lesson/LessonContent';
 import { ConfirmDialog } from 'components/utils/ConfirmDialog';
 import ProgressBar from 'components/lesson/ProgressBar';
@@ -7,6 +11,8 @@ import LoadingLesson from 'components/loading/LoadingLesson';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ResultDialog } from 'components/lesson/ResultDialog';
+import { getFinalStateModule } from 'actions/modules';
 
 const Lesson = () => {
   const { id } = useParams();
@@ -17,6 +23,8 @@ const Lesson = () => {
   );
   const [lesson, setLesson] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showModalErrorResult, setShowModalErrorResult] = useState(false);
+  const [showModalSuccessResult, setShowModalSuccessResult] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(async () => {
@@ -34,22 +42,49 @@ const Lesson = () => {
     // navigate('/home');
   }
 
-  function onContinue(event) {
+  async function onContinue(event) {
     event.preventDefault();
-    navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
-    window.location.reload(true);
+    if (
+      lesson.leccion.tipo === 'LECTURA' &&
+      lesson.leccion.estado !== 'VISTA'
+    ) {
+      await dispatch(validateQuizLesson(activeLesson.leccion.lid, {}));
+    }
+    if (lesson.leccion.tipo === 'CODIGO' && lesson.leccion.estado !== 'VISTA') {
+      await dispatch(validateCodeLesson(activeLesson.leccion.lid, {}));
+    }
+    if (activeLesson.idSiguienteLeccion) {
+      navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
+      window.location.reload(true);
+    } else {
+      dispatch(getFinalStateModule(activeLesson.leccion.modulo._id));
+    }
   }
 
   async function onValidate(event) {
     event.preventDefault();
-    await dispatch(
+    const respuesta = await dispatch(
       validateQuizLesson(activeLesson.leccion.lid, {
         idOpcionSeleccionada: selectedOption,
       })
     );
-    const lessonResponse = await dispatch(getLessonContent(id));
-    setLesson(lessonResponse);
+    if (!respuesta.esCorrecta) {
+      setShowModalErrorResult(true);
+    } else {
+      setShowModalSuccessResult(true);
+    }
     console.log({ idOpcionSeleccionada: selectedOption });
+  }
+
+  function onNoClickError() {
+    setShowModalErrorResult(false);
+    window.location.reload(true);
+  }
+
+  function onNoClickSuccess() {
+    setShowModalSuccessResult(false);
+    navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
+    window.location.reload(true);
   }
 
   return (
@@ -115,6 +150,18 @@ const Lesson = () => {
               )}
           </div>
           <ConfirmDialog showModal={showModal} setShowModal={setShowModal} />
+          <ResultDialog
+            showModal={showModalErrorResult}
+            onNoClick={() => onNoClickError()}
+            text='La opción seleccionada es incorrecta.'
+            textButton='Entendido'
+          />
+          <ResultDialog
+            showModal={showModalSuccessResult}
+            onNoClick={() => onNoClickSuccess()}
+            text='La respuesta es correcta.'
+            textButton='Continuar'
+          />
         </div>
       )}
     </>

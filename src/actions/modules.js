@@ -15,3 +15,16 @@ export const getContentModule = () => async (dispatch) => {
   }
   return false;
 };
+
+export const getFinalStateModule = (idModule) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const finalState = await mlearnerApi.get(`modulos/${idModule}/estadoFinal`);
+    dispatch(finishLoading);
+    return finalState.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
