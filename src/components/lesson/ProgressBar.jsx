@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React from 'react';
 
-const ProgressBar = ({ seenLessons, totalLessons }) => {
+const ProgressBar = ({ seenLessons, totalLessons, puntaje }) => {
+  console.log(puntaje);
   const percent = (seenLessons / totalLessons) * 100;
   return (
     <div className='flex items-center mb-6'>
@@ -15,7 +17,7 @@ const ProgressBar = ({ seenLessons, totalLessons }) => {
           className='iconify text-3xl text-sky-400'
           data-icon='grommet-icons:diamond'
         />
-        <span className='text-sky-400 text-2xl font-bold'>11</span>
+        <span className='text-sky-400 text-2xl font-bold'>{`${puntaje}`}</span>
       </div>
     </div>
   );

@@ -37,6 +37,35 @@ export const getLessonContent = (idLesson) => async (dispatch) => {
   }
 };
 
+export const validateQuizLesson =
+  (idLesson, opcionSeleccionada) => async (dispatch) => {
+    try {
+      const respuestaAxios = await mlearnerApi.post(
+        `/lecciones/${idLesson}/quizLectura/validacion`,
+        opcionSeleccionada
+      );
+      return respuestaAxios.data;
+    } catch (err) {
+      toast.error(err.response.data.msg, { position: 'top-center' });
+      dispatch(finishLoading);
+      return null;
+    }
+  };
+
+export const validateCodeLesson = (idLesson) => async (dispatch) => {
+  try {
+    const respuestaAxios = await mlearnerApi.post(
+      `/lecciones/${idLesson}/codigo/validacion`,
+      { esCorrecta: true }
+    );
+    return respuestaAxios.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+    return null;
+  }
+};
+
 export const setActiveLessons = (lessons) => ({
   type: types.setActiveLessons,
   payload: lessons,
