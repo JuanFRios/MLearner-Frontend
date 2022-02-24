@@ -19,7 +19,6 @@ const ReadingCodeLesson = ({ content }) => {
   return (
     <div>
       <ul>{itemsContent}</ul>
-      <ItemContent type='IMAGEN' value='i' />
     </div>
   );
 };

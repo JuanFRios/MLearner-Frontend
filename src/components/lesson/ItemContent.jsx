@@ -11,6 +11,39 @@ const ItemContent = ({ type, value, valueCode }) => {
         </div>
       );
       break;
+    case 'SUBTITULO':
+      item = (
+        <div className='pl-4 pb-3'>
+          <p className='text-justify font-bold text-xl'>{value}</p>
+        </div>
+      );
+      break;
+    case 'ESPACIO':
+      item = <br />;
+      break;
+    case 'TEXTO-CODIGO':
+      item = (
+        <div className='pl-4 pb-3'>
+          <pre>
+            <code>{value}</code>
+          </pre>
+        </div>
+      );
+      break;
+    case 'LINK':
+      item = (
+        <div className='pl-4 pb-3'>
+          <a
+            href={value}
+            target='_blank'
+            className='text-justify text-xl text-sky-500 underline'
+            rel='noreferrer'
+          >
+            {value}
+          </a>
+        </div>
+      );
+      break;
     case 'TITULO':
       item = (
         <div className='py-4'>
@@ -21,17 +54,13 @@ const ItemContent = ({ type, value, valueCode }) => {
     case 'IMAGEN':
       item = (
         <div className='flex justify-center'>
-          <img
-            src='https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1644539720/python-logo_asgkqg.jpg'
-            alt=''
-            className='w-40 h-fit'
-          />
+          <img src={value} alt='' className='w-full h-fit' />
         </div>
       );
       break;
     case 'LISTA':
       item = (
-        <div className='pl-8 pb-3'>
+        <div className='pl-16 pb-3'>
           <ul className='list-disc'>
             {value.split(';').map((i) => (
               <li key={i} className='text-xl'>

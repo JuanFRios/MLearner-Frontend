@@ -62,7 +62,9 @@ const Dashboard = () => {
                 icono='mdi:progress-clock'
                 color='text-green-600'
                 titulo='Progreso'
-                informacion={user ? `${user.porcentajeProgreso}%` : ''}
+                informacion={
+                  user ? `${user.porcentajeProgreso.toFixed(1)}%` : ''
+                }
               />
             </div>
             <div>

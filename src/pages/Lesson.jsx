@@ -1,4 +1,9 @@
-import { getLessonContent } from 'actions/lessons';
+/* eslint-disable no-console */
+import {
+  getLessonContent,
+  validateQuizLesson,
+  validateCodeLesson,
+} from 'actions/lessons';
 import LessonContent from 'components/lesson/LessonContent';
 import { ConfirmDialog } from 'components/utils/ConfirmDialog';
 import ProgressBar from 'components/lesson/ProgressBar';
@@ -6,6 +11,8 @@ import LoadingLesson from 'components/loading/LoadingLesson';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ResultDialog } from 'components/lesson/ResultDialog';
+import { getFinalStateModule } from 'actions/modules';
 
 const Lesson = () => {
   const { id } = useParams();
@@ -16,6 +23,8 @@ const Lesson = () => {
   );
   const [lesson, setLesson] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showModalErrorResult, setShowModalErrorResult] = useState(false);
+  const [showModalSuccessResult, setShowModalSuccessResult] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(async () => {
@@ -33,8 +42,47 @@ const Lesson = () => {
     // navigate('/home');
   }
 
-  function onContinue(event) {
+  async function onContinue(event) {
     event.preventDefault();
+    if (
+      lesson.leccion.tipo === 'LECTURA' &&
+      lesson.leccion.estado !== 'VISTA'
+    ) {
+      await dispatch(validateQuizLesson(activeLesson.leccion.lid, {}));
+    }
+    if (lesson.leccion.tipo === 'CODIGO' && lesson.leccion.estado !== 'VISTA') {
+      await dispatch(validateCodeLesson(activeLesson.leccion.lid, {}));
+    }
+    if (activeLesson.idSiguienteLeccion) {
+      navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
+      window.location.reload(true);
+    } else {
+      dispatch(getFinalStateModule(activeLesson.leccion.modulo._id));
+    }
+  }
+
+  async function onValidate(event) {
+    event.preventDefault();
+    const respuesta = await dispatch(
+      validateQuizLesson(activeLesson.leccion.lid, {
+        idOpcionSeleccionada: selectedOption,
+      })
+    );
+    if (!respuesta.esCorrecta) {
+      setShowModalErrorResult(true);
+    } else {
+      setShowModalSuccessResult(true);
+    }
+    console.log({ idOpcionSeleccionada: selectedOption });
+  }
+
+  function onNoClickError() {
+    setShowModalErrorResult(false);
+    window.location.reload(true);
+  }
+
+  function onNoClickSuccess() {
+    setShowModalSuccessResult(false);
     navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
     window.location.reload(true);
   }
@@ -61,9 +109,20 @@ const Lesson = () => {
               </p>
             )}
           </div>
-          {lesson && <ProgressBar seenLessons={3} totalLessons={32} />}
+          {lesson && (
+            <ProgressBar
+              seenLessons={lesson.leccion.modulo.numeroLeccionesVistas}
+              totalLessons={lesson.leccion.modulo.numeroLecciones}
+              puntaje={lesson.leccion.puntajeObtenido}
+            />
+          )}
           <div className='w-full max-h-screen border-2 py-6 pl-6 '>
-            {lesson && <LessonContent lesson={lesson.leccion} />}
+            {lesson && (
+              <LessonContent
+                lesson={lesson.leccion}
+                lostLives={activeLesson.vidasPerdidas}
+              />
+            )}
           </div>
           <div className='flex justify-end my-4'>
             {activeLesson &&
@@ -84,13 +143,25 @@ const Lesson = () => {
                   disabled={!selectedOption}
                   type='button'
                   className='btn bg-green-500 text-white shadow-lg disabled:bg-gray-300 disabled:text-gray-600 hover:scale-110 focus:outline-none'
-                  onClick={onContinue}
+                  onClick={onValidate}
                 >
                   Validar
                 </button>
               )}
           </div>
           <ConfirmDialog showModal={showModal} setShowModal={setShowModal} />
+          <ResultDialog
+            showModal={showModalErrorResult}
+            onNoClick={() => onNoClickError()}
+            text='La opción seleccionada es incorrecta.'
+            textButton='Entendido'
+          />
+          <ResultDialog
+            showModal={showModalSuccessResult}
+            onNoClick={() => onNoClickSuccess()}
+            text='La respuesta es correcta.'
+            textButton='Continuar'
+          />
         </div>
       )}
     </>
