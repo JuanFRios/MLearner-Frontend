@@ -30,9 +30,18 @@ export const renewToken = () => async (dispatch) => {
   }
 };
 
+export const startLogout = () => (dispatch) => {
+  dispatch(logout());
+  localStorage.removeItem('token');
+};
+
 export const login = (user) => ({
   type: types.login,
   payload: {
     user,
   },
+});
+
+export const logout = () => ({
+  type: types.logout,
 });

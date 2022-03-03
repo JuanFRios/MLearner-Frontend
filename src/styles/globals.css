@@ -66,12 +66,45 @@
   border-radius: 100px;
 }
 
+.continue-1{
+  @apply h-64 py-1;
+  box-sizing: border-box;
+  width: 800px;
+  border-radius: 60px;
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324361/ContinueMod_0_rfchfy.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.continue-3{
+  @apply h-64 py-1;
+  box-sizing: border-box;
+  width: 800px;
+  border-radius: 60px;
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324557/ContinueMod_3_mhrjt4.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .continue{
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;
   border-radius: 60px;
-  background-image: url(https://i.ibb.co/Jc14DmW/Continue-Mod.png);
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324932/ContinueMod_1_ey7ie8.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.continue-2{
+  @apply h-64 py-1;
+  box-sizing: border-box;
+  width: 800px;
+  border-radius: 60px;
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324486/ContinueMod_2_btwfhq.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -109,11 +142,6 @@
   border-radius: 16px;
 }
 
-.enable{
-  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
-}
 .enable p
 {
   background:#03314B;
@@ -123,23 +151,110 @@
   background: linear-gradient(90deg, #03314B 0%, rgba(3, 49, 75, 0.82) 57.12%, rgba(3, 49, 75, 0.69) 79.15%, rgba(5, 25, 45, 0.31) 104.09%);
 }
 
-.good{
+.enable-0{
+  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.good-0{
   background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
   background-position: center;
   object-fit: cover;
   filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
 }
 
-.bad{
+.bad-0{
   background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
   background-position: center;
   object-fit: cover;
   box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
 }
 
-.locked{
+.locked-0{
   color: rgba(249, 250, 251, 0.54);
   background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.enable-1{
+  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.good-1{
+  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
+  background-position: center;
+  object-fit: cover;
+  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
+}
+
+.bad-1{
+  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
+  background-position: center;
+  object-fit: cover;
+  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
+}
+
+.locked-1{
+  color: rgba(249, 250, 251, 0.54);
+  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.enable-3{
+  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.good-3{
+  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
+  background-position: center;
+  object-fit: cover;
+  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
+}
+
+.bad-3{
+  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
+  background-position: center;
+  object-fit: cover;
+  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
+}
+
+.locked-3{
+  color: rgba(249, 250, 251, 0.54);
+  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.enable-2{
+  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
+  background-position: center;
+  object-fit: cover;
+}
+
+.good-2{
+  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
+  background-position: center;
+  object-fit: cover;
+  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
+}
+
+.bad-2{
+  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
+  background-position: center;
+  object-fit: cover;
+  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
+}
+
+.locked-2{
+  color: rgba(249, 250, 251, 0.54);
+  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
   background-position: center;
   object-fit: cover;
 }

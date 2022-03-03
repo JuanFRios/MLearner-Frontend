@@ -3,7 +3,6 @@ import ModalHeader from '@material-tailwind/react/ModalHeader';
 import ModalBody from '@material-tailwind/react/ModalBody';
 import ModalFooter from '@material-tailwind/react/ModalFooter';
 import Button from '@material-tailwind/react/Button';
-// import LoadingLessons from 'components/loading/LoadingLessons';
 import ItemLesson from 'components/dashboard/ItemLesson';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingLessons from 'components/loading/LoadingLessons';
