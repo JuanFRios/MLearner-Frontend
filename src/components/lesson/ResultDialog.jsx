@@ -4,17 +4,30 @@ import ModalBody from '@material-tailwind/react/ModalBody';
 import ModalFooter from '@material-tailwind/react/ModalFooter';
 import Button from '@material-tailwind/react/Button';
 
-export const ResultDialog = ({ showModal, onNoClick, text, textButton }) => (
+export const ResultDialog = ({
+  showModal,
+  onNoClick,
+  titulo,
+  icon,
+  text,
+  textButton,
+}) => (
   <Modal
-    size='lg'
+    size='xl'
     active={showModal}
     toggler={() => onNoClick()}
     className='z-50'
   >
     <ModalHeader toggler={() => onNoClick()}>
-      <span className='text-3xl'>Resultado</span>
+      <span className='text-3xl flex'>{titulo}</span>
     </ModalHeader>
-    <ModalBody>{text}</ModalBody>
+    <ModalBody>
+      <span className='flex'>
+        <span className='iconify text-3xl' data-icon={icon} />
+        {text}
+        <span className='iconify text-3xl' data-icon={icon} />
+      </span>
+    </ModalBody>
     <ModalFooter>
       <Button
         color='green'

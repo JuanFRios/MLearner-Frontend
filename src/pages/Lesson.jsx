@@ -151,12 +151,16 @@ const Lesson = () => {
           <ResultDialog
             showModal={showModalErrorResult}
             onNoClick={() => onNoClickError()}
+            titulo='¡Lo siento!'
+            icon='noto:sad-but-relieved-face'
             text='La opción seleccionada es incorrecta.'
             textButton='Entendido'
           />
           <ResultDialog
             showModal={showModalSuccessResult}
             onNoClick={() => onNoClickSuccess()}
+            titulo='¡Felicitaciones!'
+            icon='noto:party-popper'
             text='La respuesta es correcta.'
             textButton='Continuar'
           />
