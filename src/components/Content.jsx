@@ -14,6 +14,7 @@ export const Content = ({
   puntajetotal,
   tamaño,
   activo,
+  orden,
 }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -51,22 +52,22 @@ export const Content = ({
   switch (activo) {
     case ModulesStatus.passed:
       icono = 'iconoir:gym';
-      color = 'good';
+      color = `good-${orden}`;
       evento = () => onReforce();
       break;
     case ModulesStatus.fail:
       icono = 'bx:bxs-lock';
-      color = 'bad';
+      color = `bad-${orden}`;
       evento = () => onReset();
       break;
     case ModulesStatus.inProgress:
       icono = 'fluent:play-12-filled';
-      color = 'enable';
+      color = `enable-${orden} enable`;
       evento = () => onPlay();
       break;
     case ModulesStatus.blocked:
       icono = 'bx:bxs-lock';
-      color = 'locked';
+      color = `locked-${orden}`;
       break;
     default:
       icono = '';

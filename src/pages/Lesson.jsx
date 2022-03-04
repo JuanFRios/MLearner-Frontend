@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {
   getLessonContent,
   validateQuizLesson,
@@ -73,7 +72,6 @@ const Lesson = () => {
     } else {
       setShowModalSuccessResult(true);
     }
-    console.log({ idOpcionSeleccionada: selectedOption });
   }
 
   function onNoClickError() {
@@ -113,7 +111,7 @@ const Lesson = () => {
             <ProgressBar
               seenLessons={lesson.leccion.modulo.numeroLeccionesVistas}
               totalLessons={lesson.leccion.modulo.numeroLecciones}
-              puntaje={lesson.leccion.puntajeObtenido}
+              puntaje={lesson.leccion.modulo.puntajeAcumulado}
             />
           )}
           <div className='w-full max-h-screen border-2 py-6 pl-6 '>
@@ -153,12 +151,16 @@ const Lesson = () => {
           <ResultDialog
             showModal={showModalErrorResult}
             onNoClick={() => onNoClickError()}
+            titulo='¡Lo siento!'
+            icon='noto:sad-but-relieved-face'
             text='La opción seleccionada es incorrecta.'
             textButton='Entendido'
           />
           <ResultDialog
             showModal={showModalSuccessResult}
             onNoClick={() => onNoClickSuccess()}
+            titulo='¡Felicitaciones!'
+            icon='noto:party-popper'
             text='La respuesta es correcta.'
             textButton='Continuar'
           />
