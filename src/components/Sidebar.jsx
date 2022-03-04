@@ -1,17 +1,18 @@
+import { startLogout } from 'actions/auth';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const dispath = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
   let selectedH;
   let selectedE;
   function onSubmit(event) {
     event.preventDefault();
-    localStorage.removeItem('token');
-    // Hacer el dispatch para logout en redux
+    dispath(startLogout());
     navigate('/');
   }
 

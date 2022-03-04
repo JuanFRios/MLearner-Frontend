@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 const ProgressBar = ({ seenLessons, totalLessons, puntaje }) => {
-  console.log(puntaje);
   const percent = (seenLessons / totalLessons) * 100;
   return (
     <div className='flex items-center mb-6'>

@@ -30,6 +30,7 @@ const Dashboard = () => {
             tamaño={module.modulo.tamañoVisualizacion}
             imagen={module.modulo.urlImagen}
             activo={module.estado}
+            orden={module.modulo.orden}
           />
         ))
       );
