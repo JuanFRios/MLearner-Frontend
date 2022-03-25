@@ -40,7 +40,7 @@
         "endOfLine": "auto"
       }
     ],
-    "no-console": "error",
+    "no-console": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
