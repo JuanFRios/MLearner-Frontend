@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LoadingHome = () => (
-  <div className='animate-pulse flex flex-col ml-32 space-x-4 w-190'>
+  <div className='animate-pulse flex flex-col ml-36 space-x-4 w-190'>
     <div className='flex w-full justify-end pr-10 mt-4'>
       <div className='h-20 bg-slate-200 w-36 mx-2 rounded-full' />
       <div className='h-20 bg-slate-200 w-36 mx-2 rounded-full' />

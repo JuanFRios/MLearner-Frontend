@@ -1,7 +1,6 @@
 import { types } from 'types/types';
 import mlearnerApi from 'api/mlearnerApi';
 import { startLoading, finishLoading } from 'actions/ui';
-import { toast } from 'react-toastify';
 
 export const startLoginEmailPassword = (formData) => async (dispatch) => {
   dispatch(startLoading());
@@ -12,7 +11,6 @@ export const startLoginEmailPassword = (formData) => async (dispatch) => {
       return await dispatch(renewToken());
     }
   } catch (err) {
-    toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading());
   }
   return false;

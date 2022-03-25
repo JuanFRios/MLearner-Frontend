@@ -11,6 +11,8 @@ export const ContinueLesson = ({ idLesson }) => {
     await dispatch(getLessonContent(idLesson));
   }, []);
 
+  const className = `continue-${activeLesson?.leccion.modulo.orden} flex`;
+
   function onContinue(event) {
     event.preventDefault();
     navigate(`/lesson/${idLesson}`);
@@ -18,7 +20,7 @@ export const ContinueLesson = ({ idLesson }) => {
 
   return (
     <div className='flex flex-col justify-around items-center mt-8'>
-      <div className='continue flex'>
+      <div className={className}>
         <div className='flex flex-col self-baseline mt-8 pt-5 ml-3 pl-2'>
           <div className='w-48'>
             <p className='text-3xl font-bold'>

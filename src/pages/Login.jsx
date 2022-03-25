@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from 'components/Footer';
 import Input from 'components/utils/Input';
 import useFormData from 'hooks/useFormData';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { startLoginEmailPassword } from 'actions/auth';
+import { ButtonLoading } from 'components/loading/ButtonLoading';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { form, formData, updateFormData } = useFormData();
+  const [loading, setLoading] = useState(false);
 
   async function onSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     const auth = await dispatch(startLoginEmailPassword(formData));
+    setLoading(false);
     if (auth) {
       navigate('/home');
     }
@@ -44,12 +48,7 @@ const Login = () => {
               type='password'
               placeholder='Escribe tu contraseña'
             />
-            <button
-              type='submit'
-              className='btn btn-blue w-2/4 focus:outline-none focus:ring focus:border-blue-500'
-            >
-              Ingresar
-            </button>
+            <ButtonLoading isSubmit loading={loading} text='Ingresar' />
           </form>
         </div>
         <Footer />

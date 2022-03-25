@@ -12,6 +12,16 @@
     background-repeat: no-repeat;
 }
 
+.bg-about {
+    @apply max-h-full bg-cover;
+    display: block;
+    margin: 0 auto;
+    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1648181739/Line_12_dj1pde.png);
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
 .transparent {
   background: rgba(0,0,0,0.5);
 }
@@ -88,7 +98,7 @@
     background-repeat: no-repeat;
 }
 
-.continue{
+.continue-0{
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;

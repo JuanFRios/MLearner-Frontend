@@ -1,7 +1,7 @@
 import { startLogout } from 'actions/auth';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -49,7 +49,9 @@ const Sidebar = () => {
                   className='iconify big-icon'
                   data-icon='majesticons:light-bulb'
                 />
-                <span className='ml-2 text-2xl font-bold'>Aprender</span>
+                <Link to='/home'>
+                  <span className='ml-2 text-2xl font-bold'>Aprender</span>
+                </Link>
               </div>
             </li>
             <li
@@ -60,7 +62,9 @@ const Sidebar = () => {
                   className='iconify big-icon'
                   data-icon='ic:sharp-query-stats'
                 />
-                <span className='ml-2 text-2xl font-bold'>Estadisticas</span>
+                <Link to='/credits'>
+                  <span className='ml-2 text-2xl font-bold'>Acerca de</span>
+                </Link>
               </div>
             </li>
           </ul>
