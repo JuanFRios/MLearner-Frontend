@@ -286,3 +286,7 @@ input[type="radio"]:checked + label{
   @apply
   text-white
 }
+
+.front {
+  z-index: 100;
+}
