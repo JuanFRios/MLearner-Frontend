@@ -18,25 +18,32 @@ export const ConfirmDialog = ({ showModal, setShowModal }) => {
   }
 
   return (
-    <Modal size='lg' active={showModal} toggler={() => setShowModal()}>
-      <ModalHeader toggler={() => setShowModal(false)}>
-        <span className='text-3xl'>Confirmar salida</span>
-      </ModalHeader>
-      <ModalBody>¿Está seguro que desea abandonar la lección?</ModalBody>
-      <ModalFooter>
-        <Button
-          color='red'
-          buttonType='link'
-          onClick={() => setShowModal(false)}
-          ripple='dark'
-        >
-          Cancelar
-        </Button>
+    <div className='front'>
+      <Modal
+        size='lg'
+        className='front'
+        active={showModal}
+        toggler={() => setShowModal()}
+      >
+        <ModalHeader toggler={() => setShowModal(false)}>
+          <span className='text-3xl'>Confirmar salida</span>
+        </ModalHeader>
+        <ModalBody>¿Está seguro que desea abandonar la lección?</ModalBody>
+        <ModalFooter>
+          <Button
+            color='red'
+            buttonType='link'
+            onClick={() => setShowModal(false)}
+            ripple='dark'
+          >
+            Cancelar
+          </Button>
 
-        <Button color='green' onClick={() => onClick()} ripple='light'>
-          Confirmar
-        </Button>
-      </ModalFooter>
-    </Modal>
+          <Button color='green' onClick={() => onClick()} ripple='light'>
+            Confirmar
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </div>
   );
 };

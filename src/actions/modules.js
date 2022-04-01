@@ -28,3 +28,16 @@ export const getFinalStateModule = (idModule) => async (dispatch) => {
   }
   return false;
 };
+
+export const resetModule = (idModule) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    await mlearnerApi.post(`modulos/${idModule}/reset`);
+    dispatch(finishLoading);
+    return true;
+  } catch (err) {
+    toast.error(err.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};

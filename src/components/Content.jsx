@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { getLessonsByModule } from 'actions/lessons';
-import { getContentModule } from 'actions/modules';
+import { getContentModule, resetModule } from 'actions/modules';
 import { LessonsModal } from 'pages/LessonsModal';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -32,11 +32,14 @@ export const Content = ({
   }
 
   function onReforce() {
-    console.log('reforce lesson');
+    onPlay();
   }
 
-  function onReset() {
-    console.log('reset lesson');
+  async function onReset() {
+    const response = await dispatch(resetModule(idModule));
+    if (response) {
+      window.location.reload(true);
+    }
   }
 
   if (tamaño === 'moduleLg') {
@@ -56,7 +59,7 @@ export const Content = ({
       evento = () => onReforce();
       break;
     case ModulesStatus.fail:
-      icono = 'bx:bxs-lock';
+      icono = 'ooui:reload';
       color = `bad-${orden}`;
       evento = () => onReset();
       break;
@@ -83,7 +86,9 @@ export const Content = ({
             <div
               className='flex'
               onClick={() => {
-                onPlay();
+                if (activo !== ModulesStatus.fail) {
+                  onPlay();
+                }
               }}
               role='button'
               tabIndex='0'

@@ -12,31 +12,33 @@ export const ResultDialog = ({
   text,
   textButton,
 }) => (
-  <Modal
-    size='xl'
-    active={showModal}
-    toggler={() => onNoClick()}
-    className='z-50'
-  >
-    <ModalHeader toggler={() => onNoClick()}>
-      <span className='text-3xl flex'>{titulo}</span>
-    </ModalHeader>
-    <ModalBody>
-      <span className='flex'>
-        <span className='iconify text-3xl' data-icon={icon} />
-        {text}
-        <span className='iconify text-3xl' data-icon={icon} />
-      </span>
-    </ModalBody>
-    <ModalFooter>
-      <Button
-        color='green'
-        buttonType='link'
-        onClick={() => onNoClick()}
-        ripple='dark'
-      >
-        {textButton}
-      </Button>
-    </ModalFooter>
-  </Modal>
+  <div className='front'>
+    <Modal
+      size='xl'
+      active={showModal}
+      toggler={() => onNoClick()}
+      className='front'
+    >
+      <ModalHeader toggler={() => onNoClick()}>
+        <span className='text-3xl flex'>{titulo}</span>
+      </ModalHeader>
+      <ModalBody>
+        <span className='flex'>
+          <span className='iconify text-3xl' data-icon={icon} />
+          {text}
+          <span className='iconify text-3xl' data-icon={icon} />
+        </span>
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          color='green'
+          buttonType='link'
+          onClick={() => onNoClick()}
+          ripple='dark'
+        >
+          {textButton}
+        </Button>
+      </ModalFooter>
+    </Modal>
+  </div>
 );

@@ -2,24 +2,17 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
 
-const Compiler = ( {sampleCodev} ) => {
-    const sct = `          test_object("a")
-    test_function("print")
-    success_msg("Genial!")`
+const Compiler = ( {sampleCodev, valorHint, valorPreExerciseCode, valorSCT, valorSolution} ) => {
     useEffect(() => {
         window.initAddedDCLightExercises()
     }, [])    
     return (
     <div data-datacamp-exercise data-lang="python" id='t'>
-        <code data-type="pre-exercise-code">
-          # no pec
-        </code>
+        {valorPreExerciseCode && <code data-type="pre-exercise-code">{valorPreExerciseCode}</code>}
         <code data-type="sample-code">{sampleCodev}</code>
-        {/* <code data-type="solution">{sampleCodev}</code> */}
-        <code data-type="sct">{sct}</code>
-        <div  data-type="hint" >
-            Use the assignment operator (<code>=</code>) to create the variable <code>a</code>.
-        </div>
+        {valorSolution && <code data-type="solution">{valorSolution}</code>}
+        {valorSCT && <code data-type="sct">{valorSCT}</code>}
+        {valorHint && <div  data-type="hint" >{valorHint}</div>}
         
     </div>
 )}
