@@ -56,7 +56,10 @@ const Lesson = () => {
       navigate(`/lesson/${activeLesson.idSiguienteLeccion}`);
       window.location.reload(true);
     } else {
-      dispatch(getFinalStateModule(activeLesson.leccion.modulo._id));
+      if (lesson.leccion.estado !== 'VISTA') {
+        await dispatch(getFinalStateModule(activeLesson.leccion.modulo._id));
+      }
+      navigate('/home');
     }
   }
 

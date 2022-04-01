@@ -15,7 +15,6 @@ export const getLessonsByModule = (idModule) => async (dispatch) => {
     }, 500);
     return respuestaAxios;
   } catch (err) {
-    toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);
     return null;
   }
