@@ -33,8 +33,12 @@ const Sidebar = () => {
       <div className='backgroudSB w-80 fixed h-full flex flex-col items-center content-center  z-20 '>
         <div className='px-8 py-12'>
           <div className='flex flex-col items-center'>
-            <div className='circle text-white'>
-              J{/* <img src={user ? user.urlImagen : ''} alt='' /> */}
+            <div>
+              <img
+                src={user ? user.urlImagen : ''}
+                className='rounded-full'
+                alt=''
+              />
             </div>
             <p className='text-gray-200 py-3 text-2xl font-bold text-center'>
               {user ? user.nombreCompleto : ''}
