@@ -25,7 +25,13 @@ const LessonContent = ({ lesson, lostLives }) => {
       )}
       {lesson.tipo === LessonType.code && (
         <div className='pt-8'>
-          <Compiler />
+          <Compiler
+            sampleCodev={lesson.contenido[0].valorSampleCode}
+            valorHint={lesson.contenido[0].valorHint}
+            valorPreExerciseCode={lesson.contenido[0].valorPreExerciseCode}
+            valorSCT={lesson.contenido[0].valorSCT}
+            valorSolution={lesson.contenido[0].valorSolution}
+          />
         </div>
       )}
       <div className='flex'>{livesItems}</div>
