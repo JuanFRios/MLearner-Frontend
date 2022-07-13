@@ -8,6 +8,7 @@ import Dashboard from 'pages/Dashboard';
 import Lesson from 'pages/Lesson';
 import LessonLayout from 'layouts/LessonLayout';
 import About from 'pages/about';
+import Statistics from 'pages/statistics';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ export const AppRouter = () => (
       </Route>
       <Route path='/' element={<PrivateLayout />}>
         <Route path='/credits' element={<About />} />
+        <Route path='/statistics' element={<Statistics />} />
         <Route path='/home' element={<Dashboard />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>

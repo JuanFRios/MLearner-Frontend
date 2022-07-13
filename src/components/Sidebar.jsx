@@ -10,20 +10,41 @@ const Sidebar = () => {
   const location = useLocation();
   let selectedH;
   let selectedE;
+  let selectedS;
   function onSubmit(event) {
     event.preventDefault();
     dispath(startLogout());
     navigate('/');
   }
 
-  if (location.pathname === '/home') {
-    selectedH = 'border-green-500 text-green-500';
-    selectedE =
-      'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
-  } else {
-    selectedE = 'border-green-500 text-green-500';
-    selectedH =
-      'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+  switch (location.pathname) {
+    case '/home':
+      selectedH = 'border-green-500 text-green-500';
+      selectedE =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      selectedS =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      break;
+    case '/credits':
+      selectedE = 'border-green-500 text-green-500';
+      selectedH =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      selectedS =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      break;
+    case '/statistics':
+      selectedS = 'border-green-500 text-green-500';
+      selectedE =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      selectedH =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      break;
+    default:
+      selectedH = 'border-green-500 text-green-500';
+      selectedE =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
+      selectedS =
+        'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
   }
 
   return (
@@ -59,13 +80,23 @@ const Sidebar = () => {
               </div>
             </li>
             <li
-              className={`${selectedE} flex w-full justify-between border-b cursor-pointer items-center mb-6`}
+              className={`${selectedS} flex w-full justify-between border-b cursor-pointer items-center mb-6`}
             >
               <div className='flex items-center pb-1 '>
                 <span
                   className='iconify big-icon'
                   data-icon='ic:sharp-query-stats'
                 />
+                <Link to='/statistics'>
+                  <span className='ml-2 text-2xl font-bold'>Estadísticas</span>
+                </Link>
+              </div>
+            </li>
+            <li
+              className={`${selectedE} flex w-full justify-between border-b cursor-pointer items-center mb-6`}
+            >
+              <div className='flex items-center pb-1 '>
+                <span className='iconify big-icon' data-icon='charm:info' />
                 <Link to='/credits'>
                   <span className='ml-2 text-2xl font-bold'>Acerca de</span>
                 </Link>
