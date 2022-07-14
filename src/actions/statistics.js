@@ -16,3 +16,16 @@ export const getStatistics = (typeStatistics) => async (dispatch) => {
   }
   return false;
 };
+
+export const getRacha = () => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const racha = await mlearnerApi.get('curso/estadisticas/diasEstudio');
+    dispatch(finishLoading);
+    return racha.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};

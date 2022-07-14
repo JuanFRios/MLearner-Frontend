@@ -52,7 +52,7 @@ export default function TopStudents({ topRacha, topProgress, topScore }) {
           color='text-orange-600'
           element={e}
           typeTop='RACHA'
-          key={e}
+          key={`${e.nombreCompleto}Racha`}
         />
       ))
     );
@@ -63,7 +63,7 @@ export default function TopStudents({ topRacha, topProgress, topScore }) {
           color='text-sky-400'
           element={e}
           typeTop='PERCENTAGE'
-          key={e}
+          key={`${e.nombreCompleto}Percentage`}
         />
       ))
     );
@@ -76,7 +76,7 @@ export default function TopStudents({ topRacha, topProgress, topScore }) {
             color='text-sky-400'
             element={e}
             typeTop='SCORE'
-            key={e}
+            key={`${e.nombreCompleto}Score`}
           />
         );
       })
