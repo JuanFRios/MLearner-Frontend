@@ -41,7 +41,7 @@ const Dashboard = () => {
     <>
       {!ready && <LoadingHome />}
       {ready && (
-        <div className='ml-64 pl-28 pr-4 pt-5'>
+        <div className='ml-40 pl-64 pt-6 w-190'>
           <div className='flex flex-col'>
             <div className='flex justify-end mr-6'>
               <InformationProgress

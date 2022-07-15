@@ -9,6 +9,8 @@ import Lesson from 'pages/Lesson';
 import LessonLayout from 'layouts/LessonLayout';
 import About from 'pages/about';
 import Statistics from 'pages/statistics';
+import ContentManagement from 'pages/admin/ContentManagement';
+import AdminStatistics from 'pages/admin/AdminStatistics';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -20,6 +22,8 @@ export const AppRouter = () => (
         <Route path='/credits' element={<About />} />
         <Route path='/statistics' element={<Statistics />} />
         <Route path='/home' element={<Dashboard />} />
+        <Route path='/admin/course' element={<ContentManagement />} />
+        <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>
         <Route path='/lesson/:id' element={<Lesson />} />

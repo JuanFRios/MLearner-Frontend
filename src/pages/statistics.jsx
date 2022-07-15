@@ -20,13 +20,21 @@ const Statistics = () => {
     setReady(true);
   }, []);
   if (!ready) {
-    return <p>cargando</p>;
+    return (
+      <div className='private-container'>
+        <p>Cargando</p>
+      </div>
+    );
   }
   return (
     <>
-      {!ready && <p>cargando</p>}
+      {!ready && (
+        <div className='private-container'>
+          <p>Cargando</p>
+        </div>
+      )}
       {ready && (
-        <div className='ml-40 pl-64 pt-6 w-190'>
+        <div className='private-container'>
           <div className='flex justify-end mr-6'>
             <InformationProgress
               className='basis-1/4'
