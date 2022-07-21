@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import LoadingSidebar from 'components/loading/LoadingSidebar';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
   let role;
   if (!user) {
-    return <span>No user</span>;
+    return <LoadingSidebar />;
   }
   if (user) {
     switch (user.rol) {
@@ -39,7 +40,7 @@ const Sidebar = () => {
   return (
     <div className='flex'>
       <div className='backgroudSB w-80 fixed h-full flex flex-col items-center content-center  z-20 '>
-        <div className='px-8 py-12'>
+        <div className='px-8 py-12 w-full'>
           <div className='flex flex-col items-center'>
             <div>
               <img
