@@ -11,6 +11,7 @@ import About from 'pages/about';
 import Statistics from 'pages/statistics';
 import ContentManagement from 'pages/admin/ContentManagement';
 import AdminStatistics from 'pages/admin/AdminStatistics';
+import ModuleContent from 'pages/admin/ModuleContent';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -23,6 +24,10 @@ export const AppRouter = () => (
         <Route path='/statistics' element={<Statistics />} />
         <Route path='/home' element={<Dashboard />} />
         <Route path='/admin/course' element={<ContentManagement />} />
+        <Route
+          path='/admin/course/module/:module'
+          element={<ModuleContent />}
+        />
         <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>

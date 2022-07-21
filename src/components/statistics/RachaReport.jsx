@@ -11,13 +11,13 @@ const RachaReport = () => {
           id: 'basic-bar',
         },
         xaxis: {
-          categories: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
+          categories: ['Sab', 'Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie'],
         },
       },
       series: [
         {
           name: 'Puntaje',
-          data: [30, 40, 45, 50, 49, 60],
+          data: [30, 40, 45, 50, 49, 20, 10],
         },
       ],
     });

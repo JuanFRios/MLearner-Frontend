@@ -72,7 +72,9 @@ const MenuItem = ({ text, route, icon }) => {
   return (
     <li
       className={
-        location.pathname === route ? 'active-menu-item' : 'inactive-menu-item'
+        location.pathname.includes(route)
+          ? 'active-menu-item'
+          : 'inactive-menu-item'
       }
     >
       <div className='flex items-center pb-1'>

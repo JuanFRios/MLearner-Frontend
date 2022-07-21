@@ -37,8 +37,6 @@ const Lesson = () => {
   function onClick(event) {
     event.preventDefault();
     setShowModal(true);
-    // dispatch(resetLessonStatus());
-    // navigate('/home');
   }
 
   async function onContinue(event) {
