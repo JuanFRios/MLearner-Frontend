@@ -1,50 +1,31 @@
+import { getModules } from 'actions/modules';
 import ItemModule from 'components/admin/modules/ItemModule';
 import ModalNewModule from 'components/admin/modules/ModalNewModule';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const ContentManagement = () => {
   function onEdit() {
     setShowNewModal(true);
   }
-
   const [showNewModal, setShowNewModal] = useState(false);
-  console.log('first');
-  const module = {
-    nombre: 'Introducción a Python',
-    id: 'prueba',
-    tamaño: 'moduleLg',
-    orden: 0,
-    nroLecciones: 54,
-    urlImage:
-      'https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png',
-  };
-  const module1 = {
-    nombre: 'Ingeniería de Características',
-    id: 'prueba',
-    tamaño: 'moduleSm',
-    orden: 0,
-    nroLecciones: 54,
-    urlImage:
-      'https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png',
-  };
-  const module2 = {
-    nombre: 'Reducción de dimensionalidad',
-    id: 'prueba',
-    tamaño: 'moduleSm',
-    orden: 0,
-    nroLecciones: 54,
-    urlImage:
-      'https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png',
-  };
-  const module3 = {
-    nombre: 'Clustering',
-    id: 'prueba',
-    tamaño: 'moduleLg',
-    orden: 0,
-    nroLecciones: 54,
-    urlImage:
-      'https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png',
-  };
+  const dispatch = useDispatch();
+  const [ready, setReady] = useState(false);
+  const [modulesItems, setModulesItems] = useState([]);
+  let modules = null;
+  console.log(ready, modules);
+
+  useEffect(async () => {
+    setTimeout(async () => {
+      modules = await dispatch(getModules());
+      console.log('first', modules);
+      setReady(true);
+      setModulesItems(
+        modules.map((m) => <ItemModule module={m} key={m.mid} />)
+      );
+    }, 500);
+  }, []);
+
   return (
     <div className='private-container'>
       <p className='text-2xl font-bold'>Contenido del curso</p>
@@ -63,10 +44,7 @@ const ContentManagement = () => {
             Agregar módulo
           </button>
         </div>
-        <ItemModule module={module} />
-        <ItemModule module={module1} />
-        <ItemModule module={module2} />
-        <ItemModule module={module3} />
+        {modulesItems}
       </div>
       <ModalNewModule showModal={showNewModal} setShowModal={setShowNewModal} />
     </div>

@@ -3,6 +3,7 @@ import mlearnerApi from 'api/mlearnerApi';
 import { startLoading, finishLoading } from 'actions/ui';
 import { toast } from 'react-toastify';
 
+// STUDENT
 export const getContentModule = () => async (dispatch) => {
   dispatch(startLoading());
   try {
@@ -37,6 +38,20 @@ export const resetModule = (idModule) => async (dispatch) => {
     return true;
   } catch (err) {
     toast.error(err.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
+
+// ADMIN
+export const getModules = () => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const modules = await mlearnerApi.get('modulos');
+    dispatch(finishLoading);
+    return modules.data.modulos;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);
   }
   return false;

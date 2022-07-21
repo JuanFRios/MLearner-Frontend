@@ -20,7 +20,7 @@ const ItemModule = ({ module }) => {
     console.log('first');
   }
 
-  if (module.tamaño === 'moduleLg') {
+  if (module.tamañoVisualizacion === 'moduleLg') {
     anchoModulo = 'w-full';
     medidatexto = 'w-128 mt-12 text-2xl';
     // medidaIcono = 'pl-64';
@@ -34,9 +34,9 @@ const ItemModule = ({ module }) => {
     <div className={anchoModulo}>
       <div className='flex flex-col items-center my-2 text-white w-full'>
         <div
-          className={`${module.tamaño}  enable flex py-4`}
+          className={`${module.tamañoVisualizacion}  enable flex py-4`}
           style={{
-            backgroundImage: `url(${module.urlImage})`,
+            backgroundImage: `url(${module.urlImagen})`,
             objectFit: 'cover',
             backgroundPosition: 'center',
           }}

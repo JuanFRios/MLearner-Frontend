@@ -1,5 +1,10 @@
 import { startLogout } from 'actions/auth';
-import { adminMenuOptions, studentMenuOptions } from 'constants/Menu';
+import {
+  adminMenuOptions,
+  studentMenuOptions,
+  ROLE_STUDENT,
+  ROLE_ADMIN,
+} from 'constants/Menu';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
@@ -8,6 +13,22 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispath = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  let role;
+  if (!user) {
+    return <span>No user</span>;
+  }
+  if (user) {
+    switch (user.rol) {
+      case ROLE_STUDENT:
+        role = 'Estudiante';
+        break;
+      case ROLE_ADMIN:
+        role = 'Administrador';
+        break;
+      default:
+        role = 'Estudiante';
+    }
+  }
 
   function onSubmit(event) {
     event.preventDefault();
@@ -31,10 +52,10 @@ const Sidebar = () => {
               {user ? user.nombreCompleto : ''}
             </p>
             <div className='bg-slate-100 rounded-full text-dark_blue_1 w-full flex justify-center'>
-              <span>Estudiante</span>
+              <span>{role}</span>
             </div>
           </div>
-          <MenuOptions />
+          <MenuOptions user={user} />
         </div>
         <div className='px-8 py-3 absolute bottom-4 text-gray-200 '>
           <div className='flex items-center hover:text-green-500 cursor-pointer'>
@@ -52,19 +73,18 @@ const Sidebar = () => {
   );
 };
 
-const MenuOptions = () => {
-  const menuItems = studentMenuOptions.map(({ text, route, icon }) => (
-    <MenuItem text={text} route={route} icon={icon} key={route} />
-  ));
-  const menuItems2 = adminMenuOptions.map(({ text, route, icon }) => (
-    <MenuItem text={text} route={route} icon={icon} key={route} />
-  ));
-  return (
-    <ul className='mt-12 '>
-      {menuItems}
-      {menuItems2}
-    </ul>
-  );
+const MenuOptions = ({ user }) => {
+  let menuItems;
+  if (user.rol === ROLE_STUDENT) {
+    menuItems = studentMenuOptions.map(({ text, route, icon }) => (
+      <MenuItem text={text} route={route} icon={icon} key={route} />
+    ));
+  } else if (user.rol === ROLE_ADMIN) {
+    menuItems = adminMenuOptions.map(({ text, route, icon }) => (
+      <MenuItem text={text} route={route} icon={icon} key={route} />
+    ));
+  }
+  return <ul className='mt-12 '>{menuItems}</ul>;
 };
 
 const MenuItem = ({ text, route, icon }) => {

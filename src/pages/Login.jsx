@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { startLoginEmailPassword } from 'actions/auth';
 import { ButtonLoading } from 'components/loading/ButtonLoading';
+import { ROLE_STUDENT, ROLE_ADMIN } from 'constants/Menu';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,12 @@ const Login = () => {
     const auth = await dispatch(startLoginEmailPassword(formData));
     setLoading(false);
     if (auth) {
-      navigate('/home');
+      if (auth.rol === ROLE_STUDENT) {
+        navigate('/home');
+      }
+      if (auth.rol === ROLE_ADMIN) {
+        navigate('/admin/course');
+      }
     }
   }
 
