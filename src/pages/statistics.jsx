@@ -4,20 +4,28 @@ import RachaReport from 'components/statistics/RachaReport';
 import TopStudents from 'components/statistics/TopStudents';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { average } from 'utils/math';
 
 const Statistics = () => {
   const [ready, setReady] = useState(false);
   const [topRacha, setTopRacha] = useState(null);
   const [topProgress, setTopProgress] = useState(null);
   const [topScore, setTopScore] = useState(null);
+  const [racha, setRacha] = useState([]);
+  const [avg, setavg] = useState(null);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(async () => {
-    dispatch(getRacha());
+    const ra = await dispatch(getRacha());
+    setRacha(ra);
     setTopRacha(await dispatch(getStatistics('RACHA')));
-    setTopProgress(await dispatch(getStatistics('PUNTAJE')));
-    setTopScore(await dispatch(getStatistics('PORCENTAJE')));
-    setReady(true);
+    setTopScore(await dispatch(getStatistics('PUNTAJE')));
+    setTopProgress(await dispatch(getStatistics('PORCENTAJE')));
+    setTimeout(() => {
+      const scores = racha.map((r) => r.puntajeAcumulado);
+      setavg(average(scores));
+      setReady(true);
+    }, 500);
   }, []);
   if (!ready) {
     return (
@@ -59,12 +67,14 @@ const Statistics = () => {
             />
           </div>
           <div>
-            <p className='text-2xl font-bold'>
-              {user?.nombreCompleto.split(' ')[0]}!, observa tu progreso
+            <p className='text-2xl font-bold mt-4'>
+              {user?.nombreCompleto.split(' ')[0]}!, observa tu progreso, has
+              obtenido en promedio {avg} puntos cada día durante la última
+              semana
             </p>
           </div>
           <div className='flex justify-center'>
-            <RachaReport />
+            <RachaReport days={racha} />
           </div>
           <div>
             <p className='text-2xl font-bold'>Top 10 de estudiantes</p>

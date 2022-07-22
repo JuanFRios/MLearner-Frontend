@@ -22,7 +22,7 @@ export const getRacha = () => async (dispatch) => {
   try {
     const racha = await mlearnerApi.get('curso/estadisticas/diasEstudio');
     dispatch(finishLoading);
-    return racha.data;
+    return racha.data.dias;
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);

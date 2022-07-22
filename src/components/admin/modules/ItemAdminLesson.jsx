@@ -25,7 +25,7 @@ const ItemAdminLesson = ({ lesson }) => {
   }
 
   return (
-    <div className='w-full flex h-16'>
+    <div className='w-full flex h-16 my-2'>
       <div className='w-10/12 flex'>
         <div className='w-1/12 bg-slate-50 rounded-xl mx-2 flex items-center justify-center'>
           <span className='iconify big-icon' data-icon={icon} />

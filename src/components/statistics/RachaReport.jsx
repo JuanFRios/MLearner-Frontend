@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
+import { getDayOfWeek } from 'utils/date';
 
-const RachaReport = () => {
-  console.log('first');
+const RachaReport = ({ days }) => {
+  console.log('first', days);
   const [options, setOptions] = useState(null);
   useEffect(() => {
+    const categories = days.map((d) => getDayOfWeek(d.fecha));
+    const score = days.map((d) => d.puntajeAcumulado);
     setOptions({
       options: {
         chart: {
           id: 'basic-bar',
         },
         xaxis: {
-          categories: ['Sab', 'Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie'],
+          categories,
         },
       },
       series: [
         {
           name: 'Puntaje',
-          data: [30, 40, 45, 50, 49, 20, 10],
+          data: score,
+        },
+      ],
+      yaxis: [
+        {
+          title: {
+            text: 'Website Blog',
+          },
         },
       ],
     });

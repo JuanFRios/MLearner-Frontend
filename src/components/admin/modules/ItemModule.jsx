@@ -16,7 +16,7 @@ const ItemModule = ({ module }) => {
     console.log('first');
   }
   function onConfig() {
-    navigate('/admin/course/module/1234231');
+    navigate(`/admin/course/module/${module.mid}`);
     console.log('first');
   }
 

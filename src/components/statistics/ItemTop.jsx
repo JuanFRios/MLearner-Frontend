@@ -17,7 +17,9 @@ const ItemTop = ({ typeTop, icono, color, element }) => {
           {element.nombreCompleto}
         </div>
         <div className='p-1 flex items-center'>
-          {typeTop === 'PERCENTAGE' && <ProgressBar porcentaje='30' />}
+          {typeTop === 'PERCENTAGE' && (
+            <ProgressBar porcentaje={element.valor.toFixed(1)} />
+          )}
           {typeTop !== 'PERCENTAGE' && (
             <>
               <span className={`iconify ${color} text-2xl`} data-icon={icono} />

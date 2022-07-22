@@ -36,6 +36,20 @@ const ModuleContent = () => {
     tipo: 'LECTURA',
     estado: 'VISTA',
   };
+  const lesson2 = {
+    idLeccion: '625d812c7ab0a5763aac964c',
+    tituloLeccion: '2. Mi primer código',
+    orden: 0,
+    tipo: 'CODIGO',
+    estado: 'VISTA',
+  };
+  const lesson3 = {
+    idLeccion: '625d812c7ab0a5763aac964c',
+    tituloLeccion: '3. Pon a prueba tus conocimientos',
+    orden: 0,
+    tipo: 'QUIZ',
+    estado: 'VISTA',
+  };
   return (
     <div className='private-container'>
       <div className='mb-4'>
@@ -99,8 +113,9 @@ const ModuleContent = () => {
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
       </div>
-      <p>Hola</p>
       <ItemAdminLesson lesson={lesson} />
+      <ItemAdminLesson lesson={lesson2} />
+      <ItemAdminLesson lesson={lesson3} />
       <MaxScoreModal
         showModal={showScoreModal}
         setShowModal={setShowScoreModal}
