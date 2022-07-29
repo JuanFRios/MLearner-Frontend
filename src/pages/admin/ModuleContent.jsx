@@ -1,23 +1,15 @@
-import { Menu, MenuItem } from '@mui/material';
 import ItemAdminLesson from 'components/admin/modules/ItemAdminLesson';
 import MaxScoreModal from 'components/admin/modules/MaxScoreModal';
 import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import ButtonPopper from 'components/utils/ButtonPopper';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ModuleContent = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [showResourcesModal, setShowResourcesModal] = useState(false);
-  const [showMenuLesson, setshowMenuLesson] = useState(false);
   const navigate = useNavigate();
-  function addLesson() {
-    setshowMenuLesson((anchorEld) => !anchorEld);
-    console.log('first');
-  }
-
-  const handleClose = () => {
-    setshowMenuLesson(false);
-  };
+  const { module } = useParams();
 
   function onMaxScore() {
     setShowScoreModal(true);
@@ -63,7 +55,7 @@ const ModuleContent = () => {
       </div>
       <p className='text-2xl font-thin'>Contenido del módulo</p>
       <p className='text-2xl font-bold'>Reducción de dimensionalidad</p>
-      <div className='flex w-full justify-end mx-4'>
+      <div className='flex w-full justify-end mx-4 pr-16'>
         <button
           type='button'
           className='btn btn-blue hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
@@ -78,40 +70,7 @@ const ModuleContent = () => {
         >
           <span> Recursos</span>
         </button>
-        <button
-          type='button'
-          id='basic-button'
-          aria-controls={showMenuLesson ? 'basic-menu' : undefined}
-          aria-haspopup='true'
-          aria-expanded={showMenuLesson ? 'true' : undefined}
-          className='btn btn-blue hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
-          onClick={addLesson}
-        >
-          <span className='iconify text-2xl mx-1' data-icon='carbon:add-alt' />
-          Agregar lección
-        </button>
-        <Menu
-          id='basic-menu'
-          anchorEl={showMenuLesson}
-          open={showMenuLesson}
-          onClose={handleClose}
-          aria-labelledby='basic-button'
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
+        <ButtonPopper module={module} />
       </div>
       <ItemAdminLesson lesson={lesson} />
       <ItemAdminLesson lesson={lesson2} />
@@ -119,10 +78,12 @@ const ModuleContent = () => {
       <MaxScoreModal
         showModal={showScoreModal}
         setShowModal={setShowScoreModal}
+        module={module}
       />
       <ResourcesModal
         showModal={showResourcesModal}
         setShowModal={setShowResourcesModal}
+        module={module}
       />
     </div>
   );

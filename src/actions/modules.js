@@ -56,3 +56,31 @@ export const getModules = () => async (dispatch) => {
   }
   return false;
 };
+
+export const getScoreModule = (idModule) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const scores = await mlearnerApi.get(`modulos/${idModule}/puntaje`);
+    dispatch(finishLoading);
+    return scores.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
+
+export const getresourcesByModule = (idModule) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const resources = await mlearnerApi.get(
+      `curso/modulos/${idModule}/recursos`
+    );
+    dispatch(finishLoading);
+    return resources.data.recursos;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
