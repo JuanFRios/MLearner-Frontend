@@ -13,19 +13,38 @@ const ContentManagement = () => {
   const dispatch = useDispatch();
   const [ready, setReady] = useState(false);
   const [modulesItems, setModulesItems] = useState([]);
+  const [tamanoNuevoModulo, setTamanoNuevoModulo] = useState('');
   let modules = null;
   console.log(ready, modules);
 
   useEffect(async () => {
     setTimeout(async () => {
       modules = await dispatch(getModules());
-      console.log('first', modules);
       setReady(true);
+      calcularTamanoNuevoModulo(modules);
       setModulesItems(
         modules.map((m) => <ItemModule module={m} key={m.mid} />)
       );
     }, 500);
   }, []);
+
+  const calcularTamanoNuevoModulo = (allModules) => {
+    if (allModules.length > 1) {
+      const ultimoModulo = allModules[allModules.length - 1];
+      const penultimoModulo = allModules[allModules.length - 2];
+      if (ultimoModulo.tamañoVisualizacion === 'moduleLg') {
+        setTamanoNuevoModulo('moduleSm');
+      } else if (penultimoModulo.tamañoVisualizacion === 'moduleSm') {
+        setTamanoNuevoModulo('moduleLg');
+      } else {
+        setTamanoNuevoModulo('moduleSm');
+      }
+    } else if (allModules.length > 0) {
+      setTamanoNuevoModulo('moduleSm');
+    } else {
+      setTamanoNuevoModulo('moduleLg');
+    }
+  };
 
   return (
     <>
@@ -53,6 +72,7 @@ const ContentManagement = () => {
           <ModalNewModule
             showModal={showNewModal}
             setShowModal={setShowNewModal}
+            tamanoNuevoModulo={tamanoNuevoModulo}
           />
         </div>
       )}
