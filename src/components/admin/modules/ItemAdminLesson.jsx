@@ -31,7 +31,7 @@ const ItemAdminLesson = ({ lesson }) => {
           <span className='iconify big-icon' data-icon={icon} />
         </div>
         <div className='w-11/12 bg-slate-50 rounded-xl font-medium text-xl mx-2 flex items-center'>
-          <span className='mx-4'>{lesson.tituloLeccion}</span>
+          <span className='mx-4'>{lesson.titulo}</span>
         </div>
       </div>
       <div className='w-2/12 flex items-center justify-center'>

@@ -15,7 +15,6 @@ const ResourcesModal = ({ showModal, setShowModal, module }) => {
   function onClick() {
     setShowModal(false);
   }
-
   useEffect(async () => {
     const resp = await dispatch(getresourcesByModule(module));
     const data = {
@@ -47,7 +46,7 @@ const ResourcesModal = ({ showModal, setShowModal, module }) => {
       </ModalBody>
       <ModalFooter>
         <Button color='blueGray' onClick={() => onClick()} ripple='light'>
-          Cancelar
+          Cerrar
         </Button>
       </ModalFooter>
     </Modal>

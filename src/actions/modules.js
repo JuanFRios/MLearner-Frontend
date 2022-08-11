@@ -84,3 +84,54 @@ export const getresourcesByModule = (idModule) => async (dispatch) => {
   }
   return false;
 };
+
+export const saveModule = (module) => async (dispatch) => {
+  dispatch(startLoading());
+  const bodyFormData = new FormData();
+  bodyFormData.append('nombre', module.nombre);
+  bodyFormData.append('carpetaDestinoRecurso', module.carpetaDestinoRecurso);
+  bodyFormData.append('imagen', module.imagen);
+  bodyFormData.append('tamanoVisualizacion', module.tamanoVisualizacion);
+  try {
+    const moduleCreated = await mlearnerApi.post(`modulos`, bodyFormData);
+    dispatch(finishLoading);
+    return moduleCreated;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
+
+export const saveResourceModule = (idModule, resource) => async (dispatch) => {
+  dispatch(startLoading());
+  const bodyFormData = new FormData();
+  bodyFormData.append('recurso', resource.resource);
+  try {
+    const resourceCreated = await mlearnerApi.post(
+      `curso/modulos/${idModule}/recursos`,
+      bodyFormData
+    );
+    dispatch(finishLoading);
+    return resourceCreated;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
+
+export const getLessonsByModule = (idModule) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const lessons = await mlearnerApi.get(
+      `modulos/admin/${idModule}/lecciones?page=0&pageSize=50`
+    );
+    dispatch(finishLoading);
+    return lessons.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
