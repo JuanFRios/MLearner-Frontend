@@ -121,17 +121,18 @@ export const saveResourceModule = (idModule, resource) => async (dispatch) => {
   return false;
 };
 
-export const getLessonsByModule = (idModule) => async (dispatch) => {
-  dispatch(startLoading());
-  try {
-    const lessons = await mlearnerApi.get(
-      `modulos/admin/${idModule}/lecciones?page=0&pageSize=50`
-    );
-    dispatch(finishLoading);
-    return lessons.data;
-  } catch (err) {
-    toast.error(err.response.data.msg, { position: 'top-center' });
-    dispatch(finishLoading);
-  }
-  return false;
-};
+export const getLessonsByModule =
+  (idModule, page, pageSize) => async (dispatch) => {
+    dispatch(startLoading());
+    try {
+      const lessons = await mlearnerApi.get(
+        `modulos/admin/${idModule}/lecciones?page=${page}&pageSize=${pageSize}`
+      );
+      dispatch(finishLoading);
+      return lessons.data;
+    } catch (err) {
+      toast.error(err.response.data.msg, { position: 'top-center' });
+      dispatch(finishLoading);
+    }
+    return false;
+  };

@@ -1,31 +1,18 @@
-import { getLessonsByModule } from 'actions/modules';
-import ItemAdminLesson from 'components/admin/modules/ItemAdminLesson';
 import MaxScoreModal from 'components/admin/modules/MaxScoreModal';
 import NewResourceModal from 'components/admin/modules/NewResourceModal';
 import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import TableModuleItems from 'components/admin/modules/TableModuleItems';
 import ButtonPopper from 'components/utils/ButtonPopper';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ModuleContent = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [showResourcesModal, setShowResourcesModal] = useState(false);
   const [showNewResourceModal, setShowNewResourceModal] = useState(false);
-  const [ready, setReady] = useState(null);
-  const [lessonsItem, setLessonsItems] = useState(null);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const { module } = useParams();
-
-  useEffect(async () => {
-    const lessons = await dispatch(getLessonsByModule(module));
-    setLessonsItems(
-      lessons.lecciones.map((l) => <ItemAdminLesson lesson={l} key={l.lid} />)
-    );
-    setReady(true);
-    console.log(lessons);
-  }, []);
 
   function onMaxScore() {
     setShowScoreModal(true);
@@ -38,14 +25,6 @@ const ModuleContent = () => {
   }
   function onBack() {
     navigate('/admin/course');
-  }
-
-  if (!ready) {
-    return (
-      <div className='private-container'>
-        <h1>Cargando ... </h1>
-      </div>
-    );
   }
 
   return (
@@ -85,7 +64,7 @@ const ModuleContent = () => {
         </button>
         <ButtonPopper module={module} />
       </div>
-      {lessonsItem}
+      <TableModuleItems module={module} />
       <MaxScoreModal
         showModal={showScoreModal}
         setShowModal={setShowScoreModal}
