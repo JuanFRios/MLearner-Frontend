@@ -43,7 +43,7 @@ const NewOption = ({ showModal, setShowModal, opciones, setOpciones }) => {
           >
             <InputLesson
               text='Descripción'
-              name='descripcion'
+              name='opcion'
               type='text'
               accept=''
               required

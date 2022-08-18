@@ -91,3 +91,17 @@ export const changeSelectedOption = (option) => ({
 export const resetLessonStatus = () => ({
   type: types.resetLessonStatus,
 });
+
+// ADMIN
+export const saveLesson = (lesson) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const lessonCreated = await mlearnerApi.post(`lecciones`, lesson);
+    dispatch(finishLoading);
+    return lessonCreated;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};

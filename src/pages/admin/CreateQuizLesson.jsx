@@ -5,9 +5,14 @@ import useFormData from 'hooks/useFormData';
 import InputLesson from 'components/utils/InputLesson';
 import NewOption from 'components/admin/lessons/quiz/NewOption';
 import ItemOption from 'components/admin/lessons/quiz/ItemOption';
+import { validateQuizLesson } from 'utils/validators';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { saveLesson } from 'actions/lessons';
 
 const CreateQuizLesson = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { module } = useParams();
   const [showNewOptionModal, setShowNewOptionModal] = useState(false);
   const [lesson, setLesson] = useState([]);
@@ -17,18 +22,34 @@ const CreateQuizLesson = () => {
   useEffect(() => {
     const quizLesson = {
       ...lesson,
-      vidas: formData.vidas,
+      vidasTotales: formData.vidasTotales,
       puntaje: formData.puntaje,
       titulo: formData.titulo,
       pregunta: { enunciado: formData.enunciado, opciones: [...opciones] },
+      tipo: 'QUIZ',
       modulo: module,
     };
     setLesson(quizLesson);
   }, [opciones, formData]);
 
-  function onSave() {
-    console.log(lesson);
-  }
+  const onSave = async () => {
+    const { isError, errors, quizLessonCast } = validateQuizLesson(lesson);
+    console.log(isError, errors, quizLessonCast);
+    if (isError) {
+      toast.error(errors[0], {
+        position: 'top-center',
+      });
+    } else {
+      const lessonCreated = await dispatch(saveLesson(quizLessonCast));
+      if (lessonCreated) {
+        toast.success('Lección creada correctamente', {
+          position: 'top-center',
+        });
+      }
+      console.log(quizLessonCast);
+      navigate(`/admin/course/module/${module}`);
+    }
+  };
 
   function onBack() {
     navigate(`/admin/course/module/${module}`);
@@ -73,7 +94,7 @@ const CreateQuizLesson = () => {
             <InputLesson text='Puntaje' name='puntaje' type='number' />
           </div>
           <div className='w-2/12'>
-            <InputLesson text='Vidas' name='vidas' type='number' />
+            <InputLesson text='Vidas' name='vidasTotales' type='number' />
           </div>
         </div>
         <div className='w-full mt-10'>
@@ -109,7 +130,10 @@ const CreateQuizLesson = () => {
         </h1>
         {opciones.length > 0 ? (
           opciones.map((opcion) => (
-            <ItemOption option={opcion} key={opcion.descripcion} />
+            <ItemOption
+              option={opcion}
+              key={opcion.descripcion + opcion.esCorrecta}
+            />
           ))
         ) : (
           <p className='w-full text-center text-slate-400 mt-4'>

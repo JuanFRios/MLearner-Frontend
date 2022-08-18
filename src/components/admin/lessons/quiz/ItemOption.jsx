@@ -23,7 +23,7 @@ const ItemOption = ({ option }) => {
         <div
           className={`w-11/12 ${bg} rounded-xl font-medium text-xl mx-2 flex items-center`}
         >
-          <span className='mx-4'>{option.descripcion}</span>
+          <span className='mx-4'>{option.opcion}</span>
         </div>
       </div>
       <div className='w-2/12 flex items-center justify-center'>

@@ -34,8 +34,8 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export function createRow(arr) {
-  return { row: arr.map((i) => ({ value: i })) };
+export function createRow(arr, id) {
+  return { row: arr.map((i) => ({ value: i })), id };
 }
 
 const TableBasic = ({ data }) => (
@@ -52,7 +52,7 @@ const TableBasic = ({ data }) => (
       </TableHead>
       <TableBody>
         {data.rows.map((row) => (
-          <StyledTableRow key={row}>
+          <StyledTableRow key={row.id}>
             {row.row.map((cell) => (
               <StyledTableCell align='center'>{cell.value}</StyledTableCell>
             ))}

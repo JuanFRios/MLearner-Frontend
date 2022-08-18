@@ -21,10 +21,10 @@ const MaxScoreModal = ({ showModal, setShowModal, module }) => {
     const data = {
       labels: ['Tipo de lección', 'Puntaje'],
       rows: [
-        createRow(['Lectura', resp.puntajeLeccionesLectura]),
-        createRow(['Quiz', resp.puntajeLeccionesQuiz]),
-        createRow(['Código', resp.puntajeLeccionesCodigo]),
-        createRow(['Total puntos', resp.puntajeTotal]),
+        createRow(['Lectura', resp.puntajeLeccionesLectura], 'lectura'),
+        createRow(['Quiz', resp.puntajeLeccionesQuiz], 'quiz'),
+        createRow(['Código', resp.puntajeLeccionesCodigo], 'codigo'),
+        createRow(['Total puntos', resp.puntajeTotal], 'total'),
       ],
     };
     setScore(data);

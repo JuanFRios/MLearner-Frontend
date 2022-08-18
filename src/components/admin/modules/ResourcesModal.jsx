@@ -19,7 +19,7 @@ const ResourcesModal = ({ showModal, setShowModal, module }) => {
     const resp = await dispatch(getresourcesByModule(module));
     const data = {
       labels: ['Nombre', 'Url'],
-      rows: resp.map((r) => createRow([r.nombre, r.url])),
+      rows: resp.map((r) => createRow([r.nombre, r.url], r.rid)),
     };
     setResources(data);
     setReady(true);
