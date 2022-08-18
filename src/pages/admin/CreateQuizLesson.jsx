@@ -15,7 +15,7 @@ const CreateQuizLesson = () => {
   const dispatch = useDispatch();
   const { module } = useParams();
   const [showNewOptionModal, setShowNewOptionModal] = useState(false);
-  const [lesson, setLesson] = useState([]);
+  const [lesson, setLesson] = useState({});
   const [opciones, setOpciones] = useState([]);
   const { form, formData, updateFormData } = useFormData();
 

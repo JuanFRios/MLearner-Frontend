@@ -1,21 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LessonTypeIcon } from 'constants/Lesson';
 import useFormData from 'hooks/useFormData';
 import InputLesson from 'components/utils/InputLesson';
 import ButtonPopperLesson from 'components/utils/ButtonPopperLesson';
 import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import AddItem from 'components/admin/lessons/reading/AddItem';
+import ItemContent from 'components/admin/lessons/reading/ItemContent';
+import { toast } from 'react-toastify';
+import { validateReadingLesson } from 'utils/validators';
+import { useDispatch } from 'react-redux';
+import { saveLesson } from 'actions/lessons';
 
 const CreateReadingLesson = () => {
-  console.log('first');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { module } = useParams();
   const [showResourcesModal, setShowResourcesModal] = useState(false);
+  const [showNewItemModal, setShowNewItemModal] = useState(false);
+  const [lesson, setLesson] = useState({});
+  const [contenido, setContenido] = useState([]);
   const { form, formData, updateFormData } = useFormData();
   function onBack() {
     navigate(`/admin/course/module/${module}`);
     console.log(formData);
   }
+
+  function onAddSpace() {
+    setContenido([...contenido, { clave: 'ESPACIO', valor: 'Salto de línea' }]);
+  }
+
+  useEffect(() => {
+    const readingLesson = {
+      ...lesson,
+      vidasTotales: formData.vidasTotales,
+      puntaje: formData.puntaje,
+      titulo: formData.titulo,
+      contenido: [...contenido],
+      tipo: 'LECTURA',
+      modulo: module,
+    };
+    setLesson(readingLesson);
+  }, [contenido, formData]);
+
+  const onSave = async () => {
+    const { isError, errors, readLessonCast } = validateReadingLesson(lesson);
+    console.log(isError, errors, readLessonCast);
+    if (isError) {
+      toast.error(errors[0], {
+        position: 'top-center',
+      });
+    } else {
+      const lessonCreated = await dispatch(saveLesson(readLessonCast));
+      if (lessonCreated) {
+        toast.success('Lección creada correctamente', {
+          position: 'top-center',
+        });
+      }
+      console.log(readLessonCast);
+      navigate(`/admin/course/module/${module}`);
+    }
+  };
+
   function onResources() {
     setShowResourcesModal(true);
   }
@@ -45,7 +91,7 @@ const CreateReadingLesson = () => {
         <div className='w-8/12 mr-8'>
           <InputLesson
             text='Nombre de la lección'
-            name='nombre'
+            name='titulo'
             type='text'
             placeholder='Escribe el nombre de la lección'
           />
@@ -54,7 +100,7 @@ const CreateReadingLesson = () => {
           <InputLesson text='Puntaje' name='puntaje' type='number' />
         </div>
         <div className='w-2/12'>
-          <InputLesson text='Vidas' name='vidas' type='number' />
+          <InputLesson text='Vidas' name='vidasTotales' type='number' />
         </div>
       </form>
       <div className='flex justify-end mt-10'>
@@ -65,19 +111,43 @@ const CreateReadingLesson = () => {
         >
           <span> Recursos</span>
         </button>
-        <ButtonPopperLesson />
+        <ButtonPopperLesson
+          onAddOther={() => setShowNewItemModal(true)}
+          onAddSpace={() => onAddSpace()}
+        />
+        <button
+          type='button'
+          className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
+          onClick={onSave}
+        >
+          <span className='iconify text-2xl mx-1' data-icon='ion:save' />
+          <span> Guardar</span>
+        </button>
       </div>
       <div className='flex flex-col mt-10'>
         <h1 className='w-full text-center text-2xl fotn-bold'>
           Contenido de la lección
         </h1>
-        <p className='w-full text-center text-slate-400 mt-4'>
-          **Aún no se han creado items para la lección**
-        </p>
+        {contenido.length > 0 ? (
+          contenido.map((item) => (
+            <ItemContent item={item} key={contenido.clave + contenido.valor} />
+          ))
+        ) : (
+          <p className='w-full text-center text-slate-400 mt-4'>
+            **Aún no se han creado opciones para el enunciado**
+          </p>
+        )}
       </div>
       <ResourcesModal
         showModal={showResourcesModal}
         setShowModal={setShowResourcesModal}
+        module={module}
+      />
+      <AddItem
+        showModal={showNewItemModal}
+        setShowModal={setShowNewItemModal}
+        contenido={contenido}
+        setContenido={setContenido}
         module={module}
       />
     </div>

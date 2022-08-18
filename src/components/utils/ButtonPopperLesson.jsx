@@ -4,14 +4,10 @@ import Popper from '@mui/material/Popper';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 
-const ButtonPopperLesson = () => {
+const ButtonPopperLesson = ({ onAddOther, onAddSpace }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
-
-  function onAddReading() {
-    console.log('first');
-  }
 
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +24,10 @@ const ButtonPopperLesson = () => {
                 <button
                   type='button'
                   className='hover:scale-110 focus:outline-none'
-                  onClick={onAddReading}
+                  onClick={() => {
+                    onAddSpace();
+                    setOpen(false);
+                  }}
                 >
                   Espacio
                 </button>
@@ -41,6 +40,10 @@ const ButtonPopperLesson = () => {
                 <button
                   type='button'
                   className='hover:scale-110 focus:outline-none'
+                  onClick={() => {
+                    onAddOther();
+                    setOpen(false);
+                  }}
                 >
                   Otro
                 </button>

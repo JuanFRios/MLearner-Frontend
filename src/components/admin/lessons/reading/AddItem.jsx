@@ -8,52 +8,58 @@ import Button from '@material-tailwind/react/Button';
 import InputLesson from 'components/utils/InputLesson';
 import Select from 'components/utils/Select';
 
-const NewOption = ({ showModal, setShowModal, opciones, setOpciones }) => {
+const AddItem = ({ showModal, setShowModal, contenido, setContenido }) => {
   const { form, formData, updateFormData } = useFormData();
   function onClick() {
     setShowModal(false);
-    document.getElementById('myform').reset();
+    document.getElementById('formreadinglesson').reset();
   }
 
   const onSubmit = async () => {
-    setOpciones([...opciones, formData]);
+    setContenido([...contenido, formData]);
     setShowModal(false);
-    document.getElementById('myform').reset();
+    document.getElementById('formreadinglesson').reset();
   };
 
   return (
     <Modal size='lg' active={showModal} toggler={() => onClick()}>
       <ModalHeader toggler={() => onClick()}>
-        <span className='text-3xl mr-52'>Nueva opción</span>
+        <span className='text-3xl mr-52'>Nuevo item</span>
       </ModalHeader>
       <ModalBody>
         <div className='flex'>
           <form
-            id='myform'
+            id='formreadinglesson'
             ref={form}
             onChange={updateFormData}
             className='w-full h-full mb-6 flex flex-col justify-center items-center'
             onSubmit={onSubmit}
           >
-            <InputLesson
-              text='Descripción'
-              name='opcion'
-              type='text'
-              accept=''
-              required
-              placeholder='Ingrese una descripción'
-            />
             <Select
-              text='Es correcta'
-              name='esCorrecta'
+              text='Tipo de item'
+              name='clave'
               type='checkbox'
               required
               options={[
                 { value: null, label: '-' },
-                { value: true, label: 'Si' },
-                { value: false, label: 'No' },
+                { value: 'TITULO', label: 'Titulo' },
+                { value: 'SUBTITULO', label: 'Subtitulo' },
+                { value: 'TEXTO', label: 'Texto' },
+                { value: 'IMAGEN', label: 'Imagen' },
+                { value: 'LISTA', label: 'Lista' },
+                { value: 'LINK', label: 'Link' },
+                { value: 'TEXTO-CODIGO', label: 'Texto en formato código' },
               ]}
               placeholder='Ingrese una descripción'
+            />
+            <InputLesson
+              text='Valor del item'
+              name='valor'
+              type='text'
+              accept=''
+              required
+              placeholder='Ingrese un valor'
+              textarea
             />
           </form>
         </div>
@@ -70,4 +76,4 @@ const NewOption = ({ showModal, setShowModal, opciones, setOpciones }) => {
   );
 };
 
-export default NewOption;
+export default AddItem;
