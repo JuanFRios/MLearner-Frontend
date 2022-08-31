@@ -7,17 +7,15 @@ const ItemModule = ({ module }) => {
   let anchoModulo;
   let medidatexto;
   // let medidaIcono;
-  console.log('first');
 
   function onEdit() {
-    console.log('first');
+    console.log('');
   }
   function onDelete() {
-    console.log('first');
+    console.log('');
   }
   function onConfig() {
     navigate(`/admin/course/module/${module.mid}`);
-    console.log('first');
   }
 
   if (module.tamañoVisualizacion === 'moduleLg') {

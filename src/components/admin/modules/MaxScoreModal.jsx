@@ -30,7 +30,6 @@ const MaxScoreModal = ({ showModal, setShowModal, module }) => {
     setScore(data);
 
     setReady(true);
-    console.log(score);
   }, [showModal]);
 
   if (!ready) {

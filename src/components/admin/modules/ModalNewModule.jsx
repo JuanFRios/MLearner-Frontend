@@ -19,10 +19,8 @@ const ModalNewModule = ({ showModal, setShowModal, tamanoNuevoModulo }) => {
   }
 
   const onSubmit = async () => {
-    console.log(formData);
     if (formData.nombre && formData.imagen && formData.carpetaDestinoRecurso) {
       const newModule = { ...formData, tamanoVisualizacion: tamanoNuevoModulo };
-      console.log(newModule, 'a guardar');
       const module = await dispatch(saveModule(newModule));
       if (module) {
         toast.success('Módulo creado correctamente', {

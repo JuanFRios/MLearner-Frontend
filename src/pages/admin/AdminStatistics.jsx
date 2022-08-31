@@ -15,7 +15,6 @@ const AdminStatistics = () => {
     setTopScore(await dispatch(getStatistics('PORCENTAJE')));
     setReady(true);
   }, []);
-  console.log('first');
   if (!ready) {
     return (
       <div className='private-container'>

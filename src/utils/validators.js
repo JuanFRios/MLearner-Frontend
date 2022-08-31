@@ -51,14 +51,44 @@ export const validateReadingLesson = (readLesson) => {
   if (!readLesson.contenido || readLesson.contenido.length === 0) {
     errors.push('Al menos un item de contenido es requerido');
   }
-  let readLessonCast;
+  const isError = errors.length > 0;
+  const readLessonCast = {
+    ...readLesson,
+    vidasTotales: readLesson.vidasTotales
+      ? parseInt(readLesson.vidasTotales, 10)
+      : undefined,
+    puntaje: readLesson.puntaje ? parseInt(readLesson.puntaje, 10) : undefined,
+  };
+  return { isError, errors, readLessonCast };
+};
+
+export const validateCodeLesson = (codeLesson) => {
+  const errors = [];
+  if (!codeLesson.titulo) {
+    errors.push('El titulo es requerido');
+  }
+  if (!codeLesson.vidasTotales) {
+    errors.push('El numero de vidas es requerido');
+  }
+  if (!codeLesson.puntaje) {
+    errors.push('El puntaje es requerido');
+  }
+  if (!codeLesson.contenido || codeLesson.contenido.length === 0) {
+    errors.push('Al menos un item de contenido es requerido');
+  }
+  if (codeLesson.contenido && codeLesson.contenido.length > 0) {
+    if (!codeLesson.contenido[0].valorSolution) {
+      errors.push('El código solución es requerido');
+    }
+  }
+  let codeLessonCast;
   const isError = errors.length > 0;
   if (!isError) {
-    readLessonCast = {
-      ...readLesson,
-      vidasTotales: parseInt(readLesson.vidasTotales, 10),
-      puntaje: parseInt(readLesson.puntaje, 10),
+    codeLessonCast = {
+      ...codeLesson,
+      vidasTotales: parseInt(codeLesson.vidasTotales, 10),
+      puntaje: parseInt(codeLesson.puntaje, 10),
     };
   }
-  return { isError, errors, readLessonCast };
+  return { isError, errors, codeLessonCast };
 };

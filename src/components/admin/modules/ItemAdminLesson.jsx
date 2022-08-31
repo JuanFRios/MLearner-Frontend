@@ -1,23 +1,31 @@
 import { LessonTypeIcon } from 'constants/Lesson';
 import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ItemAdminLesson = ({ lesson }) => {
+  const { module } = useParams();
+  const navigate = useNavigate();
+  let route;
   function onEdit() {
-    console.log('first');
+    navigate(route);
+    console.log('');
   }
   function onDelete() {
-    console.log('first');
+    console.log('');
   }
   let icon;
   switch (lesson.tipo) {
     case LessonTypeIcon.reading.type:
       icon = LessonTypeIcon.reading.icon;
+      route = `/admin/course/module/${module}/reading/${lesson.lid}`;
       break;
     case LessonTypeIcon.code.type:
       icon = LessonTypeIcon.code.icon;
+      route = `/admin/course/module/${module}/code/${lesson.lid}`;
       break;
     case LessonTypeIcon.quiz.type:
       icon = LessonTypeIcon.quiz.icon;
+      route = `/admin/course/module/${module}/quiz/${lesson.lid}`;
       break;
     default:
       icon = LessonTypeIcon.reading.icon;

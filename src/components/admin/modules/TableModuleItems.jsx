@@ -21,7 +21,6 @@ export default function TableModuleItems({ module }) {
     );
     setCount(lessons.totalElements);
     setReady(true);
-    console.log(lessons);
   }, [page, rowsPerPage]);
 
   const handleChangePage = (event, newPage) => {

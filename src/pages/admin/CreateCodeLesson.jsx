@@ -1,20 +1,91 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LessonTypeIcon } from 'constants/Lesson';
 import useFormData from 'hooks/useFormData';
 import InputLesson from 'components/utils/InputLesson';
 import ResourcesModal from 'components/admin/modules/ResourcesModal';
 import InputLessonCode from 'components/utils/InputLessonCode';
+import { toast } from 'react-toastify';
+import { validateCodeLesson } from 'utils/validators';
+import { useDispatch } from 'react-redux';
+import { saveLesson, getLessonById } from 'actions/lessons';
 
 const CreateCodeLesson = () => {
-  console.log('first');
+  const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [valid, setValid] = useState(false);
   const { module } = useParams();
+  const [lesson, setLesson] = useState({});
   const [showResourcesModal, setShowResourcesModal] = useState(false);
-  const { form, formData, updateFormData } = useFormData();
+  const { form, formData, updateFormData, upData } = useFormData();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getLessonById(id)).then((l) => {
+        console.log(l.contenidoLeccion.leccionActual);
+        setLesson(l.contenidoLeccion.leccionActual);
+        upData(l.contenidoLeccion.leccionActual);
+        console.log(formData);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const codeLesson = {
+      ...lesson,
+      vidasTotales: formData.vidasTotales,
+      puntaje: formData.puntaje,
+      titulo: formData.titulo,
+      contenido: [
+        {
+          clave: 'CODIGO',
+          valor: 'codigo',
+          valorPreExerciseCode: formData.valorPreExerciseCode,
+          valorSampleCode: formData.valorSampleCode,
+          valorSolution: formData.valorSolution,
+          valorSCT: formData.valorSCT,
+          valorHint: formData.valorHint,
+        },
+      ],
+      tipo: 'CODIGO',
+      modulo: module,
+    };
+    setLesson(codeLesson);
+    const validation = validateCodeLesson(codeLesson);
+    setValid(!validation.isError);
+    if (valid) {
+      localStorage.setItem(
+        'lessonPreview',
+        JSON.stringify(validation.codeLessonCast)
+      );
+    }
+    console.log(validation);
+  }, [formData]);
+
+  const onPreview = () => {
+    navigate(`/preview/lesson`);
+  };
+
+  const onSave = async () => {
+    const { isError, errors, codeLessonCast } = validateCodeLesson(lesson);
+    if (isError) {
+      toast.error(errors[0], {
+        position: 'top-center',
+      });
+    } else {
+      const lessonCreated = await dispatch(saveLesson(codeLessonCast));
+      if (lessonCreated) {
+        toast.success('Lección creada correctamente', {
+          position: 'top-center',
+        });
+      }
+      navigate(`/admin/course/module/${module}`);
+    }
+  };
+
   function onBack() {
     navigate(`/admin/course/module/${module}`);
-    console.log(formData);
   }
   function onResources() {
     setShowResourcesModal(true);
@@ -46,7 +117,7 @@ const CreateCodeLesson = () => {
           <div className='w-8/12 mr-8'>
             <InputLesson
               text='Nombre de la lección'
-              name='nombre'
+              name='titulo'
               type='text'
               placeholder='Escribe el nombre de la lección'
             />
@@ -55,7 +126,7 @@ const CreateCodeLesson = () => {
             <InputLesson text='Puntaje' name='puntaje' type='number' />
           </div>
           <div className='w-2/12'>
-            <InputLesson text='Vidas' name='vidas' type='number' />
+            <InputLesson text='Vidas' name='vidasTotales' type='number' />
           </div>
         </div>
 
@@ -67,17 +138,34 @@ const CreateCodeLesson = () => {
           >
             <span> Recursos</span>
           </button>
+          <button
+            type='button'
+            disabled={!valid}
+            className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
+            onClick={onPreview}
+          >
+            <span className='iconify text-2xl mx-1' data-icon='ion:save' />
+            <span> Visualizar</span>
+          </button>
+          <button
+            type='button'
+            className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
+            onClick={onSave}
+          >
+            <span className='iconify text-2xl mx-1' data-icon='ion:save' />
+            <span> Guardar</span>
+          </button>
         </div>
         <div className='flex flex-col mt-10'>
           <h1 className='w-full text-center text-2xl fotn-bold'>
             Contenido de la lección
           </h1>
         </div>
-        <InputLessonCode text='Solución' name='solucion' />
-        <InputLessonCode text='Código precargado' name='precargado' />
-        <InputLessonCode text='Código de ejemplo' name='example' />
-        <InputLessonCode text='Reglas de validación' name='reglas' />
-        <InputLessonCode text='Pistas' name='pistas' />
+        <InputLessonCode text='Solución' name='valorSolution' />
+        <InputLessonCode text='Código precargado' name='valorPreExerciseCode' />
+        <InputLessonCode text='Código de ejemplo' name='valorSampleCode' />
+        <InputLessonCode text='Reglas de validación' name='valorSCT' />
+        <InputLessonCode text='Pistas' name='valorHint' />
       </form>
       <ResourcesModal
         showModal={showResourcesModal}

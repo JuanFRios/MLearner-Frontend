@@ -23,7 +23,6 @@ const ResourcesModal = ({ showModal, setShowModal, module }) => {
     };
     setResources(data);
     setReady(true);
-    console.log(resources);
   }, [showModal]);
 
   if (!ready) {

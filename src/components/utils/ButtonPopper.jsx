@@ -13,7 +13,6 @@ const ButtonPopper = ({ module }) => {
 
   function onAddReading() {
     navigate(`/admin/course/module/${module}/reading`);
-    console.log('first');
   }
   function onAddQuiz() {
     navigate(`/admin/course/module/${module}/quiz`);

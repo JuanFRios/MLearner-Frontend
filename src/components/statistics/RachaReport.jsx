@@ -3,7 +3,6 @@ import Chart from 'react-apexcharts';
 import { getDayOfWeek } from 'utils/date';
 
 const RachaReport = ({ days }) => {
-  console.log('first', days);
   const [options, setOptions] = useState(null);
   useEffect(() => {
     const categories = days.map((d) => getDayOfWeek(d.fecha));

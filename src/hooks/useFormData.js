@@ -34,10 +34,14 @@ const useFormData = (initial) => {
     setFormData(getFormData());
   };
 
+  const upData = (data) => {
+    setFormData(data);
+  };
+
   const resetFormData = () => {
     setFormData({});
   };
-  return { form, formData, updateFormData, resetFormData };
+  return { form, formData, updateFormData, resetFormData, upData };
 };
 
 export default useFormData;

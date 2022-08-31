@@ -40,7 +40,6 @@ function a11yProps(index) {
 }
 
 export default function TopStudents({ topRacha, topProgress, topScore }) {
-  console.log('first', topRacha, topProgress, topScore);
   const [topRachaItems, setTopRachaItems] = useState([]);
   const [topProgressItems, setTopProgressItems] = useState([]);
   const [topScoreItems, setTopScoreItems] = useState([]);

@@ -54,7 +54,9 @@ const TableBasic = ({ data }) => (
         {data.rows.map((row) => (
           <StyledTableRow key={row.id}>
             {row.row.map((cell) => (
-              <StyledTableCell align='center'>{cell.value}</StyledTableCell>
+              <StyledTableCell align='center' key={cell.value}>
+                {cell.value}
+              </StyledTableCell>
             ))}
           </StyledTableRow>
         ))}

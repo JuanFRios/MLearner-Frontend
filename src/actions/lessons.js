@@ -105,3 +105,16 @@ export const saveLesson = (lesson) => async (dispatch) => {
   }
   return false;
 };
+
+export const getLessonById = (idLesson) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const respuestaAxios = await mlearnerApi.get(`/lecciones/${idLesson}`);
+    dispatch(finishLoading);
+    return respuestaAxios.data;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+    return null;
+  }
+};

@@ -15,6 +15,7 @@ import ModuleContent from 'pages/admin/ModuleContent';
 import CreateReadingLesson from 'pages/admin/CreateReadingLesson';
 import CreateQuizLesson from 'pages/admin/CreateQuizLesson';
 import CreateCodeLesson from 'pages/admin/CreateCodeLesson';
+import LessonPreview from 'pages/admin/LessonPreview';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -43,10 +44,17 @@ export const AppRouter = () => (
           path='/admin/course/module/:module/code'
           element={<CreateCodeLesson />}
         />
+        <Route
+          path='/admin/course/module/:module/code/:id'
+          element={<CreateCodeLesson />}
+        />
         <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>
         <Route path='/lesson/:id' element={<Lesson />} />
+      </Route>
+      <Route path='/' element={<LessonLayout />}>
+        <Route path='preview/lesson' element={<LessonPreview />} />
       </Route>
     </Routes>
   </BrowserRouter>

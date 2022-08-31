@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LessonTypeIcon } from 'constants/Lesson';
@@ -11,10 +12,12 @@ import { toast } from 'react-toastify';
 import { validateReadingLesson } from 'utils/validators';
 import { useDispatch } from 'react-redux';
 import { saveLesson } from 'actions/lessons';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateReadingLesson = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [valid, setValid] = useState(false);
   const { module } = useParams();
   const [showResourcesModal, setShowResourcesModal] = useState(false);
   const [showNewItemModal, setShowNewItemModal] = useState(false);
@@ -26,8 +29,15 @@ const CreateReadingLesson = () => {
     console.log(formData);
   }
 
+  const onPreview = () => {
+    window.open('/preview/lesson', '_blank');
+  };
+
   function onAddSpace() {
-    setContenido([...contenido, { clave: 'ESPACIO', valor: 'Salto de línea' }]);
+    setContenido([
+      ...contenido,
+      { clave: 'ESPACIO', valor: 'Salto de línea', _id: uuidv4() },
+    ]);
   }
 
   useEffect(() => {
@@ -40,7 +50,17 @@ const CreateReadingLesson = () => {
       tipo: 'LECTURA',
       modulo: module,
     };
-    setLesson(readingLesson);
+    setLesson({ ...readingLesson });
+    console.log(readingLesson);
+    const validation = validateReadingLesson(readingLesson);
+    setValid(!validation.isError);
+    if (valid) {
+      localStorage.setItem(
+        'lessonPreview',
+        JSON.stringify(validation.readLessonCast)
+      );
+    }
+    console.log(validation);
   }, [contenido, formData]);
 
   const onSave = async () => {
@@ -51,13 +71,20 @@ const CreateReadingLesson = () => {
         position: 'top-center',
       });
     } else {
-      const lessonCreated = await dispatch(saveLesson(readLessonCast));
+      const lessonToCreate = {
+        ...readLessonCast,
+        contenido: readLessonCast.contenido.map((item) => ({
+          clave: item.clave,
+          valor: item.valor,
+        })),
+      };
+      const lessonCreated = await dispatch(saveLesson(lessonToCreate));
       if (lessonCreated) {
         toast.success('Lección creada correctamente', {
           position: 'top-center',
         });
       }
-      console.log(readLessonCast);
+      console.log(lessonToCreate);
       navigate(`/admin/course/module/${module}`);
     }
   };
@@ -117,6 +144,17 @@ const CreateReadingLesson = () => {
         />
         <button
           type='button'
+          disabled={!valid}
+          className={`btn bg-light_green_2 text-white opacity-100 hover:scale-110 focus:outline-none flex justify-center items-center mx-2 ${
+            !valid ? 'opacity-50 ' : ''
+          }`}
+          onClick={onPreview}
+        >
+          <span className='iconify text-2xl mx-1' data-icon='ion:save' />
+          <span> Visualizar</span>
+        </button>
+        <button
+          type='button'
           className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
           onClick={onSave}
         >
@@ -129,8 +167,13 @@ const CreateReadingLesson = () => {
           Contenido de la lección
         </h1>
         {contenido.length > 0 ? (
-          contenido.map((item) => (
-            <ItemContent item={item} key={contenido.clave + contenido.valor} />
+          contenido.map((item, index) => (
+            <ItemContent
+              item={item}
+              key={item.clave + item.valor + index}
+              contenido={contenido}
+              setContenido={setContenido}
+            />
           ))
         ) : (
           <p className='w-full text-center text-slate-400 mt-4'>

@@ -20,7 +20,6 @@ const NewResourceModal = ({ showModal, setShowModal, module }) => {
   const onSubmit = async () => {
     if (formData.resource) {
       const resource = await dispatch(saveResourceModule(module, formData));
-      console.log(resource);
       if (resource) {
         navigator.clipboard.writeText(resource.data.recurso.url);
         toast.success('Recurso creado, url copiada en el portapapeles', {

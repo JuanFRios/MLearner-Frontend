@@ -1,10 +1,12 @@
 import React from 'react';
 
-const ItemContent = ({ item }) => {
+const ItemContent = ({ item, contenido, setContenido }) => {
   function onEdit() {
     console.log('');
   }
   function onDelete() {
+    const newContenido = contenido.filter((c) => c._id !== item._id);
+    setContenido(newContenido);
     console.log('');
   }
 
