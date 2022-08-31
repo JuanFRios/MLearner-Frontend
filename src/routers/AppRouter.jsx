@@ -8,6 +8,14 @@ import Dashboard from 'pages/Dashboard';
 import Lesson from 'pages/Lesson';
 import LessonLayout from 'layouts/LessonLayout';
 import About from 'pages/about';
+import Statistics from 'pages/statistics';
+import ContentManagement from 'pages/admin/ContentManagement';
+import AdminStatistics from 'pages/admin/AdminStatistics';
+import ModuleContent from 'pages/admin/ModuleContent';
+import CreateReadingLesson from 'pages/admin/CreateReadingLesson';
+import CreateQuizLesson from 'pages/admin/CreateQuizLesson';
+import CreateCodeLesson from 'pages/admin/CreateCodeLesson';
+import LessonPreview from 'pages/admin/LessonPreview';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -17,10 +25,36 @@ export const AppRouter = () => (
       </Route>
       <Route path='/' element={<PrivateLayout />}>
         <Route path='/credits' element={<About />} />
+        <Route path='/statistics' element={<Statistics />} />
         <Route path='/home' element={<Dashboard />} />
+        <Route path='/admin/course' element={<ContentManagement />} />
+        <Route
+          path='/admin/course/module/:module'
+          element={<ModuleContent />}
+        />
+        <Route
+          path='/admin/course/module/:module/reading'
+          element={<CreateReadingLesson />}
+        />
+        <Route
+          path='/admin/course/module/:module/quiz'
+          element={<CreateQuizLesson />}
+        />
+        <Route
+          path='/admin/course/module/:module/code'
+          element={<CreateCodeLesson />}
+        />
+        <Route
+          path='/admin/course/module/:module/code/:id'
+          element={<CreateCodeLesson />}
+        />
+        <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>
         <Route path='/lesson/:id' element={<Lesson />} />
+      </Route>
+      <Route path='/' element={<LessonLayout />}>
+        <Route path='preview/lesson' element={<LessonPreview />} />
       </Route>
     </Routes>
   </BrowserRouter>

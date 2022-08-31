@@ -33,7 +33,15 @@ const useFormData = (initial) => {
   const updateFormData = () => {
     setFormData(getFormData());
   };
-  return { form, formData, updateFormData };
+
+  const upData = (data) => {
+    setFormData(data);
+  };
+
+  const resetFormData = () => {
+    setFormData({});
+  };
+  return { form, formData, updateFormData, resetFormData, upData };
 };
 
 export default useFormData;

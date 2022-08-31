@@ -4,6 +4,12 @@ export const LessonType = {
   quiz: 'QUIZ',
 };
 
+export const LessonTypeIcon = {
+  reading: { type: 'LECTURA', icon: 'bi:file-text' },
+  code: { type: 'CODIGO', icon: 'bi:code-square' },
+  quiz: { type: 'QUIZ', icon: 'ic:outline-quiz' },
+};
+
 export const LessonStatus = {
   seen: 'VISTA',
   inProgress: 'EN_CURSO',

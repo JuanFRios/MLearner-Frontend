@@ -1,8 +1,8 @@
 import React from 'react';
 
 const About = () => (
-  <div className='ml-40 pl-40 w-190'>
-    <div className='flex w-full py-20 pr-20 pl-32 text-center text-2xl'>
+  <div className='private-container'>
+    <div className='flex w-full py-20 pr-20 text-center text-2xl'>
       <p>
         MLearner es una versión inicial de una plataforma de enseñanza de
         conceptos y algoritmos de aprendizaje no supervisado, desarrollada para
@@ -28,7 +28,7 @@ const About = () => (
         image='/picture-juanE.png'
       />
     </div>
-    <div className='flex w-full py-20 pr-20 pl-32 text-center justify-center text-2xl'>
+    <div className='flex w-full py-20 pr-20  text-center justify-center text-2xl'>
       <p>
         En este punto el aplicativo se encuentra abierto para futuras mejoras e
         implementación de nuevas funcionalidades.

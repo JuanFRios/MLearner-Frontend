@@ -21,7 +21,7 @@ export const renewToken = () => async (dispatch) => {
     const respuestaAxios = await mlearnerApi.get('/auth/renovarToken');
     dispatch(login(respuestaAxios.data.usuario));
     dispatch(finishLoading());
-    return true;
+    return respuestaAxios.data.usuario;
   } catch (err) {
     dispatch(finishLoading());
     return false;

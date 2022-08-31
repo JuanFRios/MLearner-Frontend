@@ -1,37 +1,46 @@
 import { startLogout } from 'actions/auth';
+import {
+  adminMenuOptions,
+  studentMenuOptions,
+  ROLE_STUDENT,
+  ROLE_ADMIN,
+} from 'constants/Menu';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import LoadingSidebar from 'components/loading/LoadingSidebar';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const dispath = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const location = useLocation();
-  let selectedH;
-  let selectedE;
+  let role;
+  if (!user) {
+    return <LoadingSidebar />;
+  }
+  if (user) {
+    switch (user.rol) {
+      case ROLE_STUDENT:
+        role = 'Estudiante';
+        break;
+      case ROLE_ADMIN:
+        role = 'Administrador';
+        break;
+      default:
+        role = 'Estudiante';
+    }
+  }
+
   function onSubmit(event) {
     event.preventDefault();
     dispath(startLogout());
     navigate('/');
   }
 
-  if (location.pathname === '/home') {
-    selectedH = 'border-green-500 text-green-500';
-    selectedE =
-      'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
-  } else {
-    selectedE = 'border-green-500 text-green-500';
-    selectedH =
-      'border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500';
-  }
-
   return (
     <div className='flex'>
-      {/* Sidebar starts */}
-      {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
       <div className='backgroudSB w-80 fixed h-full flex flex-col items-center content-center  z-20 '>
-        <div className='px-8 py-12'>
+        <div className='px-8 py-12 w-full'>
           <div className='flex flex-col items-center'>
             <div>
               <img
@@ -43,35 +52,11 @@ const Sidebar = () => {
             <p className='text-gray-200 py-3 text-2xl font-bold text-center'>
               {user ? user.nombreCompleto : ''}
             </p>
+            <div className='bg-slate-100 rounded-full text-dark_blue_1 w-full flex justify-center'>
+              <span>{role}</span>
+            </div>
           </div>
-          <ul className='mt-12 '>
-            <li
-              className={`${selectedH} flex w-full justify-between border-b cursor-pointer items-center mb-6`}
-            >
-              <div className='flex items-center pb-1'>
-                <span
-                  className='iconify big-icon'
-                  data-icon='majesticons:light-bulb'
-                />
-                <Link to='/home'>
-                  <span className='ml-2 text-2xl font-bold'>Aprender</span>
-                </Link>
-              </div>
-            </li>
-            <li
-              className={`${selectedE} flex w-full justify-between border-b cursor-pointer items-center mb-6`}
-            >
-              <div className='flex items-center pb-1 '>
-                <span
-                  className='iconify big-icon'
-                  data-icon='ic:sharp-query-stats'
-                />
-                <Link to='/credits'>
-                  <span className='ml-2 text-2xl font-bold'>Acerca de</span>
-                </Link>
-              </div>
-            </li>
-          </ul>
+          <MenuOptions user={user} />
         </div>
         <div className='px-8 py-3 absolute bottom-4 text-gray-200 '>
           <div className='flex items-center hover:text-green-500 cursor-pointer'>
@@ -85,8 +70,41 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      {/* Sidebar ends */}
     </div>
+  );
+};
+
+const MenuOptions = ({ user }) => {
+  let menuItems;
+  if (user.rol === ROLE_STUDENT) {
+    menuItems = studentMenuOptions.map(({ text, route, icon }) => (
+      <MenuItem text={text} route={route} icon={icon} key={route} />
+    ));
+  } else if (user.rol === ROLE_ADMIN) {
+    menuItems = adminMenuOptions.map(({ text, route, icon }) => (
+      <MenuItem text={text} route={route} icon={icon} key={route} />
+    ));
+  }
+  return <ul className='mt-12 '>{menuItems}</ul>;
+};
+
+const MenuItem = ({ text, route, icon }) => {
+  const location = useLocation();
+  return (
+    <li
+      className={
+        location.pathname.includes(route)
+          ? 'active-menu-item'
+          : 'inactive-menu-item'
+      }
+    >
+      <div className='flex items-center pb-1'>
+        <span className='iconify big-icon' data-icon={icon} />
+        <Link to={route}>
+          <span className='ml-2 text-2xl font-bold'>{text}</span>
+        </Link>
+      </div>
+    </li>
   );
 };
 

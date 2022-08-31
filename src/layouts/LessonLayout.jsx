@@ -6,13 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { renewToken } from 'actions/auth';
 
-const LessonLayout = () => {
+const LessonLayout = ({ isPublic }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(async () => {
-    const isLoggedIn = await dispatch(renewToken());
-    if (!isLoggedIn) {
-      navigate('/');
+    if (!isPublic) {
+      const isLoggedIn = await dispatch(renewToken());
+      if (!isLoggedIn) {
+        navigate('/');
+      }
     }
   }, [dispatch]);
   return (
