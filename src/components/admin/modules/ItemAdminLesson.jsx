@@ -13,6 +13,10 @@ const ItemAdminLesson = ({ lesson }) => {
   function onDelete() {
     console.log('');
   }
+  function onPreview() {
+    navigate(`/preview/lesson/${lesson.lid}`);
+    console.log('');
+  }
   let icon;
   switch (lesson.tipo) {
     case LessonTypeIcon.reading.type:
@@ -21,7 +25,7 @@ const ItemAdminLesson = ({ lesson }) => {
       break;
     case LessonTypeIcon.code.type:
       icon = LessonTypeIcon.code.icon;
-      route = `/admin/course/module/${module}/code/${lesson.lid}`;
+      route = `/admin/course/module/${module}/code/e/${lesson.lid}`;
       break;
     case LessonTypeIcon.quiz.type:
       icon = LessonTypeIcon.quiz.icon;
@@ -50,6 +54,14 @@ const ItemAdminLesson = ({ lesson }) => {
           className='focus:outline-none hover:scale-110 px-1'
         >
           <span className='iconify text-3xl' data-icon='eva:edit-outline' />
+        </button>
+        <button
+          type='button'
+          onClick={onPreview}
+          tittle='Visualizar'
+          className='focus:outline-none hover:scale-110 px-1'
+        >
+          <span className='iconify text-3xl' data-icon='akar-icons:eye' />
         </button>
         <button
           type='button'

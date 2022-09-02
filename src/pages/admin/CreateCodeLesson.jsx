@@ -14,6 +14,7 @@ const CreateCodeLesson = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [editLesson, setEditLesson] = useState();
   const [valid, setValid] = useState(false);
   const { module } = useParams();
   const [lesson, setLesson] = useState({});
@@ -24,9 +25,10 @@ const CreateCodeLesson = () => {
     if (id) {
       dispatch(getLessonById(id)).then((l) => {
         console.log(l.contenidoLeccion.leccionActual);
-        setLesson(l.contenidoLeccion.leccionActual);
+        setEditLesson(l.contenidoLeccion.leccionActual);
         upData(l.contenidoLeccion.leccionActual);
-        console.log(formData);
+        console.log('first');
+        console.log('lesson', editLesson);
       });
     }
   }, []);

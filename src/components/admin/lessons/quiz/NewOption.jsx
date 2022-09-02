@@ -8,7 +8,7 @@ import Button from '@material-tailwind/react/Button';
 import InputLesson from 'components/utils/InputLesson';
 import Select from 'components/utils/Select';
 
-const NewOption = ({ showModal, setShowModal, opciones, setOpciones }) => {
+const NewOption = ({ showModal, setShowModal, setOpciones }) => {
   const { form, formData, updateFormData } = useFormData();
   function onClick() {
     setShowModal(false);
@@ -16,7 +16,7 @@ const NewOption = ({ showModal, setShowModal, opciones, setOpciones }) => {
   }
 
   const onSubmit = async () => {
-    setOpciones([...opciones, formData]);
+    setOpciones({ ...formData, esCorrecta: formData.esCorrecta === 'true' });
     setShowModal(false);
     document.getElementById('myform').reset();
   };

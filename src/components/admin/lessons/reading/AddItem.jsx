@@ -7,9 +7,8 @@ import ModalFooter from '@material-tailwind/react/ModalFooter';
 import Button from '@material-tailwind/react/Button';
 import InputLesson from 'components/utils/InputLesson';
 import Select from 'components/utils/Select';
-import { v4 as uuidv4 } from 'uuid';
 
-const AddItem = ({ showModal, setShowModal, contenido, setContenido }) => {
+const AddItem = ({ showModal, setShowModal, setContenido }) => {
   const { form, formData, updateFormData } = useFormData();
   function onClick() {
     setShowModal(false);
@@ -17,7 +16,7 @@ const AddItem = ({ showModal, setShowModal, contenido, setContenido }) => {
   }
 
   const onSubmit = async () => {
-    setContenido([...contenido, { ...formData, _id: uuidv4() }]);
+    setContenido({ ...formData });
     setShowModal(false);
     document.getElementById('formreadinglesson').reset();
   };

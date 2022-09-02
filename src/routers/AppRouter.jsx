@@ -16,6 +16,9 @@ import CreateReadingLesson from 'pages/admin/CreateReadingLesson';
 import CreateQuizLesson from 'pages/admin/CreateQuizLesson';
 import CreateCodeLesson from 'pages/admin/CreateCodeLesson';
 import LessonPreview from 'pages/admin/LessonPreview';
+import { AddEdit } from 'pages/admin/CreateEditCodeLesson';
+import { CreateEditQuizLesson } from 'pages/admin/CreateEditQuizLesson';
+import { CreateEditReadingLesson } from 'pages/admin/CreateEditReadingLesson';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -34,11 +37,19 @@ export const AppRouter = () => (
         />
         <Route
           path='/admin/course/module/:module/reading'
-          element={<CreateReadingLesson />}
+          element={<CreateEditReadingLesson />}
+        />
+        <Route
+          path='/admin/course/module/:module/reading/:id'
+          element={<CreateEditReadingLesson />}
         />
         <Route
           path='/admin/course/module/:module/quiz'
-          element={<CreateQuizLesson />}
+          element={<CreateEditQuizLesson />}
+        />
+        <Route
+          path='/admin/course/module/:module/quiz/:id'
+          element={<CreateEditQuizLesson />}
         />
         <Route
           path='/admin/course/module/:module/code'
@@ -48,13 +59,21 @@ export const AppRouter = () => (
           path='/admin/course/module/:module/code/:id'
           element={<CreateCodeLesson />}
         />
+        <Route
+          path='/admin/course/module/:module/code/e/:id'
+          element={<AddEdit />}
+        />
+        <Route
+          path='/admin/course/module/:module/code/e'
+          element={<AddEdit />}
+        />
         <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>
         <Route path='/lesson/:id' element={<Lesson />} />
       </Route>
       <Route path='/' element={<LessonLayout />}>
-        <Route path='preview/lesson' element={<LessonPreview />} />
+        <Route path='preview/lesson/:id' element={<LessonPreview />} />
       </Route>
     </Routes>
   </BrowserRouter>

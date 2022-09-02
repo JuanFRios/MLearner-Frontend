@@ -306,3 +306,11 @@ input[type="radio"]:checked + label{
 .enable .module-actions{
   background: linear-gradient(270deg, #03314B 0%, rgba(3, 49, 75, 0.82) 57.12%, rgba(3, 49, 75, 0.69) 79.15%, rgba(5, 25, 45, 0.31) 104.09%);
 }
+
+.input-lesson {
+  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent
+}
+
+.textarea-lesson {
+  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent
+}

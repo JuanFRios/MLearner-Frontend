@@ -111,10 +111,23 @@ export const getLessonById = (idLesson) => async (dispatch) => {
   try {
     const respuestaAxios = await mlearnerApi.get(`/lecciones/${idLesson}`);
     dispatch(finishLoading);
-    return respuestaAxios.data;
+    return respuestaAxios.data.contenidoLeccion.leccionActual;
   } catch (err) {
     toast.error(err.response.data.msg, { position: 'top-center' });
     dispatch(finishLoading);
     return null;
   }
+};
+
+export const editLesson = (id, lesson) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const lessonCreated = await mlearnerApi.put(`lecciones/${id}`, lesson);
+    dispatch(finishLoading);
+    return lessonCreated;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
 };
