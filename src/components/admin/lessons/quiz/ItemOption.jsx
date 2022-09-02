@@ -7,10 +7,9 @@ const ItemOption = ({ option }) => {
   function onDelete() {
     console.log('');
   }
-  const icon =
-    option.esCorrecta === 'true' ? 'bx:check-circle' : 'ci:off-outline-close';
+  const icon = option.esCorrecta ? 'bx:check-circle' : 'ci:off-outline-close';
 
-  const bg = option.esCorrecta === 'true' ? 'bg-green-100' : 'bg-red-100';
+  const bg = option.esCorrecta ? 'bg-green-100' : 'bg-red-100';
 
   return (
     <div className='w-full flex h-16 my-2'>

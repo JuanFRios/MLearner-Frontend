@@ -18,7 +18,7 @@ const ButtonPopper = ({ module }) => {
     navigate(`/admin/course/module/${module}/quiz`);
   }
   function onAddCode() {
-    navigate(`/admin/course/module/${module}/code`);
+    navigate(`/admin/course/module/${module}/code/e`);
   }
 
   const handleClick = (newPlacement) => (event) => {

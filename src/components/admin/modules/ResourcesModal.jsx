@@ -28,7 +28,7 @@ const ResourcesModal = ({ showModal, setShowModal, module }) => {
   if (!ready) {
     return (
       <div>
-        <p>Cargando</p>
+        <p className='text-white'>.</p>
       </div>
     );
   }
