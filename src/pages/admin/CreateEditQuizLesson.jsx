@@ -13,8 +13,8 @@ import {
   quizLessonInitialValues,
   quizLessonPutInitialValues,
 } from 'utils/lessons';
-import NewOption from 'components/admin/lessons/quiz/NewOption';
 import ItemOption from 'components/admin/lessons/quiz/ItemOption';
+import AddEditOption from 'components/admin/lessons/quiz/AddEditOption';
 
 function CreateEditQuizLesson() {
   const { id, module } = useParams();
@@ -23,6 +23,7 @@ function CreateEditQuizLesson() {
   const [isLoading, setIsLoading] = useState(true);
   const [showNewOptionModal, setShowNewOptionModal] = useState(false);
   const [lesson, setLesson] = useState(quizLessonInitialValues(module));
+  const [itemEdit, setItemEdit] = useState(null);
   const isAddMode = !id;
 
   function setOpcion(opcion) {
@@ -31,6 +32,32 @@ function CreateEditQuizLesson() {
       pregunta: {
         descripcion: { ...lesson.pregunta.descripcion },
         opciones: [...lesson.pregunta.opciones, opcion],
+      },
+    });
+  }
+
+  function deleteOption(_id) {
+    setLesson({
+      ...lesson,
+      pregunta: {
+        descripcion: { ...lesson.pregunta.descripcion },
+        opciones: lesson.pregunta.opciones.filter((o) => o._id !== _id),
+      },
+    });
+  }
+
+  function editOption(option) {
+    const newOptions = lesson.pregunta.opciones.map((o) => {
+      if (o._id === option._id) {
+        return option;
+      }
+      return o;
+    });
+    setLesson({
+      ...lesson,
+      pregunta: {
+        descripcion: { ...lesson.pregunta.descripcion },
+        opciones: [...newOptions],
       },
     });
   }
@@ -56,7 +83,6 @@ function CreateEditQuizLesson() {
   });
 
   function onSubmit(fields, { setStatus, setSubmitting }) {
-    console.log(fields);
     const lessonToSave = {
       ...fields,
       pregunta: { ...fields.pregunta, opciones: lesson.pregunta.opciones },
@@ -96,13 +122,9 @@ function CreateEditQuizLesson() {
   }
 
   function onNewOption() {
+    setItemEdit(null);
     setShowNewOptionModal(true);
   }
-
-  const onPreview = (values) => {
-    localStorage.setItem('lessonPreview', JSON.stringify(values));
-    navigate(`/preview/lesson`);
-  };
 
   if (isLoading) {
     return <div className='private-container'>Cargando...</div>;
@@ -121,11 +143,11 @@ function CreateEditQuizLesson() {
         <div className='text-2xl ml-4 flex items-center'>
           <span
             className='iconify big-icon'
-            data-icon={LessonTypeIcon.code.icon}
+            data-icon={LessonTypeIcon.quiz.icon}
           />
           <span className='ml-4'>
             {' '}
-            {isAddMode ? 'Nueva' : 'Editar'} lección tipo código
+            {isAddMode ? 'Nueva' : 'Editar'} lección tipo quiz
           </span>
         </div>
       </div>
@@ -134,7 +156,7 @@ function CreateEditQuizLesson() {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, errors, touched }) => (
+        {({ errors, touched }) => (
           <Form className='w-full h-full flex flex-col justify-between items-center pt-6'>
             <div className='w-full flex'>
               <div className='w-8/12 mr-8'>
@@ -190,14 +212,7 @@ function CreateEditQuizLesson() {
                 />
                 <span> Añadir opción</span>
               </button>
-              <button
-                type='button'
-                className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
-                onClick={() => onPreview(values)}
-              >
-                <span className='iconify text-2xl mx-1' data-icon='ion:save' />
-                <span> Visualizar</span>
-              </button>
+
               <button
                 type='submit'
                 className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
@@ -212,7 +227,13 @@ function CreateEditQuizLesson() {
               </h1>
               {lesson.pregunta.opciones.length > 0 ? (
                 lesson.pregunta.opciones.map((opcion, index) => (
-                  <ItemOption option={opcion} key={opcion.opcion + index} />
+                  <ItemOption
+                    option={opcion}
+                    key={opcion.opcion + index}
+                    setItemEdit={setItemEdit}
+                    setShowEditItem={setShowNewOptionModal}
+                    handleDelete={deleteOption}
+                  />
                 ))
               ) : (
                 <p className='w-full text-center text-slate-400 mt-4'>
@@ -223,11 +244,12 @@ function CreateEditQuizLesson() {
           </Form>
         )}
       </Formik>
-      <NewOption
+      <AddEditOption
+        item={itemEdit}
         showModal={showNewOptionModal}
         setShowModal={setShowNewOptionModal}
         setOpciones={setOpcion}
-        module={module}
+        editOption={editOption}
       />
     </div>
   );

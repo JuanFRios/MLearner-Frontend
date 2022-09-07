@@ -57,6 +57,7 @@ export const quizLessonPutInitialValues = (l, module) => ({
   pregunta: {
     enunciado: l.pregunta.enunciado,
     opciones: l.pregunta.opciones.map((opcion) => ({
+      _id: opcion._id,
       opcion: opcion.opcion,
       esCorrecta: opcion.esCorrecta,
     })),

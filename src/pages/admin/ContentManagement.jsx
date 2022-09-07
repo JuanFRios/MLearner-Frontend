@@ -15,7 +15,6 @@ const ContentManagement = () => {
   const [modulesItems, setModulesItems] = useState([]);
   const [tamanoNuevoModulo, setTamanoNuevoModulo] = useState('');
   let modules = null;
-  console.log(ready, modules);
 
   useEffect(async () => {
     setTimeout(async () => {

@@ -34,7 +34,6 @@ const CreateQuizLesson = () => {
 
   const onSave = async () => {
     const { isError, errors, quizLessonCast } = validateQuizLesson(lesson);
-    console.log(isError, errors, quizLessonCast);
     if (isError) {
       toast.error(errors[0], {
         position: 'top-center',
@@ -46,14 +45,12 @@ const CreateQuizLesson = () => {
           position: 'top-center',
         });
       }
-      console.log(quizLessonCast);
       navigate(`/admin/course/module/${module}`);
     }
   };
 
   function onBack() {
     navigate(`/admin/course/module/${module}`);
-    console.log(formData);
   }
   function onNewOption() {
     setShowNewOptionModal(true);

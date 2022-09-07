@@ -7,7 +7,6 @@ const ItemContent = ({ item, contenido, setContenido }) => {
   function onDelete() {
     const newContenido = contenido.filter((c) => c._id !== item._id);
     setContenido(newContenido);
-    console.log('');
   }
 
   return (
@@ -21,14 +20,16 @@ const ItemContent = ({ item, contenido, setContenido }) => {
         </div>
       </div>
       <div className='w-2/12 flex items-center justify-center'>
-        <button
-          type='button'
-          onClick={onEdit}
-          title='Editar'
-          className='focus:outline-none hover:scale-110 px-1'
-        >
-          <span className='iconify text-3xl' data-icon='eva:edit-outline' />
-        </button>
+        {item.clave !== 'ESPACIO' && (
+          <button
+            type='button'
+            onClick={onEdit}
+            title='Editar'
+            className='focus:outline-none hover:scale-110 px-1'
+          >
+            <span className='iconify text-3xl' data-icon='eva:edit-outline' />
+          </button>
+        )}
         <button
           type='button'
           onClick={onDelete}

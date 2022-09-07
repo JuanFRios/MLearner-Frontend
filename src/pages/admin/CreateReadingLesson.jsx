@@ -26,7 +26,6 @@ const CreateReadingLesson = () => {
   const { form, formData, updateFormData } = useFormData();
   function onBack() {
     navigate(`/admin/course/module/${module}`);
-    console.log(formData);
   }
 
   const onPreview = () => {
@@ -51,7 +50,6 @@ const CreateReadingLesson = () => {
       modulo: module,
     };
     setLesson({ ...readingLesson });
-    console.log(readingLesson);
     const validation = validateReadingLesson(readingLesson);
     setValid(!validation.isError);
     if (valid) {
@@ -60,12 +58,10 @@ const CreateReadingLesson = () => {
         JSON.stringify(validation.readLessonCast)
       );
     }
-    console.log(validation);
   }, [contenido, formData]);
 
   const onSave = async () => {
     const { isError, errors, readLessonCast } = validateReadingLesson(lesson);
-    console.log(isError, errors, readLessonCast);
     if (isError) {
       toast.error(errors[0], {
         position: 'top-center',
@@ -84,7 +80,6 @@ const CreateReadingLesson = () => {
           position: 'top-center',
         });
       }
-      console.log(lessonToCreate);
       navigate(`/admin/course/module/${module}`);
     }
   };

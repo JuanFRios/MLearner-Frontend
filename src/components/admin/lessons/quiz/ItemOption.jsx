@@ -1,12 +1,14 @@
 import React from 'react';
 
-const ItemOption = ({ option }) => {
+const ItemOption = ({ option, setItemEdit, setShowEditItem, handleDelete }) => {
   function onEdit() {
-    console.log('');
+    setShowEditItem(true);
+    setItemEdit(option);
   }
   function onDelete() {
-    console.log('');
+    handleDelete(option._id);
   }
+
   const icon = option.esCorrecta ? 'bx:check-circle' : 'ci:off-outline-close';
 
   const bg = option.esCorrecta ? 'bg-green-100' : 'bg-red-100';

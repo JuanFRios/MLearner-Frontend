@@ -24,10 +24,8 @@ const CreateCodeLesson = () => {
   useEffect(() => {
     if (id) {
       dispatch(getLessonById(id)).then((l) => {
-        console.log(l.contenidoLeccion.leccionActual);
         setEditLesson(l.contenidoLeccion.leccionActual);
         upData(l.contenidoLeccion.leccionActual);
-        console.log('first');
         console.log('lesson', editLesson);
       });
     }
@@ -62,7 +60,6 @@ const CreateCodeLesson = () => {
         JSON.stringify(validation.codeLessonCast)
       );
     }
-    console.log(validation);
   }, [formData]);
 
   const onPreview = () => {

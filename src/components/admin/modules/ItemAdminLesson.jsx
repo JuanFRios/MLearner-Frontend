@@ -8,14 +8,12 @@ const ItemAdminLesson = ({ lesson }) => {
   let route;
   function onEdit() {
     navigate(route);
-    console.log('');
   }
   function onDelete() {
     console.log('');
   }
   function onPreview() {
     navigate(`/preview/lesson/${lesson.lid}`);
-    console.log('');
   }
   let icon;
   switch (lesson.tipo) {

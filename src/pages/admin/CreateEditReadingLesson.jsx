@@ -106,11 +106,6 @@ function CreateEditReadingLesson() {
     setShowResourcesModal(true);
   }
 
-  const onPreview = (values) => {
-    localStorage.setItem('lessonPreview', JSON.stringify(values));
-    navigate(`/preview/lesson`);
-  };
-
   if (isLoading) {
     return <div className='private-container'>Cargando...</div>;
   }
@@ -141,7 +136,7 @@ function CreateEditReadingLesson() {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, errors, touched }) => (
+        {({ errors, touched }) => (
           <Form className='w-full h-full flex flex-col justify-between items-center pt-6'>
             <div className='w-full flex'>
               <div className='w-8/12 mr-8'>
@@ -187,14 +182,6 @@ function CreateEditReadingLesson() {
                 onAddOther={() => setShowNewItemModal(true)}
                 onAddSpace={() => onAddSpace()}
               />
-              <button
-                type='button'
-                className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
-                onClick={() => onPreview(values)}
-              >
-                <span className='iconify text-2xl mx-1' data-icon='ion:save' />
-                <span> Visualizar</span>
-              </button>
               <button
                 type='submit'
                 className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
