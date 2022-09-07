@@ -7,60 +7,65 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { getLessonById, saveLesson, editLesson } from 'actions/lessons';
 import { LessonTypeIcon } from 'constants/Lesson';
-import ResourcesModal from 'components/admin/modules/ResourcesModal';
 import LessonInput from 'components/utils/LessonInput';
 import { toast } from 'react-toastify';
-import ButtonPopperLesson from 'components/utils/ButtonPopperLesson';
-import { v4 as uuidv4 } from 'uuid';
-import ItemContent from 'components/admin/lessons/reading/ItemContent';
 import {
-  readingLessonInitialValues,
-  readingLessonPutInitialValues,
+  quizLessonInitialValues,
+  quizLessonPutInitialValues,
 } from 'utils/lessons';
-import AddEditItemContent from 'components/admin/lessons/reading/AddEditItemContent';
+import ItemOption from 'pages/admin/lessons-management/quiz/ItemOption';
+import AddEditOption from 'pages/admin/lessons-management/quiz/AddEditOption';
 
-function CreateEditReadingLesson() {
+function CreateEditQuizLesson() {
   const { id, module } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [showResourcesModal, setShowResourcesModal] = useState(false);
-  const [showNewItemModal, setShowNewItemModal] = useState(false);
-  const [lesson, setLesson] = useState(readingLessonInitialValues(module));
+  const [showNewOptionModal, setShowNewOptionModal] = useState(false);
+  const [lesson, setLesson] = useState(quizLessonInitialValues(module));
   const [itemEdit, setItemEdit] = useState(null);
   const isAddMode = !id;
 
-  function setContenido(item) {
+  function setOpcion(opcion) {
     setLesson({
       ...lesson,
-      contenido: [...lesson.contenido, item],
-    });
-  }
-
-  function editItem(item) {
-    const newItems = lesson.contenido.map((i) => {
-      if (i._id === item._id) {
-        return item;
-      }
-      return i;
-    });
-    setLesson({
-      ...lesson,
-      contenido: [...newItems],
+      pregunta: {
+        descripcion: { ...lesson.pregunta.descripcion },
+        opciones: [...lesson.pregunta.opciones, opcion],
+      },
     });
   }
 
   function deleteOption(_id) {
     setLesson({
       ...lesson,
-      contenido: lesson.contenido.filter((i) => i._id !== _id),
+      pregunta: {
+        descripcion: { ...lesson.pregunta.descripcion },
+        opciones: lesson.pregunta.opciones.filter((o) => o._id !== _id),
+      },
+    });
+  }
+
+  function editOption(option) {
+    const newOptions = lesson.pregunta.opciones.map((o) => {
+      if (o._id === option._id) {
+        return option;
+      }
+      return o;
+    });
+    setLesson({
+      ...lesson,
+      pregunta: {
+        descripcion: { ...lesson.pregunta.descripcion },
+        opciones: [...newOptions],
+      },
     });
   }
 
   useEffect(() => {
     if (!isAddMode) {
       dispatch(getLessonById(id)).then((l) => {
-        setLesson(readingLessonPutInitialValues(l, module));
+        setLesson(quizLessonPutInitialValues(l, module));
         setIsLoading(false);
       });
     } else {
@@ -72,12 +77,15 @@ function CreateEditReadingLesson() {
     titulo: Yup.string().required('titulo is required'),
     puntaje: Yup.number().required('puntaje is required'),
     vidasTotales: Yup.number().required('vidas is required'),
+    pregunta: Yup.object().shape({
+      enunciado: Yup.string().required('enunciado is required'),
+    }),
   });
 
   function onSubmit(fields, { setStatus, setSubmitting }) {
     const lessonToSave = {
       ...fields,
-      contenido: [...lesson.contenido],
+      pregunta: { ...fields.pregunta, opciones: lesson.pregunta.opciones },
     };
     setStatus();
     if (isAddMode) {
@@ -85,16 +93,6 @@ function CreateEditReadingLesson() {
     } else {
       updateLesson(id, lessonToSave, setSubmitting);
     }
-  }
-
-  function onAddSpace() {
-    setLesson({
-      ...lesson,
-      contenido: [
-        ...lesson.contenido,
-        { clave: 'ESPACIO', valor: 'Salto de línea', _id: uuidv4() },
-      ],
-    });
   }
 
   async function createLesson(fields, setSubmitting) {
@@ -123,8 +121,9 @@ function CreateEditReadingLesson() {
     navigate(`/admin/course/module/${module}`);
   }
 
-  function onResources() {
-    setShowResourcesModal(true);
+  function onNewOption() {
+    setItemEdit(null);
+    setShowNewOptionModal(true);
   }
 
   if (isLoading) {
@@ -144,11 +143,11 @@ function CreateEditReadingLesson() {
         <div className='text-2xl ml-4 flex items-center'>
           <span
             className='iconify big-icon'
-            data-icon={LessonTypeIcon.code.icon}
+            data-icon={LessonTypeIcon.quiz.icon}
           />
           <span className='ml-4'>
             {' '}
-            {isAddMode ? 'Nueva' : 'Editar'} lección tipo código
+            {isAddMode ? 'Nueva' : 'Editar'} lección tipo quiz
           </span>
         </div>
       </div>
@@ -191,21 +190,29 @@ function CreateEditReadingLesson() {
                 />
               </div>
             </div>
+            <div className='w-full mt-10'>
+              <LessonInput
+                text='Enunciado'
+                name='pregunta.enunciado'
+                type='text'
+                placeholder='Escribe el enunciado de la pregunta'
+                errors={errors}
+                touched={touched}
+              />
+            </div>
             <div className='flex justify-end mt-10 w-full'>
               <button
                 type='button'
                 className='btn btn-blue hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
-                onClick={onResources}
+                onClick={onNewOption}
               >
-                <span> Recursos</span>
+                <span
+                  className='iconify text-2xl mx-1'
+                  data-icon='carbon:add-alt'
+                />
+                <span> Añadir opción</span>
               </button>
-              <ButtonPopperLesson
-                onAddOther={() => {
-                  setShowNewItemModal(true);
-                  setItemEdit(null);
-                }}
-                onAddSpace={() => onAddSpace()}
-              />
+
               <button
                 type='submit'
                 className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
@@ -218,18 +225,16 @@ function CreateEditReadingLesson() {
               <h1 className='w-full text-center text-2xl fotn-bold'>
                 Contenido de la lección
               </h1>
-              {lesson.contenido.length > 0 ? (
-                lesson.contenido
-                  .sort((a, b) => a.orden - b.orden)
-                  .map((item, index) => (
-                    <ItemContent
-                      item={item}
-                      key={item.clave + item.valor + index}
-                      setItemEdit={setItemEdit}
-                      setShowEditItem={setShowNewItemModal}
-                      handleDelete={deleteOption}
-                    />
-                  ))
+              {lesson.pregunta.opciones.length > 0 ? (
+                lesson.pregunta.opciones.map((opcion, index) => (
+                  <ItemOption
+                    option={opcion}
+                    key={opcion.opcion + index}
+                    setItemEdit={setItemEdit}
+                    setShowEditItem={setShowNewOptionModal}
+                    handleDelete={deleteOption}
+                  />
+                ))
               ) : (
                 <p className='w-full text-center text-slate-400 mt-4'>
                   **Aún no se han creado opciones para el enunciado**
@@ -239,20 +244,15 @@ function CreateEditReadingLesson() {
           </Form>
         )}
       </Formik>
-      <ResourcesModal
-        showModal={showResourcesModal}
-        setShowModal={setShowResourcesModal}
-        module={module}
-      />
-      <AddEditItemContent
+      <AddEditOption
         item={itemEdit}
-        showModal={showNewItemModal}
-        setShowModal={setShowNewItemModal}
-        setOpciones={setContenido}
-        editOption={editItem}
+        showModal={showNewOptionModal}
+        setShowModal={setShowNewOptionModal}
+        setOpciones={setOpcion}
+        editOption={editOption}
       />
     </div>
   );
 }
 
-export { CreateEditReadingLesson };
+export { CreateEditQuizLesson };

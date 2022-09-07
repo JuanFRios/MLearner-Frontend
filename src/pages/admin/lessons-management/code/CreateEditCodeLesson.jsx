@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { getLessonById, saveLesson, editLesson } from 'actions/lessons';
 import { LessonTypeIcon } from 'constants/Lesson';
-import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import ResourcesModal from 'pages/admin/dashboard/module-content/ResourcesModal';
 import InputLessonCode from 'components/utils/InputLessonCode';
 import LessonInput from 'components/utils/LessonInput';
 import { toast } from 'react-toastify';

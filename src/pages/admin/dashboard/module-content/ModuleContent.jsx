@@ -1,9 +1,9 @@
 import { TablePagination } from '@mui/material';
 import { getLessonsByModule } from 'actions/modules';
-import ItemAdminLesson from 'components/admin/modules/ItemAdminLesson';
-import MaxScoreModal from 'components/admin/modules/MaxScoreModal';
-import NewResourceModal from 'components/admin/modules/NewResourceModal';
-import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import ItemAdminLesson from 'pages/admin/dashboard/module-content/ItemAdminLesson';
+import MaxScoreModal from 'pages/admin/dashboard/module-content/MaxScoreModal';
+import NewResourceModal from 'pages/admin/dashboard/module-content/NewResourceModal';
+import ResourcesModal from 'pages/admin/dashboard/module-content/ResourcesModal';
 import ButtonPopper from 'components/utils/ButtonPopper';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';

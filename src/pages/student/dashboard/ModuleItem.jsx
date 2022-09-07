@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { getLessonsByModule } from 'actions/lessons';
 import { getContentModule, resetModule } from 'actions/modules';
-import { LessonsModal } from 'pages/LessonsModal';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ModulesStatus } from 'constants/Modules';
+import { LessonsModal } from 'pages/student/dashboard/lessons-list-modal/LessonsModal';
 
-export const Content = ({
+export const ModuleItem = ({
   nombre,
   idModule,
   puntajeObtenido,

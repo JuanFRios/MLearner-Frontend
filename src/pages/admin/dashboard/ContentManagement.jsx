@@ -1,6 +1,6 @@
 import { getModules } from 'actions/modules';
-import ItemModule from 'components/admin/modules/ItemModule';
-import ModalNewModule from 'components/admin/modules/ModalNewModule';
+import ItemModule from 'pages/admin/dashboard/ItemModule';
+import ModalNewModule from 'pages/admin/dashboard/ModalNewModule';
 import LoadingHomeAdmin from 'components/loading/admin/LoadingHomeAdmin';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';

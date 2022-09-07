@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { Content } from 'components/Content';
-import { ContinueLesson } from 'components/ContinueLesson';
+import { ContinueLesson } from 'pages/student/dashboard/ContinueLesson';
 import InformationProgress from 'components/InformationProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContentModule } from 'actions/modules';
 import React, { useEffect, useState } from 'react';
 import LoadingHome from 'components/loading/LoadingHome';
+import { ModuleItem } from 'pages/student/dashboard/ModuleItem';
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +21,7 @@ const Dashboard = () => {
       setReady(true);
       setModulesItems(
         modules.data.contenidoCurso.map((module) => (
-          <Content
+          <ModuleItem
             key={module.modulo._id}
             nombre={module.modulo.nombre}
             idModule={module.modulo._id}

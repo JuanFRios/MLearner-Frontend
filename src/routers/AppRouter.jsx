@@ -4,18 +4,18 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Login from 'pages/Login';
 import PublicLayout from 'layouts/PublicLayout';
 import PrivateLayout from 'layouts/PrivateLayout';
-import Dashboard from 'pages/Dashboard';
-import Lesson from 'pages/Lesson';
 import LessonLayout from 'layouts/LessonLayout';
-import About from 'pages/about';
 import Statistics from 'pages/statistics';
-import ContentManagement from 'pages/admin/ContentManagement';
+import ContentManagement from 'pages/admin/dashboard/ContentManagement';
 import AdminStatistics from 'pages/admin/AdminStatistics';
-import ModuleContent from 'pages/admin/ModuleContent';
+import ModuleContent from 'pages/admin/dashboard/module-content/ModuleContent';
 import LessonPreview from 'pages/admin/LessonPreview';
-import { CreateEditQuizLesson } from 'pages/admin/CreateEditQuizLesson';
-import { CreateEditReadingLesson } from 'pages/admin/CreateEditReadingLesson';
-import { CreateEditCodeLesson } from 'pages/admin/CreateEditCodeLesson';
+import { CreateEditQuizLesson } from 'pages/admin/lessons-management/quiz/CreateEditQuizLesson';
+import { CreateEditReadingLesson } from 'pages/admin/lessons-management/reading/CreateEditReadingLesson';
+import { CreateEditCodeLesson } from 'pages/admin/lessons-management/code/CreateEditCodeLesson';
+import Dashboard from 'pages/student/dashboard/Dashboard';
+import About from 'pages/student/about/about';
+import Lesson from 'pages/student/lesson/Lesson';
 
 export const AppRouter = () => (
   <BrowserRouter>
