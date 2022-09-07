@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-undef */
 import { Field } from 'formik';
 import React from 'react';
 
@@ -9,23 +11,40 @@ const LessonInput = ({
   errors,
   touched,
   select,
+  options,
+  textarea,
 }) => (
   <>
     <label htmlFor={name} className='flex flex-col w-full my-2'>
       <span className='text-2xl'>{text}</span>
       {!select ? (
-        <Field
-          id={name}
-          name={name}
-          placeholder={placeholder}
-          type={type}
-          autoComplete='off'
-          className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
-        />
+        textarea ? (
+          <Field
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            as='textarea'
+            rows={5}
+            autoComplete='off'
+            className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
+          />
+        ) : (
+          <Field
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            autoComplete='off'
+            className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
+          />
+        )
       ) : (
         <Field as='select' name={name} id={name}>
-          <option value={false}>No</option>
-          <option value>Si</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
+          ))}
         </Field>
       )}
     </label>

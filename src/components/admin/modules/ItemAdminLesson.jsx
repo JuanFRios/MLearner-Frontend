@@ -23,7 +23,7 @@ const ItemAdminLesson = ({ lesson }) => {
       break;
     case LessonTypeIcon.code.type:
       icon = LessonTypeIcon.code.icon;
-      route = `/admin/course/module/${module}/code/e/${lesson.lid}`;
+      route = `/admin/course/module/${module}/code/${lesson.lid}`;
       break;
     case LessonTypeIcon.quiz.type:
       icon = LessonTypeIcon.quiz.icon;

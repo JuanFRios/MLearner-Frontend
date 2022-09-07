@@ -15,7 +15,7 @@ import {
   codeLessonPutInitialvalues,
 } from 'utils/lessons';
 
-function AddEdit() {
+function CreateEditCodeLesson() {
   const { id, module } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -202,4 +202,4 @@ function AddEdit() {
   );
 }
 
-export { AddEdit };
+export { CreateEditCodeLesson };

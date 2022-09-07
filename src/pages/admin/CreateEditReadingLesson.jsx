@@ -12,12 +12,12 @@ import LessonInput from 'components/utils/LessonInput';
 import { toast } from 'react-toastify';
 import ButtonPopperLesson from 'components/utils/ButtonPopperLesson';
 import { v4 as uuidv4 } from 'uuid';
-import AddItem from 'components/admin/lessons/reading/AddItem';
 import ItemContent from 'components/admin/lessons/reading/ItemContent';
 import {
   readingLessonInitialValues,
   readingLessonPutInitialValues,
 } from 'utils/lessons';
+import AddEditItemContent from 'components/admin/lessons/reading/AddEditItemContent';
 
 function CreateEditReadingLesson() {
   const { id, module } = useParams();
@@ -27,12 +27,33 @@ function CreateEditReadingLesson() {
   const [showResourcesModal, setShowResourcesModal] = useState(false);
   const [showNewItemModal, setShowNewItemModal] = useState(false);
   const [lesson, setLesson] = useState(readingLessonInitialValues(module));
+  const [itemEdit, setItemEdit] = useState(null);
   const isAddMode = !id;
 
   function setContenido(item) {
     setLesson({
       ...lesson,
       contenido: [...lesson.contenido, item],
+    });
+  }
+
+  function editItem(item) {
+    const newItems = lesson.contenido.map((i) => {
+      if (i._id === item._id) {
+        return item;
+      }
+      return i;
+    });
+    setLesson({
+      ...lesson,
+      contenido: [...newItems],
+    });
+  }
+
+  function deleteOption(_id) {
+    setLesson({
+      ...lesson,
+      contenido: lesson.contenido.filter((i) => i._id !== _id),
     });
   }
 
@@ -179,7 +200,10 @@ function CreateEditReadingLesson() {
                 <span> Recursos</span>
               </button>
               <ButtonPopperLesson
-                onAddOther={() => setShowNewItemModal(true)}
+                onAddOther={() => {
+                  setShowNewItemModal(true);
+                  setItemEdit(null);
+                }}
                 onAddSpace={() => onAddSpace()}
               />
               <button
@@ -201,7 +225,9 @@ function CreateEditReadingLesson() {
                     <ItemContent
                       item={item}
                       key={item.clave + item.valor + index}
-                      setContenido={setContenido}
+                      setItemEdit={setItemEdit}
+                      setShowEditItem={setShowNewItemModal}
+                      handleDelete={deleteOption}
                     />
                   ))
               ) : (
@@ -218,11 +244,12 @@ function CreateEditReadingLesson() {
         setShowModal={setShowResourcesModal}
         module={module}
       />
-      <AddItem
+      <AddEditItemContent
+        item={itemEdit}
         showModal={showNewItemModal}
         setShowModal={setShowNewItemModal}
-        setContenido={setContenido}
-        module={module}
+        setOpciones={setContenido}
+        editOption={editItem}
       />
     </div>
   );

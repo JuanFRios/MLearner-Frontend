@@ -12,13 +12,10 @@ import Statistics from 'pages/statistics';
 import ContentManagement from 'pages/admin/ContentManagement';
 import AdminStatistics from 'pages/admin/AdminStatistics';
 import ModuleContent from 'pages/admin/ModuleContent';
-import CreateReadingLesson from 'pages/admin/CreateReadingLesson';
-import CreateQuizLesson from 'pages/admin/CreateQuizLesson';
-import CreateCodeLesson from 'pages/admin/CreateCodeLesson';
 import LessonPreview from 'pages/admin/LessonPreview';
-import { AddEdit } from 'pages/admin/CreateEditCodeLesson';
 import { CreateEditQuizLesson } from 'pages/admin/CreateEditQuizLesson';
 import { CreateEditReadingLesson } from 'pages/admin/CreateEditReadingLesson';
+import { CreateEditCodeLesson } from 'pages/admin/CreateEditCodeLesson';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -53,19 +50,11 @@ export const AppRouter = () => (
         />
         <Route
           path='/admin/course/module/:module/code'
-          element={<CreateCodeLesson />}
+          element={<CreateEditCodeLesson />}
         />
         <Route
           path='/admin/course/module/:module/code/:id'
-          element={<CreateCodeLesson />}
-        />
-        <Route
-          path='/admin/course/module/:module/code/e/:id'
-          element={<AddEdit />}
-        />
-        <Route
-          path='/admin/course/module/:module/code/e'
-          element={<AddEdit />}
+          element={<CreateEditCodeLesson />}
         />
         <Route path='/admin/statistics' element={<AdminStatistics />} />
       </Route>

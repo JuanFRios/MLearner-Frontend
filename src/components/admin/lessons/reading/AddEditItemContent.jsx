@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 
-const AddEditOption = ({
+const AddEditItemContent = ({
   item,
   showModal,
   setShowModal,
@@ -19,22 +19,22 @@ const AddEditOption = ({
   editOption,
 }) => {
   const isAddMode = !item;
-  const [option, setOption] = useState({ opcion: '', esCorrecta: false });
+  const [option, setOption] = useState({ valor: '', clave: '' });
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
     if (!isAddMode) {
-      setOption({ opcion: item.opcion, esCorrecta: item.esCorrecta });
+      setOption({ valor: item.valor, clave: item.clave });
       setIsLoading(false);
     } else {
-      setOption({ opcion: '', esCorrecta: false });
+      setOption({ valor: '', clave: '' });
     }
     setIsLoading(false);
   }, [item]);
 
   const validationSchema = Yup.object().shape({
-    opcion: Yup.string().required('La opcion es requerida'),
-    esCorrecta: Yup.boolean().required('Es correcta es requerido'),
+    valor: Yup.string().required('La opcion es requerida'),
+    clave: Yup.string().required('Tipo es requerido'),
   });
 
   function onClick() {
@@ -53,8 +53,8 @@ const AddEditOption = ({
 
   function createOption(fields) {
     setOpciones({
-      opcion: fields.opcion,
-      esCorrecta: fields.esCorrecta,
+      clave: fields.clave,
+      valor: fields.valor,
       _id: uuidv4(),
     });
   }
@@ -83,29 +83,39 @@ const AddEditOption = ({
               <ModalHeader toggler={() => onClick()}>
                 <span className='ml-4'>
                   {' '}
-                  {isAddMode ? 'Nueva' : 'Editar'} opción
+                  {isAddMode ? 'Nuevo' : 'Editar'} item
                 </span>
               </ModalHeader>
               <ModalBody>
                 <div className='w-128'>
                   <LessonInput
-                    name='opcion'
-                    type='text'
+                    name='clave'
+                    select
+                    options={[
+                      { value: null, text: '-' },
+                      { value: 'TITULO', text: 'Titulo' },
+                      { value: 'SUBTITULO', text: 'Subtitulo' },
+                      { value: 'TEXTO', text: 'Texto' },
+                      { value: 'IMAGEN', text: 'Imagen' },
+                      { value: 'LISTA', text: 'Lista' },
+                      { value: 'LINK', text: 'Link' },
+                      {
+                        value: 'TEXTO-CODIGO',
+                        text: 'Texto en formato código',
+                      },
+                    ]}
                     placeholder='Ingrese una descripción'
-                    text='Opción'
+                    text='Es correcta'
                     errors={errors}
                     touched={touched}
                   />
                 </div>
                 <LessonInput
-                  name='esCorrecta'
-                  select
-                  options={[
-                    { value: true, text: 'Si' },
-                    { value: false, text: 'No' },
-                  ]}
+                  name='valor'
+                  type='text'
+                  textarea
                   placeholder='Ingrese una descripción'
-                  text='Es correcta'
+                  text='Opción'
                   errors={errors}
                   touched={touched}
                 />
@@ -131,4 +141,4 @@ const AddEditOption = ({
   );
 };
 
-export default AddEditOption;
+export default AddEditItemContent;
