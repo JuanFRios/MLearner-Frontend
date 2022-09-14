@@ -103,6 +103,25 @@ export const saveModule = (module) => async (dispatch) => {
   return false;
 };
 
+export const editModule = (module, id) => async (dispatch) => {
+  dispatch(startLoading());
+  const bodyFormData = new FormData();
+  bodyFormData.append('nombre', module.nombre);
+  bodyFormData.append('carpetaDestinoRecurso', module.carpetaDestinoRecurso);
+  if (module.imagen) {
+    bodyFormData.append('imagen', module.imagen);
+  }
+  try {
+    const moduleUpdated = await mlearnerApi.put(`modulos/${id}`, bodyFormData);
+    dispatch(finishLoading);
+    return moduleUpdated;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+  }
+  return false;
+};
+
 export const saveResourceModule = (idModule, resource) => async (dispatch) => {
   dispatch(startLoading());
   const bodyFormData = new FormData();

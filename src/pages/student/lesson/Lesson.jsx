@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-no-bind */
 import {
   getLessonContent,
   validateQuizLesson,
   validateCodeLesson,
+  removeActiveLesson,
+  resetLessonStatus,
 } from 'actions/lessons';
 import LessonContent from 'components/lesson/LessonContent';
 import { ConfirmDialog } from 'components/utils/ConfirmDialog';
@@ -59,6 +62,13 @@ const Lesson = () => {
       }
       navigate('/home');
     }
+  }
+
+  function onConfirmClose() {
+    setShowModal(false);
+    dispatch(removeActiveLesson());
+    dispatch(resetLessonStatus());
+    navigate('/home');
   }
 
   async function onValidate(event) {
@@ -148,7 +158,13 @@ const Lesson = () => {
                 </button>
               )}
           </div>
-          <ConfirmDialog showModal={showModal} setShowModal={setShowModal} />
+          <ConfirmDialog
+            showModal={showModal}
+            setShowModal={setShowModal}
+            title='Confirmar salida'
+            text='¿Está seguro que desea abandonar la lección?'
+            onConfirm={onConfirmClose}
+          />
           <ResultDialog
             showModal={showModalErrorResult}
             onNoClick={() => onNoClickError()}

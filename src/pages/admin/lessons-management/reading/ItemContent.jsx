@@ -1,13 +1,19 @@
-import React from 'react';
+import { ConfirmDialog } from 'components/utils/ConfirmDialog';
+import React, { useState } from 'react';
 
 const ItemContent = ({ item, setItemEdit, setShowEditItem, handleDelete }) => {
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   function onEdit() {
     setShowEditItem(true);
     setItemEdit(item);
   }
   function onDelete() {
-    handleDelete(item._id);
+    setShowConfirmDialog(true);
   }
+
+  const handleConfirmDelete = () => {
+    handleDelete(item._id);
+  };
 
   return (
     <div className='w-full flex min-h-16 h-fit my-2'>
@@ -39,6 +45,13 @@ const ItemContent = ({ item, setItemEdit, setShowEditItem, handleDelete }) => {
           <span className='iconify text-3xl' data-icon='bxs:trash' />
         </button>
       </div>
+      <ConfirmDialog
+        showModal={showConfirmDialog}
+        setShowModal={setShowConfirmDialog}
+        title='Confirmar borrado'
+        text='¿Está seguro que desea eliminar el item?'
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };

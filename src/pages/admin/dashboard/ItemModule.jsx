@@ -2,16 +2,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ItemModule = ({ module }) => {
+const ItemModule = ({ module, setSelectedModule, setShowEditModal }) => {
   const navigate = useNavigate();
   let anchoModulo;
   let medidatexto;
   // let medidaIcono;
 
   function onEdit() {
-    console.log('');
-  }
-  function onDelete() {
+    setSelectedModule(module);
+    setShowEditModal(true);
     console.log('');
   }
   function onConfig() {
@@ -63,14 +62,6 @@ const ItemModule = ({ module }) => {
                     className='iconify text-3xl'
                     data-icon='eva:edit-outline'
                   />
-                </button>
-                <button
-                  type='button'
-                  onClick={onDelete}
-                  tittle='Eliminar'
-                  className='focus:outline-none hover:scale-110 px-1'
-                >
-                  <span className='iconify text-3xl' data-icon='bxs:trash' />
                 </button>
               </div>
             </div>

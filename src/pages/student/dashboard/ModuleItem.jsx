@@ -14,12 +14,14 @@ export const ModuleItem = ({
   puntajetotal,
   tamaño,
   activo,
-  orden,
+  imagen,
 }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   let icono;
   let color;
+  let background;
+  let className = '';
   let evento;
   let anchoModulo;
   let medidatexto;
@@ -55,22 +57,29 @@ export const ModuleItem = ({
   switch (activo) {
     case ModulesStatus.passed:
       icono = 'iconoir:gym';
-      color = `good-${orden}`;
+      background = `linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(${imagen})`;
+      color = '';
+      className = 'good';
       evento = () => onReforce();
       break;
     case ModulesStatus.fail:
       icono = 'ooui:reload';
-      color = `bad-${orden}`;
+      className = 'bad';
+      background = `linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(${imagen})`;
+      color = '';
       evento = () => onReset();
       break;
     case ModulesStatus.inProgress:
       icono = 'fluent:play-12-filled';
-      color = `enable-${orden} enable`;
+      background = `url(${imagen})`;
+      color = '';
+      className = 'enable';
       evento = () => onPlay();
       break;
     case ModulesStatus.blocked:
       icono = 'bx:bxs-lock';
-      color = `locked-${orden}`;
+      background = `linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(${imagen})`;
+      color = 'rgba(249, 250, 251, 0.54)';
       break;
     default:
       icono = '';
@@ -81,7 +90,16 @@ export const ModuleItem = ({
   return (
     <div className={anchoModulo}>
       <div className='flex flex-col items-center my-2 text-white w-full'>
-        <div className={`${tamaño} ${color} flex py-4`}>
+        <div
+          className={`${tamaño} ${className} flex py-4`}
+          style={{
+            background,
+            color,
+            backgroundSize: 'center',
+            backgroundPosition: 'center',
+            objectFit: 'cover',
+          }}
+        >
           <div className='flex flex-col'>
             <div
               className='flex'

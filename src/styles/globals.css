@@ -3,41 +3,42 @@
 @tailwind utilities;
 
 .bg {
-    @apply h-full w-full bg-cover;
-    display: block;
-    margin: 0 auto;
-    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643326469/bgcode_nlgyyl.png);
-    background-size: cover;
-    background-position: right;
-    background-repeat: no-repeat;
+  @apply h-full w-full bg-cover;
+  display: block;
+  margin: 0 auto;
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643326469/bgcode_nlgyyl.png);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 .bg-about {
-    @apply max-h-full bg-cover;
-    display: block;
-    margin: 0 auto;
-    background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1648181739/Line_12_dj1pde.png);
-    background-size: cover;
-    background-position: right;
-    background-repeat: no-repeat;
+  @apply max-h-full bg-cover;
+  display: block;
+  margin: 0 auto;
+  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1648181739/Line_12_dj1pde.png);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 .transparent {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .svg {
-  visibility: hidden; position: absolute;
+  visibility: hidden;
+  position: absolute;
 }
 
 .btn {
-    @apply font-bold py-2 px-4 rounded-xl;
-  }
-  .btn-blue {
-    @apply bg-light_blue_2 text-white;
-  }
-  .btn-blue:hover {
-    @apply bg-light_blue_1;
+  @apply font-bold py-2 px-4 rounded-xl;
+}
+.btn-blue {
+  @apply bg-light_blue_2 text-white;
+}
+.btn-blue:hover {
+  @apply bg-light_blue_1;
 }
 
 .circle {
@@ -45,27 +46,27 @@
   height: 8rem;
   border-radius: 50%;
   display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   font-size: 7rem;
   text-align: center;
-  background: #FBB631;
+  background: #fbb631;
 }
 
-.backgroudSB{
-  background: linear-gradient(180deg, #03314B 0%, #05192D 100%);
+.backgroudSB {
+  background: linear-gradient(180deg, #03314b 0%, #05192d 100%);
 }
 
 .selected {
-  background: #2CE080;
+  background: #2ce080;
 }
 
-.shadowH{
+.shadowH {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.info{
+.info {
   width: auto;
   height: auto;
   /* min-height: 30%;
@@ -76,48 +77,47 @@
   border-radius: 100px;
 }
 
-.continue-1{
+.continue {
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;
   border-radius: 60px;
-  background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324361/ContinueMod_0_rfchfy.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.continue-3{
+.continue-3 {
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;
   border-radius: 60px;
   background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324557/ContinueMod_3_mhrjt4.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.continue-0{
+.continue-0 {
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;
   border-radius: 60px;
   background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646360392/ContinueMod_1_oc0n2e.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.continue-2{
+.continue-2 {
   @apply h-64 py-1;
   box-sizing: border-box;
   width: 800px;
   border-radius: 60px;
   background-image: url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646324486/ContinueMod_2_btwfhq.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .big-icon {
@@ -132,185 +132,95 @@
   font-size: 30px;
 }
 
-.containerContent{
+.containerContent {
   width: 100%;
   align-items: center;
-  @apply px-24
+  @apply px-24;
 }
 
-.moduleLg{
+.moduleLg {
   @apply h-48;
   box-sizing: border-box;
   width: 56rem;
   border-radius: 16px;
 }
 
-.moduleSm{
+.moduleSm {
   @apply h-48;
   box-sizing: border-box;
   width: 100%;
   border-radius: 16px;
 }
 
-.enable p
-{
-  background:#03314B;
-  left:0px;
+.enable p {
+  background: #03314b;
+  left: 0px;
 }
-.enable .puntaje{
-  background: linear-gradient(90deg, #03314B 0%, rgba(3, 49, 75, 0.82) 57.12%, rgba(3, 49, 75, 0.69) 79.15%, rgba(5, 25, 45, 0.31) 104.09%);
+.enable .puntaje {
+  background: linear-gradient(
+    90deg,
+    #03314b 0%,
+    rgba(3, 49, 75, 0.82) 57.12%,
+    rgba(3, 49, 75, 0.69) 79.15%,
+    rgba(5, 25, 45, 0.31) 104.09%
+  );
 }
 
-.enable-0{
-  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-.good-0{
-  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
+.good {
   filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
 }
 
-.bad-0{
-  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
+.bad {
   box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
 }
 
-.locked-0{
-  color: rgba(249, 250, 251, 0.54);
-  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1643821946/img1_1_lkjhw9.png);
-  background-position: center;
-  object-fit: cover;
+input[type='radio'] + label:hover,
+input[type='radio'] + label:hover label {
+  transform: scale(1.01);
 }
 
-.enable-1{
-  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
-  background-position: center;
-  object-fit: cover;
+input[type='radio']:checked + label span {
+  background-color: #3490dc;
+  box-shadow: 0px 0px 0px 2px white inset;
 }
 
-.good-1{
-  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
-  background-position: center;
-  object-fit: cover;
-  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
-}
-
-.bad-1{
-  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
-  background-position: center;
-  object-fit: cover;
-  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
-}
-
-.locked-1{
-  color: rgba(249, 250, 251, 0.54);
-  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646320991/Ing_caract_1_e5ibej.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-.enable-3{
-  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-.good-3{
-  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
-  background-position: center;
-  object-fit: cover;
-  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
-}
-
-.bad-3{
-  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
-  background-position: center;
-  object-fit: cover;
-  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
-}
-
-.locked-3{
-  color: rgba(249, 250, 251, 0.54);
-  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646323976/Clustering_1_lvdnbk.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-.enable-2{
-  background: no-repeat url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-.good-2{
-  background: no-repeat linear-gradient(180deg, rgba(146, 227, 169, 0.51) 0%, rgba(20, 82, 38, 0.88) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
-  background-position: center;
-  object-fit: cover;
-  filter: drop-shadow(0px 8px 20px rgba(18, 17, 39, 0.1));
-}
-
-.bad-2{
-  background: no-repeat linear-gradient(180deg, rgba(243, 82, 82, 0.61) 0%, rgba(153, 27, 27, 0.86) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
-  background-position: center;
-  object-fit: cover;
-  box-shadow: 0px 8px 20px rgba(18, 17, 39, 0.1);
-}
-
-.locked-2{
-  color: rgba(249, 250, 251, 0.54);
-  background: no-repeat linear-gradient(180deg, rgba(131, 136, 143, 0.59) 0%, rgba(13, 9, 9, 0.84) 100%), url(https://res.cloudinary.com/proyecto-integrador-udea-2022/image/upload/v1646322777/Reduccion_lclc2l.png);
-  background-position: center;
-  object-fit: cover;
-}
-
-input[type="radio"] + label:hover,
-input[type="radio"] + label:hover label{
-transform: scale(1.01);
-} 
-
-input[type="radio"]:checked + label span {
-background-color: #3490DC; 
-box-shadow: 0px 0px 0px 2px white inset;
-}
-
-input[type="radio"]:checked + label{
- color: #3490DC;
+input[type='radio']:checked + label {
+  color: #3490dc;
 }
 .locked .iconify {
-  @apply
-  text-white
+  @apply text-white;
 }
 
 .front {
   z-index: 100;
 }
 
-.private-container{
-  @apply ml-40 pl-64 pt-6 w-190
+.private-container {
+  @apply ml-40 pl-64 pt-6 w-190;
 }
 
 .active-menu-item {
-  @apply border-green-500 text-green-500 flex w-full justify-between border-b cursor-pointer items-center mb-6
+  @apply border-green-500 text-green-500 flex w-full justify-between border-b cursor-pointer items-center mb-6;
 }
 
 .inactive-menu-item {
-  @apply border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500 flex w-full justify-between border-b cursor-pointer items-center mb-6
+  @apply border-gray-200 text-gray-200 hover:border-green-500  hover:text-green-500 flex w-full justify-between border-b cursor-pointer items-center mb-6;
 }
 
-.enable .module-actions{
-  background: linear-gradient(270deg, #03314B 0%, rgba(3, 49, 75, 0.82) 57.12%, rgba(3, 49, 75, 0.69) 79.15%, rgba(5, 25, 45, 0.31) 104.09%);
+.enable .module-actions {
+  background: linear-gradient(
+    270deg,
+    #03314b 0%,
+    rgba(3, 49, 75, 0.82) 57.12%,
+    rgba(3, 49, 75, 0.69) 79.15%,
+    rgba(5, 25, 45, 0.31) 104.09%
+  );
 }
 
 .input-lesson {
-  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent
+  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent;
 }
 
 .textarea-lesson {
-  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent
+  @apply appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none bg-transparent;
 }

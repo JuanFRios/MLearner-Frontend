@@ -11,7 +11,7 @@ export const ContinueLesson = ({ idLesson }) => {
     await dispatch(getLessonContent(idLesson));
   }, []);
 
-  const className = `continue-${activeLesson?.leccion.modulo.orden} flex`;
+  const className = `flex h-64 py-1`;
 
   function onContinue(event) {
     event.preventDefault();
@@ -20,7 +20,18 @@ export const ContinueLesson = ({ idLesson }) => {
 
   return (
     <div className='flex flex-col justify-around items-center mt-8'>
-      <div className={className}>
+      <div
+        className={className}
+        style={{
+          background: `url(${activeLesson?.leccion.modulo.urlImagen})`,
+          borderRadius: '60px',
+          boxSizing: 'border-box',
+          width: '800px',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         <div className='flex flex-col self-baseline mt-8 pt-5 ml-3 pl-2'>
           <div className='w-48'>
             <p className='text-3xl font-bold'>

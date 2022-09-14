@@ -59,7 +59,11 @@ const AddEditOption = ({
     });
   }
   function updateOption(fields) {
-    editOption({ ...fields, _id: item._id });
+    editOption({
+      ...fields,
+      esCorrecta: fields.esCorrecta === 'true',
+      _id: item._id,
+    });
   }
 
   if (isLoading) {
