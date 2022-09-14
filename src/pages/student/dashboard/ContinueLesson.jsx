@@ -11,7 +11,7 @@ export const ContinueLesson = ({ idLesson }) => {
     await dispatch(getLessonContent(idLesson));
   }, []);
 
-  const className = `flex h-64 py-1`;
+  const className = `flex h-64 py-1 shadow-lg `;
 
   function onContinue(event) {
     event.preventDefault();
@@ -23,13 +23,13 @@ export const ContinueLesson = ({ idLesson }) => {
       <div
         className={className}
         style={{
-          background: `url(${activeLesson?.leccion.modulo.urlImagen})`,
+          background: `linear-gradient(67deg, rgba(255,255,255,0.9710477941176471) 39%, rgba(255,255,255,0) 40%), url(${activeLesson?.leccion.modulo.urlImagen})`,
           borderRadius: '60px',
           boxSizing: 'border-box',
           width: '800px',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: 'repeat',
         }}
       >
         <div className='flex flex-col self-baseline mt-8 pt-5 ml-3 pl-2'>
