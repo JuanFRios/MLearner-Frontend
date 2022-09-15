@@ -3,10 +3,10 @@ import ModalHeader from '@material-tailwind/react/ModalHeader';
 import ModalBody from '@material-tailwind/react/ModalBody';
 import ModalFooter from '@material-tailwind/react/ModalFooter';
 import Button from '@material-tailwind/react/Button';
-import ItemLesson from 'components/dashboard/ItemLesson';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingLessons from 'components/loading/LoadingLessons';
 import { removeActiveLessons } from 'actions/lessons';
+import ItemLesson from 'pages/student/dashboard/lessons-list-modal/ItemLesson';
 
 export const LessonsModal = ({ module, showModal, setShowModal }) => {
   const { activeLessons } = useSelector((state) => state.lessons);

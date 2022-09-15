@@ -1,9 +1,12 @@
-import MaxScoreModal from 'components/admin/modules/MaxScoreModal';
-import NewResourceModal from 'components/admin/modules/NewResourceModal';
-import ResourcesModal from 'components/admin/modules/ResourcesModal';
-import TableModuleItems from 'components/admin/modules/TableModuleItems';
+import { TablePagination } from '@mui/material';
+import { getLessonsByModule } from 'actions/modules';
+import ItemAdminLesson from 'pages/admin/dashboard/module-content/ItemAdminLesson';
+import MaxScoreModal from 'pages/admin/dashboard/module-content/MaxScoreModal';
+import NewResourceModal from 'pages/admin/dashboard/module-content/NewResourceModal';
+import ResourcesModal from 'pages/admin/dashboard/module-content/ResourcesModal';
 import ButtonPopper from 'components/utils/ButtonPopper';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ModuleContent = () => {
@@ -11,8 +14,28 @@ const ModuleContent = () => {
   const [showResourcesModal, setShowResourcesModal] = useState(false);
   const [showNewResourceModal, setShowNewResourceModal] = useState(false);
 
+  const [page, setPage] = React.useState(0);
+  const [countItems, setCount] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [lessonsItem, setLessonsItems] = React.useState(null);
+  const [ready, setReady] = React.useState(null);
+  const [moduleName, setModuleName] = React.useState('');
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const { module } = useParams();
+
+  React.useEffect(async () => {
+    const lessons = await dispatch(
+      getLessonsByModule(module, page, rowsPerPage)
+    );
+    setLessonsItems(
+      lessons.lecciones.map((l) => <ItemAdminLesson lesson={l} key={l.lid} />)
+    );
+    setModuleName(lessons.nombreModulo);
+    setCount(lessons.totalElements);
+    setReady(true);
+  }, [page, rowsPerPage]);
 
   function onMaxScore() {
     setShowScoreModal(true);
@@ -27,6 +50,23 @@ const ModuleContent = () => {
     navigate('/admin/course');
   }
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  if (!ready) {
+    return (
+      <div className='private-container'>
+        <h1>Cargando ... </h1>
+      </div>
+    );
+  }
+
   return (
     <div className='private-container'>
       <div className='mb-4'>
@@ -39,7 +79,7 @@ const ModuleContent = () => {
         </button>
       </div>
       <p className='text-2xl font-thin'>Contenido del módulo</p>
-      <p className='text-2xl font-bold'>Reducción de dimensionalidad</p>
+      <p className='text-2xl font-bold'>{moduleName}</p>
       <div className='flex w-full justify-end mx-4 pr-16'>
         <button
           type='button'
@@ -64,7 +104,22 @@ const ModuleContent = () => {
         </button>
         <ButtonPopper module={module} />
       </div>
-      <TableModuleItems module={module} />
+      <div>
+        <TablePagination
+          component='div'
+          count={countItems}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage='Filas por página:'
+          labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} de ${count}`
+          }
+          className='mr-16'
+        />
+        {lessonsItem}
+      </div>
       <MaxScoreModal
         showModal={showScoreModal}
         setShowModal={setShowScoreModal}

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,39 +6,28 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { getLessonById, saveLesson, editLesson } from 'actions/lessons';
 import { LessonTypeIcon } from 'constants/Lesson';
-import ResourcesModal from 'components/admin/modules/ResourcesModal';
+import ResourcesModal from 'pages/admin/dashboard/module-content/ResourcesModal';
+import InputLessonCode from 'components/utils/InputLessonCode';
 import LessonInput from 'components/utils/LessonInput';
 import { toast } from 'react-toastify';
-import ButtonPopperLesson from 'components/utils/ButtonPopperLesson';
-import { v4 as uuidv4 } from 'uuid';
-import AddItem from 'components/admin/lessons/reading/AddItem';
-import ItemContent from 'components/admin/lessons/reading/ItemContent';
 import {
-  readingLessonInitialValues,
-  readingLessonPutInitialValues,
+  codeLessonInitialvalues,
+  codeLessonPutInitialvalues,
 } from 'utils/lessons';
 
-function CreateEditReadingLesson() {
+function CreateEditCodeLesson() {
   const { id, module } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [showResourcesModal, setShowResourcesModal] = useState(false);
-  const [showNewItemModal, setShowNewItemModal] = useState(false);
-  const [lesson, setLesson] = useState(readingLessonInitialValues(module));
+  const [lesson, setLesson] = useState(codeLessonInitialvalues(module));
   const isAddMode = !id;
-
-  function setContenido(item) {
-    setLesson({
-      ...lesson,
-      contenido: [...lesson.contenido, item],
-    });
-  }
 
   useEffect(() => {
     if (!isAddMode) {
       dispatch(getLessonById(id)).then((l) => {
-        setLesson(readingLessonPutInitialValues(l, module));
+        setLesson(codeLessonPutInitialvalues(l, module));
         setIsLoading(false);
       });
     } else {
@@ -51,29 +39,22 @@ function CreateEditReadingLesson() {
     titulo: Yup.string().required('titulo is required'),
     puntaje: Yup.number().required('puntaje is required'),
     vidasTotales: Yup.number().required('vidas is required'),
+    contenido: Yup.array()
+      .of(
+        Yup.object().shape({
+          valorSolution: Yup.string().required('valorSoluction is required'), // these constraints take precedence
+        })
+      )
+      .required('Must have friends'),
   });
 
   function onSubmit(fields, { setStatus, setSubmitting }) {
-    const lessonToSave = {
-      ...fields,
-      contenido: [...lesson.contenido],
-    };
     setStatus();
     if (isAddMode) {
-      createLesson(lessonToSave, setSubmitting);
+      createLesson(fields, setSubmitting);
     } else {
-      updateLesson(id, lessonToSave, setSubmitting);
+      updateLesson(id, fields, setSubmitting);
     }
-  }
-
-  function onAddSpace() {
-    setLesson({
-      ...lesson,
-      contenido: [
-        ...lesson.contenido,
-        { clave: 'ESPACIO', valor: 'Salto de línea', _id: uuidv4() },
-      ],
-    });
   }
 
   async function createLesson(fields, setSubmitting) {
@@ -106,11 +87,6 @@ function CreateEditReadingLesson() {
     setShowResourcesModal(true);
   }
 
-  const onPreview = (values) => {
-    localStorage.setItem('lessonPreview', JSON.stringify(values));
-    navigate(`/preview/lesson`);
-  };
-
   if (isLoading) {
     return <div className='private-container'>Cargando...</div>;
   }
@@ -141,7 +117,7 @@ function CreateEditReadingLesson() {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, errors, touched }) => (
+        {({ errors, touched }) => (
           <Form className='w-full h-full flex flex-col justify-between items-center pt-6'>
             <div className='w-full flex'>
               <div className='w-8/12 mr-8'>
@@ -183,18 +159,7 @@ function CreateEditReadingLesson() {
               >
                 <span> Recursos</span>
               </button>
-              <ButtonPopperLesson
-                onAddOther={() => setShowNewItemModal(true)}
-                onAddSpace={() => onAddSpace()}
-              />
-              <button
-                type='button'
-                className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
-                onClick={() => onPreview(values)}
-              >
-                <span className='iconify text-2xl mx-1' data-icon='ion:save' />
-                <span> Visualizar</span>
-              </button>
+
               <button
                 type='submit'
                 className='btn bg-light_green_2 text-white hover:scale-110 focus:outline-none flex justify-center items-center mx-2'
@@ -207,21 +172,23 @@ function CreateEditReadingLesson() {
               <h1 className='w-full text-center text-2xl fotn-bold'>
                 Contenido de la lección
               </h1>
-              {lesson.contenido.length > 0 ? (
-                lesson.contenido
-                  .sort((a, b) => a.orden - b.orden)
-                  .map((item, index) => (
-                    <ItemContent
-                      item={item}
-                      key={item.clave + item.valor + index}
-                      setContenido={setContenido}
-                    />
-                  ))
-              ) : (
-                <p className='w-full text-center text-slate-400 mt-4'>
-                  **Aún no se han creado opciones para el enunciado**
-                </p>
-              )}
+              <InputLessonCode
+                text='Solución'
+                name='contenido[0].valorSolution'
+              />
+              <InputLessonCode
+                text='Código precargado'
+                name='contenido[0].valorPreExerciseCode'
+              />
+              <InputLessonCode
+                text='Código de ejemplo'
+                name='contenido[0].valorSampleCode'
+              />
+              <InputLessonCode
+                text='Reglas de validación'
+                name='contenido[0].valorSCT'
+              />
+              <InputLessonCode text='Pistas' name='contenido[0].valorHint' />
             </div>
           </Form>
         )}
@@ -231,14 +198,8 @@ function CreateEditReadingLesson() {
         setShowModal={setShowResourcesModal}
         module={module}
       />
-      <AddItem
-        showModal={showNewItemModal}
-        setShowModal={setShowNewItemModal}
-        setContenido={setContenido}
-        module={module}
-      />
     </div>
   );
 }
 
-export { CreateEditReadingLesson };
+export { CreateEditCodeLesson };

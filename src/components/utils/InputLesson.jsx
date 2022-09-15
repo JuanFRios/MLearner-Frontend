@@ -1,17 +1,16 @@
+import { Field } from 'formik';
 import React from 'react';
 
-const InputLesson = ({
-  text,
-  name,
-  placeholder,
-  type,
-  required,
-  accept,
-  textarea,
-}) => (
+const InputLesson = ({ text, name, placeholder, type, required, accept }) => (
   <label htmlFor={name} className='flex flex-col w-full my-2'>
     <span className='text-2xl'>{text}</span>
-    {textarea ? (
+    {type === 'select' && (
+      <Field as='select' name={name} id={name}>
+        <option value={false}>No</option>
+        <option value>Si</option>
+      </Field>
+    )}
+    {type === 'textarea' && (
       <textarea
         name={name}
         placeholder={placeholder}
@@ -20,7 +19,8 @@ const InputLesson = ({
         autoComplete='off'
         className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
       />
-    ) : (
+    )}
+    {type !== 'textarea' && type !== 'select' && (
       <input
         name={name}
         placeholder={placeholder}

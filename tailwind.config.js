@@ -16,6 +16,9 @@ module.exports = {
         160: '70rem',
         190: '85rem',
       },
+      contrast: {
+        25: '.40',
+      },
     },
   },
   plugins: [],

@@ -36,6 +36,19 @@ export const getLessonContent = (idLesson) => async (dispatch) => {
   }
 };
 
+export const deleteLesson = (idLesson) => async (dispatch) => {
+  dispatch(startLoading());
+  try {
+    const respuestaAxios = await mlearnerApi.delete(`/lecciones/${idLesson}`);
+    dispatch(finishLoading);
+    return respuestaAxios;
+  } catch (err) {
+    toast.error(err.response.data.msg, { position: 'top-center' });
+    dispatch(finishLoading);
+    return null;
+  }
+};
+
 export const validateQuizLesson =
   (idLesson, opcionSeleccionada) => async (dispatch) => {
     try {

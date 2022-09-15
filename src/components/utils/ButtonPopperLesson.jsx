@@ -4,7 +4,7 @@ import Popper from '@mui/material/Popper';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 
-const ButtonPopperLesson = ({ onAddOther, onAddSpace }) => {
+const ButtonPopperLesson = ({ onAddOther, onAddSpace, onAddCode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
@@ -34,6 +34,10 @@ const ButtonPopperLesson = ({ onAddOther, onAddSpace }) => {
                 <button
                   type='button'
                   className='hover:scale-110 focus:outline-none'
+                  onClick={() => {
+                    onAddCode();
+                    setOpen(false);
+                  }}
                 >
                   Código
                 </button>

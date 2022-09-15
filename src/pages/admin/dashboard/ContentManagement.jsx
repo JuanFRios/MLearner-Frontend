@@ -1,21 +1,24 @@
+/* eslint-disable no-restricted-imports */
 import { getModules } from 'actions/modules';
-import ItemModule from 'components/admin/modules/ItemModule';
-import ModalNewModule from 'components/admin/modules/ModalNewModule';
+import ItemModule from 'pages/admin/dashboard/ItemModule';
+import ModalNewModule from 'pages/admin/dashboard/ModalNewModule';
 import LoadingHomeAdmin from 'components/loading/admin/LoadingHomeAdmin';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import EditCreateModuleDialog from './EditCreateModuleDialog';
 
 const ContentManagement = () => {
   function onEdit() {
     setShowNewModal(true);
   }
   const [showNewModal, setShowNewModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [moduleSelected, setModuleSelected] = useState(null);
   const dispatch = useDispatch();
   const [ready, setReady] = useState(false);
   const [modulesItems, setModulesItems] = useState([]);
   const [tamanoNuevoModulo, setTamanoNuevoModulo] = useState('');
   let modules = null;
-  console.log(ready, modules);
 
   useEffect(async () => {
     setTimeout(async () => {
@@ -23,7 +26,14 @@ const ContentManagement = () => {
       setReady(true);
       calcularTamanoNuevoModulo(modules);
       setModulesItems(
-        modules.map((m) => <ItemModule module={m} key={m.mid} />)
+        modules.map((m) => (
+          <ItemModule
+            module={m}
+            key={m.mid}
+            setSelectedModule={setModuleSelected}
+            setShowEditModal={setShowEditModal}
+          />
+        ))
       );
     }, 500);
   }, []);
@@ -73,6 +83,11 @@ const ContentManagement = () => {
             showModal={showNewModal}
             setShowModal={setShowNewModal}
             tamanoNuevoModulo={tamanoNuevoModulo}
+          />
+          <EditCreateModuleDialog
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
+            module={moduleSelected}
           />
         </div>
       )}
