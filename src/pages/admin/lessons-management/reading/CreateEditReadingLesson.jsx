@@ -146,11 +146,11 @@ function CreateEditReadingLesson() {
         <div className='text-2xl ml-4 flex items-center'>
           <span
             className='iconify big-icon'
-            data-icon={LessonTypeIcon.code.icon}
+            data-icon={LessonTypeIcon.reading.icon}
           />
           <span className='ml-4'>
             {' '}
-            {isAddMode ? 'Nueva' : 'Editar'} lección tipo código
+            {isAddMode ? 'Nueva' : 'Editar'} lección tipo lectura
           </span>
         </div>
       </div>
