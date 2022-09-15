@@ -1,21 +1,27 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { Button } from '@material-tailwind/react';
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from '@material-tailwind/react';
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
+import { editModule } from 'actions/modules';
 import LessonInput from 'components/utils/LessonInput';
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
   const isAddMode = !module;
+  const dispatch = useDispatch();
   const [option, setOption] = useState({
     nombre: '',
     imagen: null,
     carpetaDestinoRecurso: '',
+    tamanoVisualizacion: '',
   });
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -26,6 +32,7 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
         nombre: module.nombre,
         carpetaDestinoRecurso: module.carpetaDestinoRecurso,
         imagen: null,
+        tamanoVisualizacion: module.tamañoVisualizacion,
       });
       setIsLoading(false);
     } else {
@@ -33,6 +40,7 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
         nombre: '',
         imagen: null,
         carpetaDestinoRecurso: '',
+        tamanoVisualizacion: '',
       });
     }
     setIsLoading(false);
@@ -45,6 +53,7 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
 
   function onClick() {
     document.getElementById('myform').reset();
+    setOption({ ...option, imagen: null });
     setShowModal(false);
   }
   const onSubmit = (fields) => {
@@ -60,10 +69,15 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
   function createOption(fields) {
     console.log(fields);
   }
-  function updateOption(fields) {
+  const updateOption = async (fields) => {
+    const resp = await dispatch(editModule(fields, module.mid));
+    if (resp.status === 200) {
+      toast.success('Módulo actualizado correctamente');
+    }
     console.log(fields.imagen);
+    window.location.reload();
     console.log('editar', fields);
-  }
+  };
 
   if (isLoading) {
     return <div className='private-container'>Cargando...</div>;
@@ -81,19 +95,18 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, setFieldValue, resetForm }) => (
           <Form
             className='w-full h-full flex flex-col justify-between items-center pt-6'
             id='myform'
           >
-            <Modal size='lg' active={showModal} toggler={() => onClick()}>
-              <ModalHeader toggler={() => onClick()}>
-                <span className='ml-4'>
-                  {' '}
-                  {isAddMode ? 'Nueva' : 'Editar'} módulo
-                </span>
-              </ModalHeader>
-              <ModalBody>
+            <Dialog
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              fullWidth
+            >
+              <DialogTitle>Nuevo Proyecto</DialogTitle>
+              <DialogContent>
                 <div className='w-128'>
                   <LessonInput
                     name='nombre'
@@ -104,17 +117,23 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
                     touched={touched}
                   />
                 </div>
-                <div className='w-128'>
-                  <LessonInput
+                <div className='w-128 flex flex-col'>
+                  <label htmlFor='imagen' className='text-2xl'>
+                    Imagen
+                  </label>
+                  <input
+                    id='imagen'
                     name='imagen'
                     type='file'
-                    placeholder='Ingrese el nombre'
-                    text='Imagen de modulo'
-                    errors={errors}
-                    touched={touched}
+                    onChange={(event) => {
+                      setFieldValue('imagen', event.currentTarget.files[0]);
+                    }}
+                    className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
                   />
+                </div>
+                <div className='w-128'>
                   <span>
-                    <b>Imagen seleccionada:</b>{' '}
+                    <b>Imagen actual:</b>{' '}
                     <a
                       href={module.urlImagen}
                       target='_blank'
@@ -145,21 +164,24 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
                     en inglés y usando - en lugar de espacios
                   </span>
                 </div>
-              </ModalBody>
-              <ModalFooter>
+              </DialogContent>
+              <DialogActions>
                 <Button
                   type='button'
                   color='blueGray'
-                  onClick={() => onClick()}
+                  onClick={() => {
+                    onClick();
+                    resetForm();
+                  }}
                   ripple='light'
                 >
                   Cerrar
                 </Button>
-                <Button color='blue' ripple='light' type='submit'>
+                <Button color='blue' ripple='light' type='submit' form='myform'>
                   Guardar
                 </Button>
-              </ModalFooter>
-            </Modal>
+              </DialogActions>
+            </Dialog>
           </Form>
         )}
       </Formik>

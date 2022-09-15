@@ -19,6 +19,7 @@ const ModalNewModule = ({ showModal, setShowModal, tamanoNuevoModulo }) => {
   }
 
   const onSubmit = async () => {
+    console.log(formData.imagen);
     if (formData.nombre && formData.imagen && formData.carpetaDestinoRecurso) {
       const newModule = { ...formData, tamanoVisualizacion: tamanoNuevoModulo };
       const module = await dispatch(saveModule(newModule));
@@ -52,6 +53,7 @@ const ModalNewModule = ({ showModal, setShowModal, tamanoNuevoModulo }) => {
             <InputLesson
               text='Nombre'
               name='nombre'
+              value='holaaa'
               type='text'
               required
               placeholder='Escribe el nombre del módulo'

@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import ButtonPopperLesson from 'components/utils/ButtonPopperLesson';
 import { v4 as uuidv4 } from 'uuid';
 import ItemContent from 'pages/admin/lessons-management/reading/ItemContent';
+import AddEditItemCode from 'pages/admin/lessons-management/reading/AddEditItemCode';
 import {
   readingLessonInitialValues,
   readingLessonPutInitialValues,
@@ -26,6 +27,7 @@ function CreateEditReadingLesson() {
   const [isLoading, setIsLoading] = useState(true);
   const [showResourcesModal, setShowResourcesModal] = useState(false);
   const [showNewItemModal, setShowNewItemModal] = useState(false);
+  const [showNewItemCodeModal, setShowNewItemCodeModal] = useState(false);
   const [lesson, setLesson] = useState(readingLessonInitialValues(module));
   const [itemEdit, setItemEdit] = useState(null);
   const isAddMode = !id;
@@ -204,6 +206,10 @@ function CreateEditReadingLesson() {
                   setShowNewItemModal(true);
                   setItemEdit(null);
                 }}
+                onAddCode={() => {
+                  setShowNewItemCodeModal(true);
+                  setItemEdit(null);
+                }}
                 onAddSpace={() => onAddSpace()}
               />
               <button
@@ -226,6 +232,7 @@ function CreateEditReadingLesson() {
                       item={item}
                       key={item.clave + item.valor + index}
                       setItemEdit={setItemEdit}
+                      setShowItemCodeEdit={setShowNewItemCodeModal}
                       setShowEditItem={setShowNewItemModal}
                       handleDelete={deleteOption}
                     />
@@ -248,6 +255,13 @@ function CreateEditReadingLesson() {
         item={itemEdit}
         showModal={showNewItemModal}
         setShowModal={setShowNewItemModal}
+        setOpciones={setContenido}
+        editOption={editItem}
+      />
+      <AddEditItemCode
+        item={itemEdit}
+        showModal={showNewItemCodeModal}
+        setShowModal={setShowNewItemCodeModal}
         setOpciones={setContenido}
         editOption={editItem}
       />

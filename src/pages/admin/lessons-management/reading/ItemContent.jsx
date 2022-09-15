@@ -1,10 +1,20 @@
 import { ConfirmDialog } from 'components/utils/ConfirmDialog';
 import React, { useState } from 'react';
 
-const ItemContent = ({ item, setItemEdit, setShowEditItem, handleDelete }) => {
+const ItemContent = ({
+  item,
+  setItemEdit,
+  setShowItemCodeEdit,
+  setShowEditItem,
+  handleDelete,
+}) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   function onEdit() {
-    setShowEditItem(true);
+    if (item.clave === 'CODIGO') {
+      setShowItemCodeEdit(true);
+    } else {
+      setShowEditItem(true);
+    }
     setItemEdit(item);
   }
   function onDelete() {

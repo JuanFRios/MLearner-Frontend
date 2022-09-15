@@ -26,7 +26,7 @@ const LessonInput = ({
             as='textarea'
             rows={5}
             autoComplete='off'
-            className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-xl focus:outline-none focus:shadow-outline bg-transparent'
+            className='appearance-none border-b border-dark_blue_2 w-full py-2 px-3 pl-0 text-gray-700 leading-6 text-sm focus:outline-none focus:shadow-outline bg-transparent'
           />
         ) : (
           <Field

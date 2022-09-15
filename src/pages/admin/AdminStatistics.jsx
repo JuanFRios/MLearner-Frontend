@@ -11,8 +11,8 @@ const AdminStatistics = () => {
   const dispatch = useDispatch();
   useEffect(async () => {
     setTopRacha(await dispatch(getStatistics('RACHA')));
-    setTopProgress(await dispatch(getStatistics('PUNTAJE')));
-    setTopScore(await dispatch(getStatistics('PORCENTAJE')));
+    setTopScore(await dispatch(getStatistics('PUNTAJE')));
+    setTopProgress(await dispatch(getStatistics('PORCENTAJE')));
     setReady(true);
   }, []);
   if (!ready) {

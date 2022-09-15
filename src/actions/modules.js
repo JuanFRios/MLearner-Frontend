@@ -108,6 +108,7 @@ export const editModule = (module, id) => async (dispatch) => {
   const bodyFormData = new FormData();
   bodyFormData.append('nombre', module.nombre);
   bodyFormData.append('carpetaDestinoRecurso', module.carpetaDestinoRecurso);
+  bodyFormData.append('tamanoVisualizacion', module.tamanoVisualizacion);
   if (module.imagen) {
     bodyFormData.append('imagen', module.imagen);
   }
