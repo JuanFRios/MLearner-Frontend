@@ -21,11 +21,9 @@ const Statistics = () => {
     setTopRacha(await dispatch(getStatistics('RACHA')));
     setTopScore(await dispatch(getStatistics('PUNTAJE')));
     setTopProgress(await dispatch(getStatistics('PORCENTAJE')));
-    setTimeout(() => {
-      const scores = racha.map((r) => r.puntajeAcumulado);
-      setavg(average(scores));
-      setReady(true);
-    }, 500);
+    const scoress = ra.map((r) => r.puntajeAcumulado);
+    setavg(average(scoress));
+    setReady(true);
   }, []);
   if (!ready) {
     return (
