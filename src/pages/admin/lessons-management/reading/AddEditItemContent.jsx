@@ -104,8 +104,8 @@ const AddEditItemContent = ({
                         text: 'Texto en formato código',
                       },
                     ]}
-                    placeholder='Ingrese una descripción'
-                    text='Es correcta'
+                    placeholder='Ingrese una opcion'
+                    text='Tipo'
                     errors={errors}
                     touched={touched}
                   />
@@ -114,8 +114,8 @@ const AddEditItemContent = ({
                   name='valor'
                   type='text'
                   textarea
-                  placeholder='Ingrese una descripción'
-                  text='Opción'
+                  placeholder='Ingrese un valor'
+                  text='Valor'
                   errors={errors}
                   touched={touched}
                 />
