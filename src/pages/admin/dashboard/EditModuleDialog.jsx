@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
-const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
+const EditModuleDialog = ({ module, showModal, setShowModal }) => {
   const isAddMode = !module;
   const dispatch = useDispatch();
   const [option, setOption] = useState({
@@ -27,7 +27,6 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
   useEffect(() => {
     setIsLoading(true);
     if (!isAddMode) {
-      console.log(module);
       setOption({
         nombre: module.nombre,
         carpetaDestinoRecurso: module.carpetaDestinoRecurso,
@@ -76,7 +75,6 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
     }
     console.log(fields.imagen);
     window.location.reload();
-    console.log('editar', fields);
   };
 
   if (isLoading) {
@@ -189,4 +187,4 @@ const EditCreateModuleDialog = ({ module, showModal, setShowModal }) => {
   );
 };
 
-export default EditCreateModuleDialog;
+export default EditModuleDialog;

@@ -73,12 +73,12 @@ function CreateEditReadingLesson() {
   const validationSchema = Yup.object().shape({
     titulo: Yup.string().required('titulo is required'),
     puntaje: Yup.number().required('puntaje is required'),
-    vidasTotales: Yup.number().required('vidas is required'),
   });
 
   function onSubmit(fields, { setStatus, setSubmitting }) {
     const lessonToSave = {
       ...fields,
+      vidasTotales: 0,
       contenido: [...lesson.contenido],
     };
     setStatus();
@@ -172,22 +172,12 @@ function CreateEditReadingLesson() {
                   touched={touched}
                 />
               </div>
-              <div className='w-2/12 mr-8'>
+              <div className='w-4/12 mr-8'>
                 <LessonInput
                   name='puntaje'
                   type='number'
                   placeholder=''
                   text='Puntaje'
-                  errors={errors}
-                  touched={touched}
-                />
-              </div>
-              <div className='w-2/12'>
-                <LessonInput
-                  name='vidasTotales'
-                  type='number'
-                  placeholder=''
-                  text='Vidas'
                   errors={errors}
                   touched={touched}
                 />

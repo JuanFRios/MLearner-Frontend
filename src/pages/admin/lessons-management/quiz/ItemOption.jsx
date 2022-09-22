@@ -18,7 +18,6 @@ const ItemOption = ({ option, setItemEdit, setShowEditItem, handleDelete }) => {
     handleDelete(option._id);
   };
   useEffect(() => {
-    console.log(option);
     if (option.esCorrecta) {
       setIcon('check_circle');
       setColor('bg-green-100');

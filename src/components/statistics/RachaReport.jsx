@@ -30,7 +30,6 @@ const RachaReport = ({ days }) => {
         },
       ],
     });
-    console.log(options);
   }, []);
   if (!options) {
     return <p>d</p>;
