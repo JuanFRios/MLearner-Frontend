@@ -108,7 +108,7 @@ const AddEditItemCode = ({
                   name='valorSampleCode'
                   type='text'
                   textarea
-                  placeholder='Ingrese una descripción'
+                  placeholder='Ingrese el codigo'
                   text='Codigo'
                   errors={errors}
                   touched={touched}

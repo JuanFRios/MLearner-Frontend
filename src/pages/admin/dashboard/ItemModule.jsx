@@ -11,7 +11,6 @@ const ItemModule = ({ module, setSelectedModule, setShowEditModal }) => {
   function onEdit() {
     setSelectedModule(module);
     setShowEditModal(true);
-    console.log('');
   }
   function onConfig() {
     navigate(`/admin/course/module/${module.mid}`);

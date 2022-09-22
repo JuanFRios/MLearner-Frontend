@@ -5,7 +5,7 @@ import ModalNewModule from 'pages/admin/dashboard/ModalNewModule';
 import LoadingHomeAdmin from 'components/loading/admin/LoadingHomeAdmin';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import EditCreateModuleDialog from './EditCreateModuleDialog';
+import EditModuleDialog from './EditModuleDialog';
 
 const ContentManagement = () => {
   function onEdit() {
@@ -84,7 +84,7 @@ const ContentManagement = () => {
             setShowModal={setShowNewModal}
             tamanoNuevoModulo={tamanoNuevoModulo}
           />
-          <EditCreateModuleDialog
+          <EditModuleDialog
             showModal={showEditModal}
             setShowModal={setShowEditModal}
             module={moduleSelected}

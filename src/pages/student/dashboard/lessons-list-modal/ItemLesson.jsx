@@ -44,8 +44,7 @@ const ItemLesson = ({ type, status, title, idLesson }) => {
       <div
         onClick={() => {
           setCursor('cursor-default');
-          if (true) {
-            // if (status === LessonStatus.inProgress) {
+          if (status === LessonStatus.inProgress) {
             setCursor('cursor-default');
             navigate(`/lesson/${idLesson}`);
           }

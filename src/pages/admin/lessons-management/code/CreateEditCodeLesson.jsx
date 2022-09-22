@@ -36,24 +36,27 @@ function CreateEditCodeLesson() {
   }, [id]);
 
   const validationSchema = Yup.object().shape({
-    titulo: Yup.string().required('titulo is required'),
-    puntaje: Yup.number().required('puntaje is required'),
-    vidasTotales: Yup.number().required('vidas is required'),
+    titulo: Yup.string().required('titulo es requerido'),
+    puntaje: Yup.number().required('puntaje es requerido'),
     contenido: Yup.array()
       .of(
         Yup.object().shape({
-          valorSolution: Yup.string().required('valorSoluction is required'), // these constraints take precedence
+          valorSolution: Yup.string().required('valorSoluction es requerido'), // these constraints take precedence
         })
       )
       .required('Must have friends'),
   });
 
   function onSubmit(fields, { setStatus, setSubmitting }) {
+    const lessonToSave = {
+      ...fields,
+      vidasTotales: 0,
+    };
     setStatus();
     if (isAddMode) {
-      createLesson(fields, setSubmitting);
+      createLesson(lessonToSave, setSubmitting);
     } else {
-      updateLesson(id, fields, setSubmitting);
+      updateLesson(id, lessonToSave, setSubmitting);
     }
   }
 
@@ -130,22 +133,12 @@ function CreateEditCodeLesson() {
                   touched={touched}
                 />
               </div>
-              <div className='w-2/12 mr-8'>
+              <div className='w-4/12 mr-8'>
                 <LessonInput
                   name='puntaje'
                   type='number'
                   placeholder=''
                   text='Puntaje'
-                  errors={errors}
-                  touched={touched}
-                />
-              </div>
-              <div className='w-2/12'>
-                <LessonInput
-                  name='vidasTotales'
-                  type='number'
-                  placeholder=''
-                  text='Vidas'
                   errors={errors}
                   touched={touched}
                 />
@@ -181,7 +174,7 @@ function CreateEditCodeLesson() {
                 name='contenido[0].valorPreExerciseCode'
               />
               <InputLessonCode
-                text='Código de ejemplo'
+                text='Código a completar'
                 name='contenido[0].valorSampleCode'
               />
               <InputLessonCode
