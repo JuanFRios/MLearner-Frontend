@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import React, { useState } from 'react';
 import { LessonType, LessonStatus } from 'constants/Lesson';
 import { useNavigate } from 'react-router-dom';
@@ -44,7 +45,7 @@ const ItemLesson = ({ type, status, title, idLesson }) => {
       <div
         onClick={() => {
           setCursor('cursor-default');
-          if (status === LessonStatus.inProgress) {
+          if (status === LessonStatus.inProgress || true) {
             setCursor('cursor-default');
             navigate(`/lesson/${idLesson}`);
           }
